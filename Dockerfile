@@ -25,6 +25,9 @@ COPY --from=deps /app/node_modules ./node_modules
 
 COPY . .
 
+# Ensure `public` exists so later COPY from the builder stage doesn't fail
+RUN mkdir -p public
+
 RUN npm run build
 
 
