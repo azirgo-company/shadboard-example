@@ -15,7 +15,7 @@ RUN \
 
 FROM base AS builder
 
-COPY --from=deps /app/refine/node_modules ./node_modules
+COPY --from=deps /app/node_modules ./node_modules
 
 COPY . .
 
@@ -25,13 +25,13 @@ FROM base AS runner
 
 ENV NODE_ENV production
 
-COPY --from=builder /app/refine/public ./public
+COPY --from=builder /app/public ./public
 
 RUN mkdir .next
 RUN chown refine:nodejs .next
 
-COPY --from=builder --chown=refine:nodejs /app/refine/.next/standalone ./
-COPY --from=builder --chown=refine:nodejs /app/refine/.next/static ./.next/static
+COPY --from=builder --chown=refine:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=refine:nodejs /app/.next/static ./.next/static
 
 USER refine
 
