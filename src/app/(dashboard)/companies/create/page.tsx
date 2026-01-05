@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import {
   Form,
@@ -7,20 +7,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { useList, useSelect } from '@refinedev/core'
+} from "@/components/ui/form"
+import { useList, useSelect } from "@refinedev/core"
 
-import { CREATE_COMPANY_MUTATION } from '@/modules/company/query'
-import { Create } from 'shadboard'
-import { Input } from '@/components/ui/input'
-import { USERS_QUERY } from '@/modules/user/query'
-import { useForm } from '@refinedev/react-hook-form'
+import { Input } from "@/components/ui/input"
+import { CREATE_COMPANY_MUTATION } from "@/modules/company/query"
+import { useForm } from "@refinedev/react-hook-form"
+import { Create } from "shadboard"
 
 export default function CreateCompanyPage() {
   const form = useForm({
     defaultValues: {
-      name: 'Company 1',
-      salesOwnerId: '1',
+      name: "Company 1",
+      salesOwnerId: "1",
     },
     refineCoreProps: {
       meta: {
@@ -35,23 +34,23 @@ export default function CreateCompanyPage() {
   } = form
 
   const select = useSelect({
-    resource: 'users',
-    optionLabel: 'name',
-    optionValue: 'id',
+    resource: "users",
+    optionLabel: "name",
+    optionValue: "id",
     // meta: {
     //   gqlQuery: USERS_QUERY,
     // },
   })
 
   const list = useList({
-    resource: 'users',
+    resource: "users",
     // meta: {
     //   gqlQuery: USERS_QUERY,
     // },
   })
 
-  console.log('Select options:', select)
-  console.log('List data:', list)
+  console.log("Select options:", select)
+  console.log("List data:", list)
 
   return (
     <Create isLoading={formLoading} saveButtonProps={saveButtonProps}>
