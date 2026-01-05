@@ -72,8 +72,8 @@ importers:
         specifier: ^7.68.0
         version: 7.70.0(react@19.2.1)
       shadboard:
-        specifier: ^0.0.10
-        version: 0.0.10(ddcbf846bb4087c78f0d54e80ee207d8)
+        specifier: ^0.0.11
+        version: 0.0.11(ddcbf846bb4087c78f0d54e80ee207d8)
       tailwind-merge:
         specifier: ^3.4.0
         version: 3.4.0
@@ -4608,8 +4608,8 @@ packages:
   setprototypeof@1.2.0:
     resolution: {integrity: sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==}
 
-  shadboard@0.0.10:
-    resolution: {integrity: sha512-sFhjE0B2dVmY5nQvK4yD9Gfy+/wAvuEVRmFUhq4K2aLdx3Es8sx6RKVZ+zSkEu7cAi4JOpT0s4gxmndLuSuVXg==}
+  shadboard@0.0.11:
+    resolution: {integrity: sha512-s/6Y7u8hts67WpZRXB8Mo32/ECk04bpzcaz6rPGw6ZMJsNRlHqJnJZ5FczehlHXgip7a19MSXXTtuRohQaBOYQ==}
     peerDependencies:
       '@radix-ui/react-avatar': ^1.1.0
       '@radix-ui/react-checkbox': ^1.3.0
@@ -5149,6 +5149,18 @@ packages:
 
   ws@8.18.3:
     resolution: {integrity: sha512-PEIGCY5tSlUt50cqyMXfCzX+oOPqN0vuGqWzbcJ2xvnkzkq46oOpz7dQaTDBdfICb4N14+GARUDw2XV2N4tvzg==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+
+  ws@8.19.0:
+    resolution: {integrity: sha512-blAT2mjOEIi0ZzruJfIhb3nps74PRWTCz1IjglWEEpQl5XS/UNama6u2/rjFkDDouqr4L67ry+1aGIALViWjDg==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
@@ -7206,7 +7218,7 @@ snapshots:
       react: 19.2.1
       react-dom: 19.2.1(react@19.2.1)
       sanitize-html: 2.17.0
-      ws: 8.18.3
+      ws: 8.19.0
     transitivePeerDependencies:
       - '@babel/preset-env'
       - bufferutil
@@ -10332,7 +10344,7 @@ snapshots:
 
   setprototypeof@1.2.0: {}
 
-  shadboard@0.0.10(ddcbf846bb4087c78f0d54e80ee207d8):
+  shadboard@0.0.11(ddcbf846bb4087c78f0d54e80ee207d8):
     dependencies:
       '@radix-ui/react-avatar': 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       '@radix-ui/react-checkbox': 1.3.3(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
@@ -10951,6 +10963,8 @@ snapshots:
       signal-exit: 4.1.0
 
   ws@8.18.3: {}
+
+  ws@8.19.0: {}
 
   y18n@4.0.3: {}
 
