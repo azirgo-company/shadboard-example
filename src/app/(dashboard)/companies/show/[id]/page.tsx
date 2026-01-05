@@ -1,12 +1,12 @@
-'use client'
+"use client"
 
-import { CompanyInformation } from '@/modules/company/components/company-information'
-import { CompanyContactsTable } from '@/modules/company/components/contacts-table'
-import { COMPANY_QUERY } from '@/modules/company/query'
-import { QuotesTable } from '@/modules/quotes/query/components/quotes-table'
-import { useShow } from '@refinedev/core'
-import Image from 'next/image'
-import { Show } from 'shadboard'
+import { CompanyInformation } from "@/modules/company/components/company-information"
+import { CompanyContactsTable } from "@/modules/company/components/contacts-table"
+import { COMPANY_QUERY } from "@/modules/company/query"
+import { QuotesTable } from "@/modules/quotes/query/components/quotes-table"
+import { useShow } from "@refinedev/core"
+import Image from "next/image"
+import { Show } from "shadboard"
 
 export default function ShowCompanyPage() {
   const show = useShow({ meta: { gqlQuery: COMPANY_QUERY } })
@@ -19,9 +19,9 @@ export default function ShowCompanyPage() {
 
   return (
     <Show isLoading={isLoading}>
-      <div className="my-5 max-w-4xl rounded-lg bg-white p-6 shadow-sm">
+      <div className="my-5 max-w-4xl rounded-lg  p-6 shadow-sm">
         <div className="flex items-center gap-6">
-          <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-lg bg-black">
+          <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-lg ">
             {company?.avatarUrl ? (
               <Image
                 src={company.avatarUrl}
@@ -36,11 +36,11 @@ export default function ShowCompanyPage() {
           </div>
 
           <div className="flex-1">
-            <h1 className="text-2xl font-semibold text-gray-900 md:text-3xl">
+            <h1 className="text-2xl font-semibold  md:text-3xl">
               {company?.name}
             </h1>
 
-            <div className="mt-2 flex items-center text-sm text-gray-600">
+            <div className="mt-2 flex items-center text-sm 0">
               <span className="mr-3">Sales Owner:</span>
               {company?.salesOwner?.avatarUrl && (
                 <Image
@@ -51,9 +51,7 @@ export default function ShowCompanyPage() {
                   className="mr-2 rounded-full object-cover"
                 />
               )}
-              <span className="font-medium text-gray-800">
-                {company?.salesOwner?.name}
-              </span>
+              <span className="font-medium ">{company?.salesOwner?.name}</span>
             </div>
           </div>
         </div>
