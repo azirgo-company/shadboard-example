@@ -15,10 +15,7 @@ export const CompanyInformation = ({ company }: CompanyInformationProps) => {
 
   const handleUpdate = async (field: string, value: string) => {
     try {
-      const parsedValue =
-        field === "totalRevenue"
-          ? parseInt(value)
-          : value
+      const parsedValue = field === "totalRevenue" ? parseInt(value) : value
       await mutate({
         resource: "companies",
         id: company?.id,
