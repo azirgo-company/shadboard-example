@@ -1,10 +1,10 @@
-'use client'
+"use client"
 
-import { EditableField } from '@/components/ui/editable-field'
-import { Company } from '@/graphql/schema.types'
-import type { BaseRecord } from '@refinedev/core'
-import { useUpdate } from '@refinedev/core'
-import { Store } from 'lucide-react'
+import { EditableField } from "@/components/ui/editable-field"
+import { Company } from "@/graphql/schema.types"
+import type { BaseRecord } from "@refinedev/core"
+import { useUpdate } from "@refinedev/core"
+import { Store } from "lucide-react"
 
 interface CompanyInformationProps {
   company?: Partial<Company> | BaseRecord | null
@@ -16,16 +16,16 @@ export const CompanyInformation = ({ company }: CompanyInformationProps) => {
   const handleUpdate = async (field: string, value: string) => {
     try {
       const parsedValue =
-        field === 'totalRevenue' || field === 'companySize'
+        field === "totalRevenue"
           ? parseInt(value)
           : value
       await mutate({
-        resource: 'companies',
+        resource: "companies",
         id: company?.id,
         values: { [field]: parsedValue },
       })
     } catch (error) {
-      console.error('Error updating company:', error)
+      console.error("Error updating company:", error)
     }
   }
 
@@ -41,9 +41,8 @@ export const CompanyInformation = ({ company }: CompanyInformationProps) => {
             <td className="py-2 text-xs text-gray-500">Company size</td>
             <td className="py-2 font-medium">
               <EditableField
-                initialValue={company?.companySize?.toString() || ''}
-                onSave={(value) => handleUpdate('companySize', value)}
-                inputType="number"
+                initialValue={company?.companySize || ""}
+                onSave={(value) => handleUpdate("companySize", value)}
               />
             </td>
           </tr>
@@ -52,8 +51,8 @@ export const CompanyInformation = ({ company }: CompanyInformationProps) => {
             <td className="py-2 text-xs text-gray-500">Total revenue</td>
             <td className="py-2 font-medium">
               <EditableField
-                initialValue={company?.totalRevenue?.toString() || ''}
-                onSave={(value) => handleUpdate('totalRevenue', value)}
+                initialValue={company?.totalRevenue?.toString() || ""}
+                onSave={(value) => handleUpdate("totalRevenue", value)}
                 inputType="number"
               />
             </td>
@@ -63,8 +62,8 @@ export const CompanyInformation = ({ company }: CompanyInformationProps) => {
             <td className="py-2 text-xs text-gray-500">Business Type</td>
             <td className="py-2 font-medium">
               <EditableField
-                initialValue={company?.businessType || ''}
-                onSave={(value) => handleUpdate('businessType', value)}
+                initialValue={company?.businessType || ""}
+                onSave={(value) => handleUpdate("businessType", value)}
               />
             </td>
           </tr>
@@ -73,8 +72,8 @@ export const CompanyInformation = ({ company }: CompanyInformationProps) => {
             <td className="py-2 text-xs text-gray-500">Country</td>
             <td className="py-2 font-medium">
               <EditableField
-                initialValue={company?.country || ''}
-                onSave={(value) => handleUpdate('country', value)}
+                initialValue={company?.country || ""}
+                onSave={(value) => handleUpdate("country", value)}
               />
             </td>
           </tr>
@@ -83,15 +82,15 @@ export const CompanyInformation = ({ company }: CompanyInformationProps) => {
             <td className="py-2 text-xs text-gray-500">Website</td>
             <td className="py-2 font-medium text-blue-600">
               <EditableField
-                initialValue={company?.website || ''}
-                onSave={(value) => handleUpdate('website', value)}
+                initialValue={company?.website || ""}
+                onSave={(value) => handleUpdate("website", value)}
                 renderValue={(value) =>
                   value ? (
                     <a href={value} target="_blank" rel="noreferrer">
                       {value}
                     </a>
                   ) : (
-                    '-'
+                    "-"
                   )
                 }
               />
