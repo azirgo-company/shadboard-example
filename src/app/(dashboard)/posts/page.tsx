@@ -1,21 +1,21 @@
-'use client'
+"use client"
 
-import { List } from 'shadboard'
-import { useTable } from '@refinedev/core'
+import { useTable } from "@refinedev/core"
+import { List } from "shadboard"
 
 export default function ListPostsPage() {
   const { tableQuery } = useTable({
-    resource: 'companies',
+    resource: "companies",
     syncWithLocation: false,
     pagination: {
-      current: 1,
+      currentPage: 1,
       pageSize: 10,
     },
   })
 
-  console.log('tableQuery data:', tableQuery?.data)
-  console.log('tableQuery isLoading:', tableQuery?.isLoading)
-  console.log('tableQuery error:', tableQuery?.error)
+  console.log("tableQuery data:", tableQuery?.data)
+  console.log("tableQuery isLoading:", tableQuery?.isLoading)
+  console.log("tableQuery error:", tableQuery?.error)
 
   return (
     <List>
