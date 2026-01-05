@@ -10,7 +10,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "refine": "refine"
+    "refine": "refine",
+    "graphql:generate": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

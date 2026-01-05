@@ -84,6 +84,22 @@ export type CreateOneCompanyMutation = { createOneCompany: Pick<
       | 'updatedAt'
     > };
 
+export type UpdateOneCompanyMutationVariables = Types.Exact<{
+  input: Types.UpdateOneCompanyInput;
+}>;
+
+
+export type UpdateOneCompanyMutation = { updateOneCompany: Pick<
+      Types.Company,
+      | 'id'
+      | 'name'
+      | 'companySize'
+      | 'totalRevenue'
+      | 'businessType'
+      | 'country'
+      | 'website'
+    > };
+
 export type ContactsQueryVariables = Types.Exact<{
   paging: Types.OffsetPaging;
   filter?: Types.InputMaybe<Types.ContactFilter>;
