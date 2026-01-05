@@ -1,6 +1,10 @@
+
 FROM refinedev/node:20 AS base
+WORKDIR /app
+
 
 FROM base AS deps
+WORKDIR /app
 
 RUN apk add --no-cache libc6-compat
 
@@ -13,7 +17,9 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
+
 FROM base AS builder
+WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
 
@@ -21,7 +27,9 @@ COPY . .
 
 RUN npm run build
 
+
 FROM base AS runner
+WORKDIR /app
 
 ENV NODE_ENV production
 
