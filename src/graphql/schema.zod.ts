@@ -1,69 +1,683 @@
-import { z } from 'zod';
-import type { Audit, AuditChange, AuditConnection, AuditDeleteResponse, AuditFilter, AuditFilterUserFilter, AuditSort, AuditSubscriptionFilter, AuthResponse, BooleanFieldComparison, CheckListItem, ChecklistItemInput, Company, CompanyAggregateFilter, CompanyAggregateGroupBy, CompanyAggregateGroupByCreatedAtArgs, CompanyAggregateGroupByUpdatedAtArgs, CompanyAggregateResponse, CompanyAvgAggregate, CompanyBusinessTypeFilterComparison, CompanyCompanySizeFilterComparison, CompanyConnection, CompanyContactsAggregateArgs, CompanyContactsAggregateGroupBy, CompanyContactsAggregateResponse, CompanyContactsArgs, CompanyContactsAvgAggregate, CompanyContactsConnection, CompanyContactsCountAggregate, CompanyContactsMaxAggregate, CompanyContactsMinAggregate, CompanyContactsSumAggregate, CompanyCountAggregate, CompanyCreateInput, CompanyDealsAggregateArgs, CompanyDealsAggregateGroupBy, CompanyDealsAggregateResponse, CompanyDealsArgs, CompanyDealsAvgAggregate, CompanyDealsConnection, CompanyDealsCountAggregate, CompanyDealsMaxAggregate, CompanyDealsMinAggregate, CompanyDealsSumAggregate, CompanyDeleteFilter, CompanyDeleteResponse, CompanyFilter, CompanyFilterCompanyNoteFilter, CompanyFilterContactFilter, CompanyFilterDealFilter, CompanyFilterUserFilter, CompanyIndustryFilterComparison, CompanyMaxAggregate, CompanyMinAggregate, CompanyNote, CompanyNoteAggregateFilter, CompanyNoteConnection, CompanyNoteCreateInput, CompanyNoteDeleteFilter, CompanyNoteDeleteResponse, CompanyNoteFilter, CompanyNoteFilterCompanyFilter, CompanyNoteFilterUserFilter, CompanyNoteSort, CompanyNoteSubscriptionFilter, CompanyNoteUpdateFilter, CompanyNoteUpdateInput, CompanyNotesAggregateArgs, CompanyNotesAggregateGroupBy, CompanyNotesAggregateResponse, CompanyNotesArgs, CompanyNotesAvgAggregate, CompanyNotesConnection, CompanyNotesCountAggregate, CompanyNotesMaxAggregate, CompanyNotesMinAggregate, CompanyNotesSumAggregate, CompanySort, CompanySubscriptionFilter, CompanySumAggregate, CompanyUpdateFilter, CompanyUpdateInput, Contact, ContactAggregateFilter, ContactConnection, ContactCreateInput, ContactDealsArgs, ContactDealsConnection, ContactDeleteFilter, ContactDeleteResponse, ContactFilter, ContactFilterCompanyFilter, ContactFilterContactNoteFilter, ContactFilterDealFilter, ContactFilterUserFilter, ContactNote, ContactNoteConnection, ContactNoteCreateInput, ContactNoteDeleteFilter, ContactNoteDeleteResponse, ContactNoteFilter, ContactNoteFilterContactFilter, ContactNoteFilterUserFilter, ContactNoteSort, ContactNoteSubscriptionFilter, ContactNoteUpdateFilter, ContactNoteUpdateInput, ContactNotesArgs, ContactNotesConnection, ContactSort, ContactStageFilterComparison, ContactStatusFilterComparison, ContactSubscriptionFilter, ContactUpdateFilter, ContactUpdateInput, CreateAuditSubscriptionFilterInput, CreateCompanyNoteSubscriptionFilterInput, CreateCompanySubscriptionFilterInput, CreateContactNoteSubscriptionFilterInput, CreateContactSubscriptionFilterInput, CreateDealStageSubscriptionFilterInput, CreateDealSubscriptionFilterInput, CreateEventCategorySubscriptionFilterInput, CreateEventSubscriptionFilterInput, CreateManyCompaniesInput, CreateManyCompanyNotesInput, CreateManyContactNotesInput, CreateManyContactsInput, CreateManyDealStagesInput, CreateManyDealsInput, CreateManyEventCategoriesInput, CreateManyEventsInput, CreateManyQuotesInput, CreateManyTaskCommentsInput, CreateManyTaskStagesInput, CreateManyTasksInput, CreateManyUsersInput, CreateOneCompanyInput, CreateOneCompanyNoteInput, CreateOneContactInput, CreateOneContactNoteInput, CreateOneDealInput, CreateOneDealStageInput, CreateOneEventCategoryInput, CreateOneEventInput, CreateOneQuoteInput, CreateOneTaskCommentInput, CreateOneTaskInput, CreateOneTaskStageInput, CreateOneUserInput, CreateQuoteSubscriptionFilterInput, CreateTaskCommentSubscriptionFilterInput, CreateTaskStageSubscriptionFilterInput, CreateTaskSubscriptionFilterInput, CreateUserSubscriptionFilterInput, DateFieldComparison, DateFieldComparisonBetween, Deal, DealAggregateFilter, DealAggregateGroupBy, DealAggregateGroupByCreatedAtArgs, DealAggregateGroupByUpdatedAtArgs, DealAggregateResponse, DealAvgAggregate, DealConnection, DealCountAggregate, DealCreateInput, DealDeleteFilter, DealDeleteResponse, DealFilter, DealFilterCompanyFilter, DealFilterContactFilter, DealFilterDealStageFilter, DealFilterUserFilter, DealMaxAggregate, DealMinAggregate, DealSort, DealStage, DealStageConnection, DealStageCreateInput, DealStageDealsAggregateArgs, DealStageDealsAggregateGroupBy, DealStageDealsAggregateResponse, DealStageDealsArgs, DealStageDealsAvgAggregate, DealStageDealsCountAggregate, DealStageDealsMaxAggregate, DealStageDealsMinAggregate, DealStageDealsSumAggregate, DealStageDeleteFilter, DealStageDeleteResponse, DealStageFilter, DealStageFilterDealFilter, DealStageFilterUserFilter, DealStageSort, DealStageSubscriptionFilter, DealStageUpdateFilter, DealStageUpdateInput, DealSubscriptionFilter, DealSumAggregate, DealUpdateFilter, DealUpdateInput, DeleteManyCompaniesInput, DeleteManyCompanyNotesInput, DeleteManyContactNotesInput, DeleteManyContactsInput, DeleteManyDealStagesInput, DeleteManyDealsInput, DeleteManyEventCategoriesInput, DeleteManyEventsInput, DeleteManyQuotesInput, DeleteManyResponse, DeleteManyTaskCommentsInput, DeleteManyTaskStagesInput, DeleteManyTasksInput, DeleteManyUsersInput, DeleteOneAuditSubscriptionFilterInput, DeleteOneCompanyInput, DeleteOneCompanyNoteInput, DeleteOneCompanyNoteSubscriptionFilterInput, DeleteOneCompanySubscriptionFilterInput, DeleteOneContactInput, DeleteOneContactNoteInput, DeleteOneContactNoteSubscriptionFilterInput, DeleteOneContactSubscriptionFilterInput, DeleteOneDealInput, DeleteOneDealStageInput, DeleteOneDealStageSubscriptionFilterInput, DeleteOneDealSubscriptionFilterInput, DeleteOneEventCategoryInput, DeleteOneEventCategorySubscriptionFilterInput, DeleteOneEventInput, DeleteOneEventSubscriptionFilterInput, DeleteOneQuoteInput, DeleteOneQuoteSubscriptionFilterInput, DeleteOneTaskCommentInput, DeleteOneTaskCommentSubscriptionFilterInput, DeleteOneTaskInput, DeleteOneTaskStageInput, DeleteOneTaskStageSubscriptionFilterInput, DeleteOneTaskSubscriptionFilterInput, DeleteOneUserInput, DeleteOneUserSubscriptionFilterInput, Event, EventCategory, EventCategoryConnection, EventCategoryCreateInput, EventCategoryDeleteFilter, EventCategoryDeleteResponse, EventCategoryEventsArgs, EventCategoryFilter, EventCategoryFilterUserFilter, EventCategorySort, EventCategorySubscriptionFilter, EventCategoryUpdateFilter, EventCategoryUpdateInput, EventConnection, EventCreateInput, EventDeleteFilter, EventDeleteResponse, EventFilter, EventFilterEventCategoryFilter, EventFilterUserFilter, EventParticipantsArgs, EventSort, EventSubscriptionFilter, EventUpdateFilter, EventUpdateInput, FloatFieldComparison, FloatFieldComparisonBetween, IdFilterComparison, IntFieldComparison, IntFieldComparisonBetween, LoginInput, NumberFieldComparison, NumberFieldComparisonBetween, OffsetPageInfo, OffsetPaging, Quote, QuoteConnection, QuoteCreateInput, QuoteDeleteFilter, QuoteDeleteResponse, QuoteFilter, QuoteFilterCompanyFilter, QuoteFilterContactFilter, QuoteFilterUserFilter, QuoteItem, QuoteItemInput, QuoteSort, QuoteStatusFilterComparison, QuoteSubscriptionFilter, QuoteUpdateFilter, QuoteUpdateInput, RegisterInput, StringFieldComparison, Task, TaskAggregateFilter, TaskAggregateGroupBy, TaskAggregateGroupByCreatedAtArgs, TaskAggregateGroupByDueDateArgs, TaskAggregateGroupByUpdatedAtArgs, TaskAggregateResponse, TaskAvgAggregate, TaskComment, TaskCommentAggregateFilter, TaskCommentConnection, TaskCommentCreateInput, TaskCommentDeleteFilter, TaskCommentDeleteResponse, TaskCommentFilter, TaskCommentFilterTaskFilter, TaskCommentFilterUserFilter, TaskCommentSort, TaskCommentSubscriptionFilter, TaskCommentUpdateFilter, TaskCommentUpdateInput, TaskCommentsAggregateArgs, TaskCommentsAggregateGroupBy, TaskCommentsAggregateResponse, TaskCommentsArgs, TaskCommentsAvgAggregate, TaskCommentsConnection, TaskCommentsCountAggregate, TaskCommentsMaxAggregate, TaskCommentsMinAggregate, TaskCommentsSumAggregate, TaskConnection, TaskCountAggregate, TaskCreateInput, TaskDeleteFilter, TaskDeleteResponse, TaskFilter, TaskFilterTaskCommentFilter, TaskFilterTaskStageFilter, TaskFilterUserFilter, TaskMaxAggregate, TaskMinAggregate, TaskSort, TaskStage, TaskStageAggregateFilter, TaskStageAggregateGroupBy, TaskStageAggregateGroupByCreatedAtArgs, TaskStageAggregateGroupByUpdatedAtArgs, TaskStageAggregateResponse, TaskStageAvgAggregate, TaskStageConnection, TaskStageCountAggregate, TaskStageCreateInput, TaskStageDeleteFilter, TaskStageDeleteResponse, TaskStageFilter, TaskStageFilterUserFilter, TaskStageMaxAggregate, TaskStageMinAggregate, TaskStageSort, TaskStageSubscriptionFilter, TaskStageSumAggregate, TaskStageTasksAggregateArgs, TaskStageTasksAggregateGroupBy, TaskStageTasksAggregateResponse, TaskStageTasksArgs, TaskStageTasksAvgAggregate, TaskStageTasksCountAggregate, TaskStageTasksMaxAggregate, TaskStageTasksMinAggregate, TaskStageTasksSumAggregate, TaskStageUpdateFilter, TaskStageUpdateInput, TaskSubscriptionFilter, TaskSumAggregate, TaskUpdateFilter, TaskUpdateInput, TaskUsersAggregateArgs, TaskUsersAggregateGroupBy, TaskUsersAggregateResponse, TaskUsersArgs, TaskUsersAvgAggregate, TaskUsersCountAggregate, TaskUsersMaxAggregate, TaskUsersMinAggregate, TaskUsersSumAggregate, UpdateManyCompaniesInput, UpdateManyCompanyNotesInput, UpdateManyContactNotesInput, UpdateManyContactsInput, UpdateManyDealStagesInput, UpdateManyDealsInput, UpdateManyEventCategoriesInput, UpdateManyEventsInput, UpdateManyQuotesInput, UpdateManyResponse, UpdateManyTaskCommentsInput, UpdateManyTaskStagesInput, UpdateManyTasksInput, UpdateManyUsersInput, UpdateOneAuditSubscriptionFilterInput, UpdateOneCompanyInput, UpdateOneCompanyNoteInput, UpdateOneCompanyNoteSubscriptionFilterInput, UpdateOneCompanySubscriptionFilterInput, UpdateOneContactInput, UpdateOneContactNoteInput, UpdateOneContactNoteSubscriptionFilterInput, UpdateOneContactSubscriptionFilterInput, UpdateOneDealInput, UpdateOneDealStageInput, UpdateOneDealStageSubscriptionFilterInput, UpdateOneDealSubscriptionFilterInput, UpdateOneEventCategoryInput, UpdateOneEventCategorySubscriptionFilterInput, UpdateOneEventInput, UpdateOneEventSubscriptionFilterInput, UpdateOneQuoteInput, UpdateOneQuoteSubscriptionFilterInput, UpdateOneTaskCommentInput, UpdateOneTaskCommentSubscriptionFilterInput, UpdateOneTaskInput, UpdateOneTaskStageInput, UpdateOneTaskStageSubscriptionFilterInput, UpdateOneTaskSubscriptionFilterInput, UpdateOneUserInput, UpdateOneUserSubscriptionFilterInput, User, UserAggregateFilter, UserCompaniesArgs, UserCompaniesConnection, UserConnection, UserContactsArgs, UserContactsConnection, UserCreateInput, UserDealsArgs, UserDealsConnection, UserDeleteFilter, UserDeleteResponse, UserEventsArgs, UserEventsConnection, UserFilter, UserFilterCompanyFilter, UserFilterContactFilter, UserFilterDealFilter, UserFilterEventFilter, UserFilterTaskFilter, UserFilterUserFilter, UserRoleFilterComparison, UserSort, UserSubscriptionFilter, UserTasksArgs, UserTasksConnection, UserUpdateFilter, UserUpdateInput } from './schema.types';
+// @ts-nocheck
+/* eslint-disable */
+import { z } from "zod"
+import type {
+  Audit,
+  AuditChange,
+  AuditConnection,
+  AuditDeleteResponse,
+  AuditFilter,
+  AuditFilterUserFilter,
+  AuditSort,
+  AuditSubscriptionFilter,
+  AuthResponse,
+  BooleanFieldComparison,
+  CheckListItem,
+  ChecklistItemInput,
+  Company,
+  CompanyAggregateFilter,
+  CompanyAggregateGroupBy,
+  CompanyAggregateGroupByCreatedAtArgs,
+  CompanyAggregateGroupByUpdatedAtArgs,
+  CompanyAggregateResponse,
+  CompanyAvgAggregate,
+  CompanyBusinessTypeFilterComparison,
+  CompanyCompanySizeFilterComparison,
+  CompanyConnection,
+  CompanyContactsAggregateArgs,
+  CompanyContactsAggregateGroupBy,
+  CompanyContactsAggregateResponse,
+  CompanyContactsArgs,
+  CompanyContactsAvgAggregate,
+  CompanyContactsConnection,
+  CompanyContactsCountAggregate,
+  CompanyContactsMaxAggregate,
+  CompanyContactsMinAggregate,
+  CompanyContactsSumAggregate,
+  CompanyCountAggregate,
+  CompanyCreateInput,
+  CompanyDealsAggregateArgs,
+  CompanyDealsAggregateGroupBy,
+  CompanyDealsAggregateResponse,
+  CompanyDealsArgs,
+  CompanyDealsAvgAggregate,
+  CompanyDealsConnection,
+  CompanyDealsCountAggregate,
+  CompanyDealsMaxAggregate,
+  CompanyDealsMinAggregate,
+  CompanyDealsSumAggregate,
+  CompanyDeleteFilter,
+  CompanyDeleteResponse,
+  CompanyFilter,
+  CompanyFilterCompanyNoteFilter,
+  CompanyFilterContactFilter,
+  CompanyFilterDealFilter,
+  CompanyFilterUserFilter,
+  CompanyIndustryFilterComparison,
+  CompanyMaxAggregate,
+  CompanyMinAggregate,
+  CompanyNote,
+  CompanyNoteAggregateFilter,
+  CompanyNoteConnection,
+  CompanyNoteCreateInput,
+  CompanyNoteDeleteFilter,
+  CompanyNoteDeleteResponse,
+  CompanyNoteFilter,
+  CompanyNoteFilterCompanyFilter,
+  CompanyNoteFilterUserFilter,
+  CompanyNoteSort,
+  CompanyNoteSubscriptionFilter,
+  CompanyNoteUpdateFilter,
+  CompanyNoteUpdateInput,
+  CompanyNotesAggregateArgs,
+  CompanyNotesAggregateGroupBy,
+  CompanyNotesAggregateResponse,
+  CompanyNotesArgs,
+  CompanyNotesAvgAggregate,
+  CompanyNotesConnection,
+  CompanyNotesCountAggregate,
+  CompanyNotesMaxAggregate,
+  CompanyNotesMinAggregate,
+  CompanyNotesSumAggregate,
+  CompanySort,
+  CompanySubscriptionFilter,
+  CompanySumAggregate,
+  CompanyUpdateFilter,
+  CompanyUpdateInput,
+  Contact,
+  ContactAggregateFilter,
+  ContactConnection,
+  ContactCreateInput,
+  ContactDealsArgs,
+  ContactDealsConnection,
+  ContactDeleteFilter,
+  ContactDeleteResponse,
+  ContactFilter,
+  ContactFilterCompanyFilter,
+  ContactFilterContactNoteFilter,
+  ContactFilterDealFilter,
+  ContactFilterUserFilter,
+  ContactNote,
+  ContactNoteConnection,
+  ContactNoteCreateInput,
+  ContactNoteDeleteFilter,
+  ContactNoteDeleteResponse,
+  ContactNoteFilter,
+  ContactNoteFilterContactFilter,
+  ContactNoteFilterUserFilter,
+  ContactNoteSort,
+  ContactNoteSubscriptionFilter,
+  ContactNoteUpdateFilter,
+  ContactNoteUpdateInput,
+  ContactNotesArgs,
+  ContactNotesConnection,
+  ContactSort,
+  ContactStageFilterComparison,
+  ContactStatusFilterComparison,
+  ContactSubscriptionFilter,
+  ContactUpdateFilter,
+  ContactUpdateInput,
+  CreateAuditSubscriptionFilterInput,
+  CreateCompanyNoteSubscriptionFilterInput,
+  CreateCompanySubscriptionFilterInput,
+  CreateContactNoteSubscriptionFilterInput,
+  CreateContactSubscriptionFilterInput,
+  CreateDealStageSubscriptionFilterInput,
+  CreateDealSubscriptionFilterInput,
+  CreateEventCategorySubscriptionFilterInput,
+  CreateEventSubscriptionFilterInput,
+  CreateManyCompaniesInput,
+  CreateManyCompanyNotesInput,
+  CreateManyContactNotesInput,
+  CreateManyContactsInput,
+  CreateManyDealStagesInput,
+  CreateManyDealsInput,
+  CreateManyEventCategoriesInput,
+  CreateManyEventsInput,
+  CreateManyQuotesInput,
+  CreateManyTaskCommentsInput,
+  CreateManyTaskStagesInput,
+  CreateManyTasksInput,
+  CreateManyUsersInput,
+  CreateOneCompanyInput,
+  CreateOneCompanyNoteInput,
+  CreateOneContactInput,
+  CreateOneContactNoteInput,
+  CreateOneDealInput,
+  CreateOneDealStageInput,
+  CreateOneEventCategoryInput,
+  CreateOneEventInput,
+  CreateOneQuoteInput,
+  CreateOneTaskCommentInput,
+  CreateOneTaskInput,
+  CreateOneTaskStageInput,
+  CreateOneUserInput,
+  CreateQuoteSubscriptionFilterInput,
+  CreateTaskCommentSubscriptionFilterInput,
+  CreateTaskStageSubscriptionFilterInput,
+  CreateTaskSubscriptionFilterInput,
+  CreateUserSubscriptionFilterInput,
+  DateFieldComparison,
+  DateFieldComparisonBetween,
+  Deal,
+  DealAggregateFilter,
+  DealAggregateGroupBy,
+  DealAggregateGroupByCreatedAtArgs,
+  DealAggregateGroupByUpdatedAtArgs,
+  DealAggregateResponse,
+  DealAvgAggregate,
+  DealConnection,
+  DealCountAggregate,
+  DealCreateInput,
+  DealDeleteFilter,
+  DealDeleteResponse,
+  DealFilter,
+  DealFilterCompanyFilter,
+  DealFilterContactFilter,
+  DealFilterDealStageFilter,
+  DealFilterUserFilter,
+  DealMaxAggregate,
+  DealMinAggregate,
+  DealSort,
+  DealStage,
+  DealStageConnection,
+  DealStageCreateInput,
+  DealStageDealsAggregateArgs,
+  DealStageDealsAggregateGroupBy,
+  DealStageDealsAggregateResponse,
+  DealStageDealsArgs,
+  DealStageDealsAvgAggregate,
+  DealStageDealsCountAggregate,
+  DealStageDealsMaxAggregate,
+  DealStageDealsMinAggregate,
+  DealStageDealsSumAggregate,
+  DealStageDeleteFilter,
+  DealStageDeleteResponse,
+  DealStageFilter,
+  DealStageFilterDealFilter,
+  DealStageFilterUserFilter,
+  DealStageSort,
+  DealStageSubscriptionFilter,
+  DealStageUpdateFilter,
+  DealStageUpdateInput,
+  DealSubscriptionFilter,
+  DealSumAggregate,
+  DealUpdateFilter,
+  DealUpdateInput,
+  DeleteManyCompaniesInput,
+  DeleteManyCompanyNotesInput,
+  DeleteManyContactNotesInput,
+  DeleteManyContactsInput,
+  DeleteManyDealStagesInput,
+  DeleteManyDealsInput,
+  DeleteManyEventCategoriesInput,
+  DeleteManyEventsInput,
+  DeleteManyQuotesInput,
+  DeleteManyResponse,
+  DeleteManyTaskCommentsInput,
+  DeleteManyTaskStagesInput,
+  DeleteManyTasksInput,
+  DeleteManyUsersInput,
+  DeleteOneAuditSubscriptionFilterInput,
+  DeleteOneCompanyInput,
+  DeleteOneCompanyNoteInput,
+  DeleteOneCompanyNoteSubscriptionFilterInput,
+  DeleteOneCompanySubscriptionFilterInput,
+  DeleteOneContactInput,
+  DeleteOneContactNoteInput,
+  DeleteOneContactNoteSubscriptionFilterInput,
+  DeleteOneContactSubscriptionFilterInput,
+  DeleteOneDealInput,
+  DeleteOneDealStageInput,
+  DeleteOneDealStageSubscriptionFilterInput,
+  DeleteOneDealSubscriptionFilterInput,
+  DeleteOneEventCategoryInput,
+  DeleteOneEventCategorySubscriptionFilterInput,
+  DeleteOneEventInput,
+  DeleteOneEventSubscriptionFilterInput,
+  DeleteOneQuoteInput,
+  DeleteOneQuoteSubscriptionFilterInput,
+  DeleteOneTaskCommentInput,
+  DeleteOneTaskCommentSubscriptionFilterInput,
+  DeleteOneTaskInput,
+  DeleteOneTaskStageInput,
+  DeleteOneTaskStageSubscriptionFilterInput,
+  DeleteOneTaskSubscriptionFilterInput,
+  DeleteOneUserInput,
+  DeleteOneUserSubscriptionFilterInput,
+  Event,
+  EventCategory,
+  EventCategoryConnection,
+  EventCategoryCreateInput,
+  EventCategoryDeleteFilter,
+  EventCategoryDeleteResponse,
+  EventCategoryEventsArgs,
+  EventCategoryFilter,
+  EventCategoryFilterUserFilter,
+  EventCategorySort,
+  EventCategorySubscriptionFilter,
+  EventCategoryUpdateFilter,
+  EventCategoryUpdateInput,
+  EventConnection,
+  EventCreateInput,
+  EventDeleteFilter,
+  EventDeleteResponse,
+  EventFilter,
+  EventFilterEventCategoryFilter,
+  EventFilterUserFilter,
+  EventParticipantsArgs,
+  EventSort,
+  EventSubscriptionFilter,
+  EventUpdateFilter,
+  EventUpdateInput,
+  FloatFieldComparison,
+  FloatFieldComparisonBetween,
+  IdFilterComparison,
+  IntFieldComparison,
+  IntFieldComparisonBetween,
+  LoginInput,
+  NumberFieldComparison,
+  NumberFieldComparisonBetween,
+  OffsetPageInfo,
+  OffsetPaging,
+  Quote,
+  QuoteConnection,
+  QuoteCreateInput,
+  QuoteDeleteFilter,
+  QuoteDeleteResponse,
+  QuoteFilter,
+  QuoteFilterCompanyFilter,
+  QuoteFilterContactFilter,
+  QuoteFilterUserFilter,
+  QuoteItem,
+  QuoteItemInput,
+  QuoteSort,
+  QuoteStatusFilterComparison,
+  QuoteSubscriptionFilter,
+  QuoteUpdateFilter,
+  QuoteUpdateInput,
+  RegisterInput,
+  StringFieldComparison,
+  Task,
+  TaskAggregateFilter,
+  TaskAggregateGroupBy,
+  TaskAggregateGroupByCreatedAtArgs,
+  TaskAggregateGroupByDueDateArgs,
+  TaskAggregateGroupByUpdatedAtArgs,
+  TaskAggregateResponse,
+  TaskAvgAggregate,
+  TaskComment,
+  TaskCommentAggregateFilter,
+  TaskCommentConnection,
+  TaskCommentCreateInput,
+  TaskCommentDeleteFilter,
+  TaskCommentDeleteResponse,
+  TaskCommentFilter,
+  TaskCommentFilterTaskFilter,
+  TaskCommentFilterUserFilter,
+  TaskCommentSort,
+  TaskCommentSubscriptionFilter,
+  TaskCommentUpdateFilter,
+  TaskCommentUpdateInput,
+  TaskCommentsAggregateArgs,
+  TaskCommentsAggregateGroupBy,
+  TaskCommentsAggregateResponse,
+  TaskCommentsArgs,
+  TaskCommentsAvgAggregate,
+  TaskCommentsConnection,
+  TaskCommentsCountAggregate,
+  TaskCommentsMaxAggregate,
+  TaskCommentsMinAggregate,
+  TaskCommentsSumAggregate,
+  TaskConnection,
+  TaskCountAggregate,
+  TaskCreateInput,
+  TaskDeleteFilter,
+  TaskDeleteResponse,
+  TaskFilter,
+  TaskFilterTaskCommentFilter,
+  TaskFilterTaskStageFilter,
+  TaskFilterUserFilter,
+  TaskMaxAggregate,
+  TaskMinAggregate,
+  TaskSort,
+  TaskStage,
+  TaskStageAggregateFilter,
+  TaskStageAggregateGroupBy,
+  TaskStageAggregateGroupByCreatedAtArgs,
+  TaskStageAggregateGroupByUpdatedAtArgs,
+  TaskStageAggregateResponse,
+  TaskStageAvgAggregate,
+  TaskStageConnection,
+  TaskStageCountAggregate,
+  TaskStageCreateInput,
+  TaskStageDeleteFilter,
+  TaskStageDeleteResponse,
+  TaskStageFilter,
+  TaskStageFilterUserFilter,
+  TaskStageMaxAggregate,
+  TaskStageMinAggregate,
+  TaskStageSort,
+  TaskStageSubscriptionFilter,
+  TaskStageSumAggregate,
+  TaskStageTasksAggregateArgs,
+  TaskStageTasksAggregateGroupBy,
+  TaskStageTasksAggregateResponse,
+  TaskStageTasksArgs,
+  TaskStageTasksAvgAggregate,
+  TaskStageTasksCountAggregate,
+  TaskStageTasksMaxAggregate,
+  TaskStageTasksMinAggregate,
+  TaskStageTasksSumAggregate,
+  TaskStageUpdateFilter,
+  TaskStageUpdateInput,
+  TaskSubscriptionFilter,
+  TaskSumAggregate,
+  TaskUpdateFilter,
+  TaskUpdateInput,
+  TaskUsersAggregateArgs,
+  TaskUsersAggregateGroupBy,
+  TaskUsersAggregateResponse,
+  TaskUsersArgs,
+  TaskUsersAvgAggregate,
+  TaskUsersCountAggregate,
+  TaskUsersMaxAggregate,
+  TaskUsersMinAggregate,
+  TaskUsersSumAggregate,
+  UpdateManyCompaniesInput,
+  UpdateManyCompanyNotesInput,
+  UpdateManyContactNotesInput,
+  UpdateManyContactsInput,
+  UpdateManyDealStagesInput,
+  UpdateManyDealsInput,
+  UpdateManyEventCategoriesInput,
+  UpdateManyEventsInput,
+  UpdateManyQuotesInput,
+  UpdateManyResponse,
+  UpdateManyTaskCommentsInput,
+  UpdateManyTaskStagesInput,
+  UpdateManyTasksInput,
+  UpdateManyUsersInput,
+  UpdateOneAuditSubscriptionFilterInput,
+  UpdateOneCompanyInput,
+  UpdateOneCompanyNoteInput,
+  UpdateOneCompanyNoteSubscriptionFilterInput,
+  UpdateOneCompanySubscriptionFilterInput,
+  UpdateOneContactInput,
+  UpdateOneContactNoteInput,
+  UpdateOneContactNoteSubscriptionFilterInput,
+  UpdateOneContactSubscriptionFilterInput,
+  UpdateOneDealInput,
+  UpdateOneDealStageInput,
+  UpdateOneDealStageSubscriptionFilterInput,
+  UpdateOneDealSubscriptionFilterInput,
+  UpdateOneEventCategoryInput,
+  UpdateOneEventCategorySubscriptionFilterInput,
+  UpdateOneEventInput,
+  UpdateOneEventSubscriptionFilterInput,
+  UpdateOneQuoteInput,
+  UpdateOneQuoteSubscriptionFilterInput,
+  UpdateOneTaskCommentInput,
+  UpdateOneTaskCommentSubscriptionFilterInput,
+  UpdateOneTaskInput,
+  UpdateOneTaskStageInput,
+  UpdateOneTaskStageSubscriptionFilterInput,
+  UpdateOneTaskSubscriptionFilterInput,
+  UpdateOneUserInput,
+  UpdateOneUserSubscriptionFilterInput,
+  User,
+  UserAggregateFilter,
+  UserCompaniesArgs,
+  UserCompaniesConnection,
+  UserConnection,
+  UserContactsArgs,
+  UserContactsConnection,
+  UserCreateInput,
+  UserDealsArgs,
+  UserDealsConnection,
+  UserDeleteFilter,
+  UserDeleteResponse,
+  UserEventsArgs,
+  UserEventsConnection,
+  UserFilter,
+  UserFilterCompanyFilter,
+  UserFilterContactFilter,
+  UserFilterDealFilter,
+  UserFilterEventFilter,
+  UserFilterTaskFilter,
+  UserFilterUserFilter,
+  UserRoleFilterComparison,
+  UserSort,
+  UserSubscriptionFilter,
+  UserTasksArgs,
+  UserTasksConnection,
+  UserUpdateFilter,
+  UserUpdateInput,
+} from "./schema.types"
 
 type Properties<T> = Required<{
-  [K in keyof T]: z.ZodType<T[K], any, T[K]>;
-}>;
+  [K in keyof T]: z.ZodType<T[K], any, T[K]>
+}>
 
-type definedNonNullAny = {};
+type definedNonNullAny = {}
 
 // @ts-nocheck
 /* eslint-disable */
-export const isDefinedNonNullAny = (v: any): v is definedNonNullAny => v !== undefined && v !== null;
+export const isDefinedNonNullAny = (v: any): v is definedNonNullAny =>
+  v !== undefined && v !== null
 
-export const definedNonNullAnySchema = z.any().refine((v) => isDefinedNonNullAny(v));
+export const definedNonNullAnySchema = z
+  .any()
+  .refine((v) => isDefinedNonNullAny(v))
 
-export const AuditSortFieldsSchema = z.enum(['action', 'createdAt', 'id', 'targetEntity', 'targetId', 'updatedAt']);
+export const AuditSortFieldsSchema = z.enum([
+  "action",
+  "createdAt",
+  "id",
+  "targetEntity",
+  "targetId",
+  "updatedAt",
+])
 
-export const BusinessTypeSchema = z.enum(['B2B', 'B2C', 'B2G']);
+export const BusinessTypeSchema = z.enum(["B2B", "B2C", "B2G"])
 
-export const CompanyNoteSortFieldsSchema = z.enum(['createdAt', 'id', 'updatedAt']);
+export const CompanyNoteSortFieldsSchema = z.enum([
+  "createdAt",
+  "id",
+  "updatedAt",
+])
 
-export const CompanySizeSchema = z.enum(['ENTERPRISE', 'LARGE', 'MEDIUM', 'SMALL']);
+export const CompanySizeSchema = z.enum([
+  "ENTERPRISE",
+  "LARGE",
+  "MEDIUM",
+  "SMALL",
+])
 
-export const CompanySortFieldsSchema = z.enum(['businessType', 'companySize', 'country', 'createdAt', 'id', 'industry', 'name', 'totalRevenue', 'updatedAt', 'website']);
+export const CompanySortFieldsSchema = z.enum([
+  "businessType",
+  "companySize",
+  "country",
+  "createdAt",
+  "id",
+  "industry",
+  "name",
+  "totalRevenue",
+  "updatedAt",
+  "website",
+])
 
-export const ContactNoteSortFieldsSchema = z.enum(['createdAt', 'id', 'updatedAt']);
+export const ContactNoteSortFieldsSchema = z.enum([
+  "createdAt",
+  "id",
+  "updatedAt",
+])
 
-export const ContactSortFieldsSchema = z.enum(['createdAt', 'email', 'id', 'jobTitle', 'name', 'phone', 'score', 'stage', 'status', 'timezone', 'updatedAt']);
+export const ContactSortFieldsSchema = z.enum([
+  "createdAt",
+  "email",
+  "id",
+  "jobTitle",
+  "name",
+  "phone",
+  "score",
+  "stage",
+  "status",
+  "timezone",
+  "updatedAt",
+])
 
-export const ContactStageSchema = z.enum(['CUSTOMER', 'LEAD', 'SALES_QUALIFIED_LEAD']);
+export const ContactStageSchema = z.enum([
+  "CUSTOMER",
+  "LEAD",
+  "SALES_QUALIFIED_LEAD",
+])
 
-export const ContactStatusSchema = z.enum(['CHURNED', 'CONTACTED', 'INTERESTED', 'LOST', 'NEGOTIATION', 'NEW', 'QUALIFIED', 'UNQUALIFIED', 'WON']);
+export const ContactStatusSchema = z.enum([
+  "CHURNED",
+  "CONTACTED",
+  "INTERESTED",
+  "LOST",
+  "NEGOTIATION",
+  "NEW",
+  "QUALIFIED",
+  "UNQUALIFIED",
+  "WON",
+])
 
-export const DealSortFieldsSchema = z.enum(['closeDateDay', 'closeDateMonth', 'closeDateYear', 'companyId', 'createdAt', 'dealOwnerId', 'id', 'stageId', 'title', 'updatedAt', 'value']);
+export const DealSortFieldsSchema = z.enum([
+  "closeDateDay",
+  "closeDateMonth",
+  "closeDateYear",
+  "companyId",
+  "createdAt",
+  "dealOwnerId",
+  "id",
+  "stageId",
+  "title",
+  "updatedAt",
+  "value",
+])
 
-export const DealStageSortFieldsSchema = z.enum(['createdAt', 'id', 'title', 'updatedAt']);
+export const DealStageSortFieldsSchema = z.enum([
+  "createdAt",
+  "id",
+  "title",
+  "updatedAt",
+])
 
-export const EventCategorySortFieldsSchema = z.enum(['createdAt', 'id', 'title', 'updatedAt']);
+export const EventCategorySortFieldsSchema = z.enum([
+  "createdAt",
+  "id",
+  "title",
+  "updatedAt",
+])
 
-export const EventSortFieldsSchema = z.enum(['createdAt', 'description', 'endDate', 'id', 'startDate', 'title', 'updatedAt']);
+export const EventSortFieldsSchema = z.enum([
+  "createdAt",
+  "description",
+  "endDate",
+  "id",
+  "startDate",
+  "title",
+  "updatedAt",
+])
 
-export const GroupBySchema = z.enum(['DAY', 'MONTH', 'WEEK', 'YEAR']);
+export const GroupBySchema = z.enum(["DAY", "MONTH", "WEEK", "YEAR"])
 
-export const IndustrySchema = z.enum(['AEROSPACE', 'AGRICULTURE', 'AUTOMOTIVE', 'CHEMICALS', 'CONSTRUCTION', 'DEFENSE', 'EDUCATION', 'ENERGY', 'FINANCIAL_SERVICES', 'FOOD_AND_BEVERAGE', 'GOVERNMENT', 'HEALTHCARE', 'HOSPITALITY', 'INDUSTRIAL_MANUFACTURING', 'INSURANCE', 'LIFE_SCIENCES', 'LOGISTICS', 'MEDIA', 'MINING', 'NONPROFIT', 'OTHER', 'PHARMACEUTICALS', 'PROFESSIONAL_SERVICES', 'REAL_ESTATE', 'RETAIL', 'TECHNOLOGY', 'TELECOMMUNICATIONS', 'TRANSPORTATION', 'UTILITIES']);
+export const IndustrySchema = z.enum([
+  "AEROSPACE",
+  "AGRICULTURE",
+  "AUTOMOTIVE",
+  "CHEMICALS",
+  "CONSTRUCTION",
+  "DEFENSE",
+  "EDUCATION",
+  "ENERGY",
+  "FINANCIAL_SERVICES",
+  "FOOD_AND_BEVERAGE",
+  "GOVERNMENT",
+  "HEALTHCARE",
+  "HOSPITALITY",
+  "INDUSTRIAL_MANUFACTURING",
+  "INSURANCE",
+  "LIFE_SCIENCES",
+  "LOGISTICS",
+  "MEDIA",
+  "MINING",
+  "NONPROFIT",
+  "OTHER",
+  "PHARMACEUTICALS",
+  "PROFESSIONAL_SERVICES",
+  "REAL_ESTATE",
+  "RETAIL",
+  "TECHNOLOGY",
+  "TELECOMMUNICATIONS",
+  "TRANSPORTATION",
+  "UTILITIES",
+])
 
-export const QuoteSortFieldsSchema = z.enum(['createdAt', 'id', 'status', 'title', 'total', 'updatedAt']);
+export const QuoteSortFieldsSchema = z.enum([
+  "createdAt",
+  "id",
+  "status",
+  "title",
+  "total",
+  "updatedAt",
+])
 
-export const QuoteStatusSchema = z.enum(['ACCEPTED', 'DRAFT', 'SENT']);
+export const QuoteStatusSchema = z.enum(["ACCEPTED", "DRAFT", "SENT"])
 
-export const RoleSchema = z.enum(['ADMIN', 'SALES_INTERN', 'SALES_MANAGER', 'SALES_PERSON']);
+export const RoleSchema = z.enum([
+  "ADMIN",
+  "SALES_INTERN",
+  "SALES_MANAGER",
+  "SALES_PERSON",
+])
 
-export const SortDirectionSchema = z.enum(['ASC', 'DESC']);
+export const SortDirectionSchema = z.enum(["ASC", "DESC"])
 
-export const SortNullsSchema = z.enum(['NULLS_FIRST', 'NULLS_LAST']);
+export const SortNullsSchema = z.enum(["NULLS_FIRST", "NULLS_LAST"])
 
-export const TaskCommentSortFieldsSchema = z.enum(['createdAt', 'id', 'updatedAt']);
+export const TaskCommentSortFieldsSchema = z.enum([
+  "createdAt",
+  "id",
+  "updatedAt",
+])
 
-export const TaskSortFieldsSchema = z.enum(['completed', 'createdAt', 'description', 'dueDate', 'id', 'stageId', 'title', 'updatedAt']);
+export const TaskSortFieldsSchema = z.enum([
+  "completed",
+  "createdAt",
+  "description",
+  "dueDate",
+  "id",
+  "stageId",
+  "title",
+  "updatedAt",
+])
 
-export const TaskStageSortFieldsSchema = z.enum(['createdAt', 'id', 'title', 'updatedAt']);
+export const TaskStageSortFieldsSchema = z.enum([
+  "createdAt",
+  "id",
+  "title",
+  "updatedAt",
+])
 
-export const UserSortFieldsSchema = z.enum(['createdAt', 'email', 'id', 'jobTitle', 'name', 'phone', 'role', 'timezone', 'updatedAt']);
+export const UserSortFieldsSchema = z.enum([
+  "createdAt",
+  "email",
+  "id",
+  "jobTitle",
+  "name",
+  "phone",
+  "role",
+  "timezone",
+  "updatedAt",
+])
 
 export function AuditSchema(): z.ZodObject<Properties<Audit>> {
   return z.object({
-    __typename: z.literal('Audit').optional(),
+    __typename: z.literal("Audit").optional(),
     action: z.string(),
     changes: z.array(z.lazy(() => AuditChangeSchema())),
     createdAt: z.string().datetime(),
@@ -71,38 +685,42 @@ export function AuditSchema(): z.ZodObject<Properties<Audit>> {
     targetEntity: z.string(),
     targetId: z.number(),
     updatedAt: z.string().datetime(),
-    user: z.lazy(() => UserSchema().nullish())
+    user: z.lazy(() => UserSchema().nullish()),
   })
 }
 
 export function AuditChangeSchema(): z.ZodObject<Properties<AuditChange>> {
   return z.object({
-    __typename: z.literal('AuditChange').optional(),
+    __typename: z.literal("AuditChange").optional(),
     field: z.string(),
     from: z.string().nullish(),
-    to: z.string().nullish()
+    to: z.string().nullish(),
   })
 }
 
-export function AuditConnectionSchema(): z.ZodObject<Properties<AuditConnection>> {
+export function AuditConnectionSchema(): z.ZodObject<
+  Properties<AuditConnection>
+> {
   return z.object({
-    __typename: z.literal('AuditConnection').optional(),
+    __typename: z.literal("AuditConnection").optional(),
     nodes: z.array(z.lazy(() => AuditSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function AuditDeleteResponseSchema(): z.ZodObject<Properties<AuditDeleteResponse>> {
+export function AuditDeleteResponseSchema(): z.ZodObject<
+  Properties<AuditDeleteResponse>
+> {
   return z.object({
-    __typename: z.literal('AuditDeleteResponse').optional(),
+    __typename: z.literal("AuditDeleteResponse").optional(),
     action: z.string().nullish(),
     changes: z.array(z.lazy(() => AuditChangeSchema())).nullish(),
     createdAt: z.string().datetime().nullish(),
     id: z.string().nullish(),
     targetEntity: z.string().nullish(),
     targetId: z.number().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
@@ -116,11 +734,13 @@ export function AuditFilterSchema(): z.ZodObject<Properties<AuditFilter>> {
     targetEntity: z.lazy(() => StringFieldComparisonSchema().nullish()),
     targetId: z.lazy(() => NumberFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    user: z.lazy(() => AuditFilterUserFilterSchema().nullish())
+    user: z.lazy(() => AuditFilterUserFilterSchema().nullish()),
   })
 }
 
-export function AuditFilterUserFilterSchema(): z.ZodObject<Properties<AuditFilterUserFilter>> {
+export function AuditFilterUserFilterSchema(): z.ZodObject<
+  Properties<AuditFilterUserFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => AuditFilterUserFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -132,7 +752,7 @@ export function AuditFilterUserFilterSchema(): z.ZodObject<Properties<AuditFilte
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
@@ -140,11 +760,13 @@ export function AuditSortSchema(): z.ZodObject<Properties<AuditSort>> {
   return z.object({
     direction: SortDirectionSchema,
     field: AuditSortFieldsSchema,
-    nulls: SortNullsSchema.nullish()
+    nulls: SortNullsSchema.nullish(),
   })
 }
 
-export function AuditSubscriptionFilterSchema(): z.ZodObject<Properties<AuditSubscriptionFilter>> {
+export function AuditSubscriptionFilterSchema(): z.ZodObject<
+  Properties<AuditSubscriptionFilter>
+> {
   return z.object({
     action: z.lazy(() => StringFieldComparisonSchema().nullish()),
     and: z.array(z.lazy(() => AuditSubscriptionFilterSchema())).nullish(),
@@ -153,114 +775,142 @@ export function AuditSubscriptionFilterSchema(): z.ZodObject<Properties<AuditSub
     or: z.array(z.lazy(() => AuditSubscriptionFilterSchema())).nullish(),
     targetEntity: z.lazy(() => StringFieldComparisonSchema().nullish()),
     targetId: z.lazy(() => NumberFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
 export function AuthResponseSchema(): z.ZodObject<Properties<AuthResponse>> {
   return z.object({
-    __typename: z.literal('AuthResponse').optional(),
+    __typename: z.literal("AuthResponse").optional(),
     accessToken: z.string(),
     refreshToken: z.string(),
-    user: z.lazy(() => UserSchema())
+    user: z.lazy(() => UserSchema()),
   })
 }
 
-export function BooleanFieldComparisonSchema(): z.ZodObject<Properties<BooleanFieldComparison>> {
+export function BooleanFieldComparisonSchema(): z.ZodObject<
+  Properties<BooleanFieldComparison>
+> {
   return z.object({
     is: z.boolean().nullish(),
-    isNot: z.boolean().nullish()
+    isNot: z.boolean().nullish(),
   })
 }
 
 export function CheckListItemSchema(): z.ZodObject<Properties<CheckListItem>> {
   return z.object({
-    __typename: z.literal('CheckListItem').optional(),
+    __typename: z.literal("CheckListItem").optional(),
     checked: z.boolean(),
-    title: z.string()
+    title: z.string(),
   })
 }
 
-export function ChecklistItemInputSchema(): z.ZodObject<Properties<ChecklistItemInput>> {
+export function ChecklistItemInputSchema(): z.ZodObject<
+  Properties<ChecklistItemInput>
+> {
   return z.object({
     checked: z.boolean(),
-    title: z.string()
+    title: z.string(),
   })
 }
 
 export function CompanySchema(): z.ZodObject<Properties<Company>> {
   return z.object({
-    __typename: z.literal('Company').optional(),
+    __typename: z.literal("Company").optional(),
     avatarUrl: z.string().nullish(),
     businessType: BusinessTypeSchema.nullish(),
     companySize: CompanySizeSchema.nullish(),
     contacts: z.lazy(() => CompanyContactsConnectionSchema()),
-    contactsAggregate: z.array(z.lazy(() => CompanyContactsAggregateResponseSchema())),
+    contactsAggregate: z.array(
+      z.lazy(() => CompanyContactsAggregateResponseSchema())
+    ),
     country: z.string().nullish(),
     createdAt: z.string().datetime(),
     createdBy: z.lazy(() => UserSchema()),
     deals: z.lazy(() => CompanyDealsConnectionSchema()),
-    dealsAggregate: z.array(z.lazy(() => CompanyDealsAggregateResponseSchema())),
+    dealsAggregate: z.array(
+      z.lazy(() => CompanyDealsAggregateResponseSchema())
+    ),
     id: z.string(),
     industry: IndustrySchema.nullish(),
     name: z.string(),
     notes: z.lazy(() => CompanyNotesConnectionSchema()),
-    notesAggregate: z.array(z.lazy(() => CompanyNotesAggregateResponseSchema())),
+    notesAggregate: z.array(
+      z.lazy(() => CompanyNotesAggregateResponseSchema())
+    ),
     salesOwner: z.lazy(() => UserSchema()),
     totalRevenue: z.number().nullish(),
     updatedAt: z.string().datetime(),
     updatedBy: z.lazy(() => UserSchema().nullish()),
-    website: z.string().nullish()
+    website: z.string().nullish(),
   })
 }
 
-export function CompanyContactsArgsSchema(): z.ZodObject<Properties<CompanyContactsArgs>> {
+export function CompanyContactsArgsSchema(): z.ZodObject<
+  Properties<CompanyContactsArgs>
+> {
   return z.object({
     filter: z.lazy(() => ContactFilterSchema()),
     paging: z.lazy(() => OffsetPagingSchema()),
-    sorting: z.array(z.lazy(() => ContactSortSchema()))
+    sorting: z.array(z.lazy(() => ContactSortSchema())),
   })
 }
 
-export function CompanyContactsAggregateArgsSchema(): z.ZodObject<Properties<CompanyContactsAggregateArgs>> {
+export function CompanyContactsAggregateArgsSchema(): z.ZodObject<
+  Properties<CompanyContactsAggregateArgs>
+> {
   return z.object({
-    filter: z.lazy(() => ContactAggregateFilterSchema().nullish())
+    filter: z.lazy(() => ContactAggregateFilterSchema().nullish()),
   })
 }
 
-export function CompanyDealsArgsSchema(): z.ZodObject<Properties<CompanyDealsArgs>> {
+export function CompanyDealsArgsSchema(): z.ZodObject<
+  Properties<CompanyDealsArgs>
+> {
   return z.object({
     filter: z.lazy(() => DealFilterSchema()),
     paging: z.lazy(() => OffsetPagingSchema()),
-    sorting: z.array(z.lazy(() => DealSortSchema()))
+    sorting: z.array(z.lazy(() => DealSortSchema())),
   })
 }
 
-export function CompanyDealsAggregateArgsSchema(): z.ZodObject<Properties<CompanyDealsAggregateArgs>> {
+export function CompanyDealsAggregateArgsSchema(): z.ZodObject<
+  Properties<CompanyDealsAggregateArgs>
+> {
   return z.object({
-    filter: z.lazy(() => DealAggregateFilterSchema().nullish())
+    filter: z.lazy(() => DealAggregateFilterSchema().nullish()),
   })
 }
 
-export function CompanyNotesArgsSchema(): z.ZodObject<Properties<CompanyNotesArgs>> {
+export function CompanyNotesArgsSchema(): z.ZodObject<
+  Properties<CompanyNotesArgs>
+> {
   return z.object({
     filter: z.lazy(() => CompanyNoteFilterSchema()),
     paging: z.lazy(() => OffsetPagingSchema()),
-    sorting: z.array(z.lazy(() => CompanyNoteSortSchema()))
+    sorting: z.array(z.lazy(() => CompanyNoteSortSchema())),
   })
 }
 
-export function CompanyNotesAggregateArgsSchema(): z.ZodObject<Properties<CompanyNotesAggregateArgs>> {
+export function CompanyNotesAggregateArgsSchema(): z.ZodObject<
+  Properties<CompanyNotesAggregateArgs>
+> {
   return z.object({
-    filter: z.lazy(() => CompanyNoteAggregateFilterSchema().nullish())
+    filter: z.lazy(() => CompanyNoteAggregateFilterSchema().nullish()),
   })
 }
 
-export function CompanyAggregateFilterSchema(): z.ZodObject<Properties<CompanyAggregateFilter>> {
+export function CompanyAggregateFilterSchema(): z.ZodObject<
+  Properties<CompanyAggregateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => CompanyAggregateFilterSchema())).nullish(),
-    businessType: z.lazy(() => CompanyBusinessTypeFilterComparisonSchema().nullish()),
-    companySize: z.lazy(() => CompanyCompanySizeFilterComparisonSchema().nullish()),
+    businessType: z.lazy(() =>
+      CompanyBusinessTypeFilterComparisonSchema().nullish()
+    ),
+    companySize: z.lazy(() =>
+      CompanyCompanySizeFilterComparisonSchema().nullish()
+    ),
     country: z.lazy(() => StringFieldComparisonSchema().nullish()),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
@@ -269,13 +919,15 @@ export function CompanyAggregateFilterSchema(): z.ZodObject<Properties<CompanyAg
     or: z.array(z.lazy(() => CompanyAggregateFilterSchema())).nullish(),
     totalRevenue: z.lazy(() => IntFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    website: z.lazy(() => StringFieldComparisonSchema().nullish())
+    website: z.lazy(() => StringFieldComparisonSchema().nullish()),
   })
 }
 
-export function CompanyAggregateGroupBySchema(): z.ZodObject<Properties<CompanyAggregateGroupBy>> {
+export function CompanyAggregateGroupBySchema(): z.ZodObject<
+  Properties<CompanyAggregateGroupBy>
+> {
   return z.object({
-    __typename: z.literal('CompanyAggregateGroupBy').optional(),
+    __typename: z.literal("CompanyAggregateGroupBy").optional(),
     businessType: BusinessTypeSchema.nullish(),
     companySize: CompanySizeSchema.nullish(),
     country: z.string().nullish(),
@@ -285,72 +937,88 @@ export function CompanyAggregateGroupBySchema(): z.ZodObject<Properties<CompanyA
     name: z.string().nullish(),
     totalRevenue: z.number().nullish(),
     updatedAt: z.string().datetime().nullish(),
-    website: z.string().nullish()
+    website: z.string().nullish(),
   })
 }
 
-export function CompanyAggregateGroupByCreatedAtArgsSchema(): z.ZodObject<Properties<CompanyAggregateGroupByCreatedAtArgs>> {
+export function CompanyAggregateGroupByCreatedAtArgsSchema(): z.ZodObject<
+  Properties<CompanyAggregateGroupByCreatedAtArgs>
+> {
   return z.object({
-    by: GroupBySchema.default("DAY")
+    by: GroupBySchema.default("DAY"),
   })
 }
 
-export function CompanyAggregateGroupByUpdatedAtArgsSchema(): z.ZodObject<Properties<CompanyAggregateGroupByUpdatedAtArgs>> {
+export function CompanyAggregateGroupByUpdatedAtArgsSchema(): z.ZodObject<
+  Properties<CompanyAggregateGroupByUpdatedAtArgs>
+> {
   return z.object({
-    by: GroupBySchema.default("DAY")
+    by: GroupBySchema.default("DAY"),
   })
 }
 
-export function CompanyAggregateResponseSchema(): z.ZodObject<Properties<CompanyAggregateResponse>> {
+export function CompanyAggregateResponseSchema(): z.ZodObject<
+  Properties<CompanyAggregateResponse>
+> {
   return z.object({
-    __typename: z.literal('CompanyAggregateResponse').optional(),
+    __typename: z.literal("CompanyAggregateResponse").optional(),
     avg: z.lazy(() => CompanyAvgAggregateSchema().nullish()),
     count: z.lazy(() => CompanyCountAggregateSchema().nullish()),
     groupBy: z.lazy(() => CompanyAggregateGroupBySchema().nullish()),
     max: z.lazy(() => CompanyMaxAggregateSchema().nullish()),
     min: z.lazy(() => CompanyMinAggregateSchema().nullish()),
-    sum: z.lazy(() => CompanySumAggregateSchema().nullish())
+    sum: z.lazy(() => CompanySumAggregateSchema().nullish()),
   })
 }
 
-export function CompanyAvgAggregateSchema(): z.ZodObject<Properties<CompanyAvgAggregate>> {
+export function CompanyAvgAggregateSchema(): z.ZodObject<
+  Properties<CompanyAvgAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyAvgAggregate').optional(),
+    __typename: z.literal("CompanyAvgAggregate").optional(),
     id: z.number().nullish(),
-    totalRevenue: z.number().nullish()
+    totalRevenue: z.number().nullish(),
   })
 }
 
-export function CompanyBusinessTypeFilterComparisonSchema(): z.ZodObject<Properties<CompanyBusinessTypeFilterComparison>> {
+export function CompanyBusinessTypeFilterComparisonSchema(): z.ZodObject<
+  Properties<CompanyBusinessTypeFilterComparison>
+> {
   return z.object({
     eq: BusinessTypeSchema.nullish(),
     in: z.array(BusinessTypeSchema).nullish(),
     neq: BusinessTypeSchema.nullish(),
-    notIn: z.array(BusinessTypeSchema).nullish()
+    notIn: z.array(BusinessTypeSchema).nullish(),
   })
 }
 
-export function CompanyCompanySizeFilterComparisonSchema(): z.ZodObject<Properties<CompanyCompanySizeFilterComparison>> {
+export function CompanyCompanySizeFilterComparisonSchema(): z.ZodObject<
+  Properties<CompanyCompanySizeFilterComparison>
+> {
   return z.object({
     eq: CompanySizeSchema.nullish(),
     in: z.array(CompanySizeSchema).nullish(),
     neq: CompanySizeSchema.nullish(),
-    notIn: z.array(CompanySizeSchema).nullish()
+    notIn: z.array(CompanySizeSchema).nullish(),
   })
 }
 
-export function CompanyConnectionSchema(): z.ZodObject<Properties<CompanyConnection>> {
+export function CompanyConnectionSchema(): z.ZodObject<
+  Properties<CompanyConnection>
+> {
   return z.object({
-    __typename: z.literal('CompanyConnection').optional(),
+    __typename: z.literal("CompanyConnection").optional(),
     nodes: z.array(z.lazy(() => CompanySchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function CompanyContactsAggregateGroupBySchema(): z.ZodObject<Properties<CompanyContactsAggregateGroupBy>> {
+export function CompanyContactsAggregateGroupBySchema(): z.ZodObject<
+  Properties<CompanyContactsAggregateGroupBy>
+> {
   return z.object({
-    __typename: z.literal('CompanyContactsAggregateGroupBy').optional(),
+    __typename: z.literal("CompanyContactsAggregateGroupBy").optional(),
     createdAt: z.string().datetime().nullish(),
     email: z.string().nullish(),
     id: z.string().nullish(),
@@ -361,42 +1029,50 @@ export function CompanyContactsAggregateGroupBySchema(): z.ZodObject<Properties<
     stage: ContactStageSchema.nullish(),
     status: ContactStatusSchema.nullish(),
     timezone: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function CompanyContactsAggregateResponseSchema(): z.ZodObject<Properties<CompanyContactsAggregateResponse>> {
+export function CompanyContactsAggregateResponseSchema(): z.ZodObject<
+  Properties<CompanyContactsAggregateResponse>
+> {
   return z.object({
-    __typename: z.literal('CompanyContactsAggregateResponse').optional(),
+    __typename: z.literal("CompanyContactsAggregateResponse").optional(),
     avg: z.lazy(() => CompanyContactsAvgAggregateSchema().nullish()),
     count: z.lazy(() => CompanyContactsCountAggregateSchema().nullish()),
     groupBy: z.lazy(() => CompanyContactsAggregateGroupBySchema().nullish()),
     max: z.lazy(() => CompanyContactsMaxAggregateSchema().nullish()),
     min: z.lazy(() => CompanyContactsMinAggregateSchema().nullish()),
-    sum: z.lazy(() => CompanyContactsSumAggregateSchema().nullish())
+    sum: z.lazy(() => CompanyContactsSumAggregateSchema().nullish()),
   })
 }
 
-export function CompanyContactsAvgAggregateSchema(): z.ZodObject<Properties<CompanyContactsAvgAggregate>> {
+export function CompanyContactsAvgAggregateSchema(): z.ZodObject<
+  Properties<CompanyContactsAvgAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyContactsAvgAggregate').optional(),
+    __typename: z.literal("CompanyContactsAvgAggregate").optional(),
     id: z.number().nullish(),
-    score: z.number().nullish()
+    score: z.number().nullish(),
   })
 }
 
-export function CompanyContactsConnectionSchema(): z.ZodObject<Properties<CompanyContactsConnection>> {
+export function CompanyContactsConnectionSchema(): z.ZodObject<
+  Properties<CompanyContactsConnection>
+> {
   return z.object({
-    __typename: z.literal('CompanyContactsConnection').optional(),
+    __typename: z.literal("CompanyContactsConnection").optional(),
     nodes: z.array(z.lazy(() => ContactSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function CompanyContactsCountAggregateSchema(): z.ZodObject<Properties<CompanyContactsCountAggregate>> {
+export function CompanyContactsCountAggregateSchema(): z.ZodObject<
+  Properties<CompanyContactsCountAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyContactsCountAggregate').optional(),
+    __typename: z.literal("CompanyContactsCountAggregate").optional(),
     createdAt: z.number().nullish(),
     email: z.number().nullish(),
     id: z.number().nullish(),
@@ -407,13 +1083,15 @@ export function CompanyContactsCountAggregateSchema(): z.ZodObject<Properties<Co
     stage: z.number().nullish(),
     status: z.number().nullish(),
     timezone: z.number().nullish(),
-    updatedAt: z.number().nullish()
+    updatedAt: z.number().nullish(),
   })
 }
 
-export function CompanyContactsMaxAggregateSchema(): z.ZodObject<Properties<CompanyContactsMaxAggregate>> {
+export function CompanyContactsMaxAggregateSchema(): z.ZodObject<
+  Properties<CompanyContactsMaxAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyContactsMaxAggregate').optional(),
+    __typename: z.literal("CompanyContactsMaxAggregate").optional(),
     createdAt: z.string().datetime().nullish(),
     email: z.string().nullish(),
     id: z.string().nullish(),
@@ -424,13 +1102,15 @@ export function CompanyContactsMaxAggregateSchema(): z.ZodObject<Properties<Comp
     stage: ContactStageSchema.nullish(),
     status: ContactStatusSchema.nullish(),
     timezone: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function CompanyContactsMinAggregateSchema(): z.ZodObject<Properties<CompanyContactsMinAggregate>> {
+export function CompanyContactsMinAggregateSchema(): z.ZodObject<
+  Properties<CompanyContactsMinAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyContactsMinAggregate').optional(),
+    __typename: z.literal("CompanyContactsMinAggregate").optional(),
     createdAt: z.string().datetime().nullish(),
     email: z.string().nullish(),
     id: z.string().nullish(),
@@ -441,21 +1121,25 @@ export function CompanyContactsMinAggregateSchema(): z.ZodObject<Properties<Comp
     stage: ContactStageSchema.nullish(),
     status: ContactStatusSchema.nullish(),
     timezone: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function CompanyContactsSumAggregateSchema(): z.ZodObject<Properties<CompanyContactsSumAggregate>> {
+export function CompanyContactsSumAggregateSchema(): z.ZodObject<
+  Properties<CompanyContactsSumAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyContactsSumAggregate').optional(),
+    __typename: z.literal("CompanyContactsSumAggregate").optional(),
     id: z.number().nullish(),
-    score: z.number().nullish()
+    score: z.number().nullish(),
   })
 }
 
-export function CompanyCountAggregateSchema(): z.ZodObject<Properties<CompanyCountAggregate>> {
+export function CompanyCountAggregateSchema(): z.ZodObject<
+  Properties<CompanyCountAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyCountAggregate').optional(),
+    __typename: z.literal("CompanyCountAggregate").optional(),
     businessType: z.number().nullish(),
     companySize: z.number().nullish(),
     country: z.number().nullish(),
@@ -465,11 +1149,13 @@ export function CompanyCountAggregateSchema(): z.ZodObject<Properties<CompanyCou
     name: z.number().nullish(),
     totalRevenue: z.number().nullish(),
     updatedAt: z.number().nullish(),
-    website: z.number().nullish()
+    website: z.number().nullish(),
   })
 }
 
-export function CompanyCreateInputSchema(): z.ZodObject<Properties<CompanyCreateInput>> {
+export function CompanyCreateInputSchema(): z.ZodObject<
+  Properties<CompanyCreateInput>
+> {
   return z.object({
     businessType: BusinessTypeSchema.nullish(),
     companySize: CompanySizeSchema.nullish(),
@@ -478,13 +1164,15 @@ export function CompanyCreateInputSchema(): z.ZodObject<Properties<CompanyCreate
     name: z.string(),
     salesOwnerId: z.string(),
     totalRevenue: z.number().nullish(),
-    website: z.string().nullish()
+    website: z.string().nullish(),
   })
 }
 
-export function CompanyDealsAggregateGroupBySchema(): z.ZodObject<Properties<CompanyDealsAggregateGroupBy>> {
+export function CompanyDealsAggregateGroupBySchema(): z.ZodObject<
+  Properties<CompanyDealsAggregateGroupBy>
+> {
   return z.object({
-    __typename: z.literal('CompanyDealsAggregateGroupBy').optional(),
+    __typename: z.literal("CompanyDealsAggregateGroupBy").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -495,25 +1183,29 @@ export function CompanyDealsAggregateGroupBySchema(): z.ZodObject<Properties<Com
     stageId: z.string().nullish(),
     title: z.string().nullish(),
     updatedAt: z.string().datetime().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function CompanyDealsAggregateResponseSchema(): z.ZodObject<Properties<CompanyDealsAggregateResponse>> {
+export function CompanyDealsAggregateResponseSchema(): z.ZodObject<
+  Properties<CompanyDealsAggregateResponse>
+> {
   return z.object({
-    __typename: z.literal('CompanyDealsAggregateResponse').optional(),
+    __typename: z.literal("CompanyDealsAggregateResponse").optional(),
     avg: z.lazy(() => CompanyDealsAvgAggregateSchema().nullish()),
     count: z.lazy(() => CompanyDealsCountAggregateSchema().nullish()),
     groupBy: z.lazy(() => CompanyDealsAggregateGroupBySchema().nullish()),
     max: z.lazy(() => CompanyDealsMaxAggregateSchema().nullish()),
     min: z.lazy(() => CompanyDealsMinAggregateSchema().nullish()),
-    sum: z.lazy(() => CompanyDealsSumAggregateSchema().nullish())
+    sum: z.lazy(() => CompanyDealsSumAggregateSchema().nullish()),
   })
 }
 
-export function CompanyDealsAvgAggregateSchema(): z.ZodObject<Properties<CompanyDealsAvgAggregate>> {
+export function CompanyDealsAvgAggregateSchema(): z.ZodObject<
+  Properties<CompanyDealsAvgAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyDealsAvgAggregate').optional(),
+    __typename: z.literal("CompanyDealsAvgAggregate").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -521,22 +1213,26 @@ export function CompanyDealsAvgAggregateSchema(): z.ZodObject<Properties<Company
     dealOwnerId: z.number().nullish(),
     id: z.number().nullish(),
     stageId: z.number().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function CompanyDealsConnectionSchema(): z.ZodObject<Properties<CompanyDealsConnection>> {
+export function CompanyDealsConnectionSchema(): z.ZodObject<
+  Properties<CompanyDealsConnection>
+> {
   return z.object({
-    __typename: z.literal('CompanyDealsConnection').optional(),
+    __typename: z.literal("CompanyDealsConnection").optional(),
     nodes: z.array(z.lazy(() => DealSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function CompanyDealsCountAggregateSchema(): z.ZodObject<Properties<CompanyDealsCountAggregate>> {
+export function CompanyDealsCountAggregateSchema(): z.ZodObject<
+  Properties<CompanyDealsCountAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyDealsCountAggregate').optional(),
+    __typename: z.literal("CompanyDealsCountAggregate").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -547,13 +1243,15 @@ export function CompanyDealsCountAggregateSchema(): z.ZodObject<Properties<Compa
     stageId: z.number().nullish(),
     title: z.number().nullish(),
     updatedAt: z.number().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function CompanyDealsMaxAggregateSchema(): z.ZodObject<Properties<CompanyDealsMaxAggregate>> {
+export function CompanyDealsMaxAggregateSchema(): z.ZodObject<
+  Properties<CompanyDealsMaxAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyDealsMaxAggregate').optional(),
+    __typename: z.literal("CompanyDealsMaxAggregate").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -564,13 +1262,15 @@ export function CompanyDealsMaxAggregateSchema(): z.ZodObject<Properties<Company
     stageId: z.string().nullish(),
     title: z.string().nullish(),
     updatedAt: z.string().datetime().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function CompanyDealsMinAggregateSchema(): z.ZodObject<Properties<CompanyDealsMinAggregate>> {
+export function CompanyDealsMinAggregateSchema(): z.ZodObject<
+  Properties<CompanyDealsMinAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyDealsMinAggregate').optional(),
+    __typename: z.literal("CompanyDealsMinAggregate").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -581,13 +1281,15 @@ export function CompanyDealsMinAggregateSchema(): z.ZodObject<Properties<Company
     stageId: z.string().nullish(),
     title: z.string().nullish(),
     updatedAt: z.string().datetime().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function CompanyDealsSumAggregateSchema(): z.ZodObject<Properties<CompanyDealsSumAggregate>> {
+export function CompanyDealsSumAggregateSchema(): z.ZodObject<
+  Properties<CompanyDealsSumAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyDealsSumAggregate').optional(),
+    __typename: z.literal("CompanyDealsSumAggregate").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -595,15 +1297,21 @@ export function CompanyDealsSumAggregateSchema(): z.ZodObject<Properties<Company
     dealOwnerId: z.number().nullish(),
     id: z.number().nullish(),
     stageId: z.number().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function CompanyDeleteFilterSchema(): z.ZodObject<Properties<CompanyDeleteFilter>> {
+export function CompanyDeleteFilterSchema(): z.ZodObject<
+  Properties<CompanyDeleteFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => CompanyDeleteFilterSchema())).nullish(),
-    businessType: z.lazy(() => CompanyBusinessTypeFilterComparisonSchema().nullish()),
-    companySize: z.lazy(() => CompanyCompanySizeFilterComparisonSchema().nullish()),
+    businessType: z.lazy(() =>
+      CompanyBusinessTypeFilterComparisonSchema().nullish()
+    ),
+    companySize: z.lazy(() =>
+      CompanyCompanySizeFilterComparisonSchema().nullish()
+    ),
     country: z.lazy(() => StringFieldComparisonSchema().nullish()),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
@@ -612,13 +1320,15 @@ export function CompanyDeleteFilterSchema(): z.ZodObject<Properties<CompanyDelet
     or: z.array(z.lazy(() => CompanyDeleteFilterSchema())).nullish(),
     totalRevenue: z.lazy(() => IntFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    website: z.lazy(() => StringFieldComparisonSchema().nullish())
+    website: z.lazy(() => StringFieldComparisonSchema().nullish()),
   })
 }
 
-export function CompanyDeleteResponseSchema(): z.ZodObject<Properties<CompanyDeleteResponse>> {
+export function CompanyDeleteResponseSchema(): z.ZodObject<
+  Properties<CompanyDeleteResponse>
+> {
   return z.object({
-    __typename: z.literal('CompanyDeleteResponse').optional(),
+    __typename: z.literal("CompanyDeleteResponse").optional(),
     avatarUrl: z.string().nullish(),
     businessType: BusinessTypeSchema.nullish(),
     companySize: CompanySizeSchema.nullish(),
@@ -629,15 +1339,19 @@ export function CompanyDeleteResponseSchema(): z.ZodObject<Properties<CompanyDel
     name: z.string().nullish(),
     totalRevenue: z.number().nullish(),
     updatedAt: z.string().datetime().nullish(),
-    website: z.string().nullish()
+    website: z.string().nullish(),
   })
 }
 
 export function CompanyFilterSchema(): z.ZodObject<Properties<CompanyFilter>> {
   return z.object({
     and: z.array(z.lazy(() => CompanyFilterSchema())).nullish(),
-    businessType: z.lazy(() => CompanyBusinessTypeFilterComparisonSchema().nullish()),
-    companySize: z.lazy(() => CompanyCompanySizeFilterComparisonSchema().nullish()),
+    businessType: z.lazy(() =>
+      CompanyBusinessTypeFilterComparisonSchema().nullish()
+    ),
+    companySize: z.lazy(() =>
+      CompanyCompanySizeFilterComparisonSchema().nullish()
+    ),
     contacts: z.lazy(() => CompanyFilterContactFilterSchema().nullish()),
     country: z.lazy(() => StringFieldComparisonSchema().nullish()),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -652,21 +1366,27 @@ export function CompanyFilterSchema(): z.ZodObject<Properties<CompanyFilter>> {
     totalRevenue: z.lazy(() => IntFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     updatedBy: z.lazy(() => CompanyFilterUserFilterSchema().nullish()),
-    website: z.lazy(() => StringFieldComparisonSchema().nullish())
+    website: z.lazy(() => StringFieldComparisonSchema().nullish()),
   })
 }
 
-export function CompanyFilterCompanyNoteFilterSchema(): z.ZodObject<Properties<CompanyFilterCompanyNoteFilter>> {
+export function CompanyFilterCompanyNoteFilterSchema(): z.ZodObject<
+  Properties<CompanyFilterCompanyNoteFilter>
+> {
   return z.object({
-    and: z.array(z.lazy(() => CompanyFilterCompanyNoteFilterSchema())).nullish(),
+    and: z
+      .array(z.lazy(() => CompanyFilterCompanyNoteFilterSchema()))
+      .nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => CompanyFilterCompanyNoteFilterSchema())).nullish(),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function CompanyFilterContactFilterSchema(): z.ZodObject<Properties<CompanyFilterContactFilter>> {
+export function CompanyFilterContactFilterSchema(): z.ZodObject<
+  Properties<CompanyFilterContactFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => CompanyFilterContactFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -680,11 +1400,13 @@ export function CompanyFilterContactFilterSchema(): z.ZodObject<Properties<Compa
     stage: z.lazy(() => ContactStageFilterComparisonSchema().nullish()),
     status: z.lazy(() => ContactStatusFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function CompanyFilterDealFilterSchema(): z.ZodObject<Properties<CompanyFilterDealFilter>> {
+export function CompanyFilterDealFilterSchema(): z.ZodObject<
+  Properties<CompanyFilterDealFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => CompanyFilterDealFilterSchema())).nullish(),
     closeDateDay: z.lazy(() => IntFieldComparisonSchema().nullish()),
@@ -698,11 +1420,13 @@ export function CompanyFilterDealFilterSchema(): z.ZodObject<Properties<CompanyF
     stageId: z.lazy(() => IdFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    value: z.lazy(() => FloatFieldComparisonSchema().nullish())
+    value: z.lazy(() => FloatFieldComparisonSchema().nullish()),
   })
 }
 
-export function CompanyFilterUserFilterSchema(): z.ZodObject<Properties<CompanyFilterUserFilter>> {
+export function CompanyFilterUserFilterSchema(): z.ZodObject<
+  Properties<CompanyFilterUserFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => CompanyFilterUserFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -714,22 +1438,26 @@ export function CompanyFilterUserFilterSchema(): z.ZodObject<Properties<CompanyF
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function CompanyIndustryFilterComparisonSchema(): z.ZodObject<Properties<CompanyIndustryFilterComparison>> {
+export function CompanyIndustryFilterComparisonSchema(): z.ZodObject<
+  Properties<CompanyIndustryFilterComparison>
+> {
   return z.object({
     eq: IndustrySchema.nullish(),
     in: z.array(IndustrySchema).nullish(),
     neq: IndustrySchema.nullish(),
-    notIn: z.array(IndustrySchema).nullish()
+    notIn: z.array(IndustrySchema).nullish(),
   })
 }
 
-export function CompanyMaxAggregateSchema(): z.ZodObject<Properties<CompanyMaxAggregate>> {
+export function CompanyMaxAggregateSchema(): z.ZodObject<
+  Properties<CompanyMaxAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyMaxAggregate').optional(),
+    __typename: z.literal("CompanyMaxAggregate").optional(),
     businessType: BusinessTypeSchema.nullish(),
     companySize: CompanySizeSchema.nullish(),
     country: z.string().nullish(),
@@ -739,13 +1467,15 @@ export function CompanyMaxAggregateSchema(): z.ZodObject<Properties<CompanyMaxAg
     name: z.string().nullish(),
     totalRevenue: z.number().nullish(),
     updatedAt: z.string().datetime().nullish(),
-    website: z.string().nullish()
+    website: z.string().nullish(),
   })
 }
 
-export function CompanyMinAggregateSchema(): z.ZodObject<Properties<CompanyMinAggregate>> {
+export function CompanyMinAggregateSchema(): z.ZodObject<
+  Properties<CompanyMinAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyMinAggregate').optional(),
+    __typename: z.literal("CompanyMinAggregate").optional(),
     businessType: BusinessTypeSchema.nullish(),
     companySize: CompanySizeSchema.nullish(),
     country: z.string().nullish(),
@@ -755,70 +1485,82 @@ export function CompanyMinAggregateSchema(): z.ZodObject<Properties<CompanyMinAg
     name: z.string().nullish(),
     totalRevenue: z.number().nullish(),
     updatedAt: z.string().datetime().nullish(),
-    website: z.string().nullish()
+    website: z.string().nullish(),
   })
 }
 
 export function CompanyNoteSchema(): z.ZodObject<Properties<CompanyNote>> {
   return z.object({
-    __typename: z.literal('CompanyNote').optional(),
+    __typename: z.literal("CompanyNote").optional(),
     company: z.lazy(() => CompanySchema()),
     createdAt: z.string().datetime(),
     createdBy: z.lazy(() => UserSchema()),
     id: z.string(),
     note: z.string(),
     updatedAt: z.string().datetime(),
-    updatedBy: z.lazy(() => UserSchema().nullish())
+    updatedBy: z.lazy(() => UserSchema().nullish()),
   })
 }
 
-export function CompanyNoteAggregateFilterSchema(): z.ZodObject<Properties<CompanyNoteAggregateFilter>> {
+export function CompanyNoteAggregateFilterSchema(): z.ZodObject<
+  Properties<CompanyNoteAggregateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => CompanyNoteAggregateFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => CompanyNoteAggregateFilterSchema())).nullish(),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function CompanyNoteConnectionSchema(): z.ZodObject<Properties<CompanyNoteConnection>> {
+export function CompanyNoteConnectionSchema(): z.ZodObject<
+  Properties<CompanyNoteConnection>
+> {
   return z.object({
-    __typename: z.literal('CompanyNoteConnection').optional(),
+    __typename: z.literal("CompanyNoteConnection").optional(),
     nodes: z.array(z.lazy(() => CompanyNoteSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function CompanyNoteCreateInputSchema(): z.ZodObject<Properties<CompanyNoteCreateInput>> {
+export function CompanyNoteCreateInputSchema(): z.ZodObject<
+  Properties<CompanyNoteCreateInput>
+> {
   return z.object({
     companyId: z.string(),
-    note: z.string()
+    note: z.string(),
   })
 }
 
-export function CompanyNoteDeleteFilterSchema(): z.ZodObject<Properties<CompanyNoteDeleteFilter>> {
+export function CompanyNoteDeleteFilterSchema(): z.ZodObject<
+  Properties<CompanyNoteDeleteFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => CompanyNoteDeleteFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => CompanyNoteDeleteFilterSchema())).nullish(),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function CompanyNoteDeleteResponseSchema(): z.ZodObject<Properties<CompanyNoteDeleteResponse>> {
+export function CompanyNoteDeleteResponseSchema(): z.ZodObject<
+  Properties<CompanyNoteDeleteResponse>
+> {
   return z.object({
-    __typename: z.literal('CompanyNoteDeleteResponse').optional(),
+    __typename: z.literal("CompanyNoteDeleteResponse").optional(),
     createdAt: z.string().datetime().nullish(),
     id: z.string().nullish(),
     note: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function CompanyNoteFilterSchema(): z.ZodObject<Properties<CompanyNoteFilter>> {
+export function CompanyNoteFilterSchema(): z.ZodObject<
+  Properties<CompanyNoteFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => CompanyNoteFilterSchema())).nullish(),
     company: z.lazy(() => CompanyNoteFilterCompanyFilterSchema().nullish()),
@@ -827,15 +1569,23 @@ export function CompanyNoteFilterSchema(): z.ZodObject<Properties<CompanyNoteFil
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => CompanyNoteFilterSchema())).nullish(),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    updatedBy: z.lazy(() => CompanyNoteFilterUserFilterSchema().nullish())
+    updatedBy: z.lazy(() => CompanyNoteFilterUserFilterSchema().nullish()),
   })
 }
 
-export function CompanyNoteFilterCompanyFilterSchema(): z.ZodObject<Properties<CompanyNoteFilterCompanyFilter>> {
+export function CompanyNoteFilterCompanyFilterSchema(): z.ZodObject<
+  Properties<CompanyNoteFilterCompanyFilter>
+> {
   return z.object({
-    and: z.array(z.lazy(() => CompanyNoteFilterCompanyFilterSchema())).nullish(),
-    businessType: z.lazy(() => CompanyBusinessTypeFilterComparisonSchema().nullish()),
-    companySize: z.lazy(() => CompanyCompanySizeFilterComparisonSchema().nullish()),
+    and: z
+      .array(z.lazy(() => CompanyNoteFilterCompanyFilterSchema()))
+      .nullish(),
+    businessType: z.lazy(() =>
+      CompanyBusinessTypeFilterComparisonSchema().nullish()
+    ),
+    companySize: z.lazy(() =>
+      CompanyCompanySizeFilterComparisonSchema().nullish()
+    ),
     country: z.lazy(() => StringFieldComparisonSchema().nullish()),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
@@ -844,11 +1594,13 @@ export function CompanyNoteFilterCompanyFilterSchema(): z.ZodObject<Properties<C
     or: z.array(z.lazy(() => CompanyNoteFilterCompanyFilterSchema())).nullish(),
     totalRevenue: z.lazy(() => IntFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    website: z.lazy(() => StringFieldComparisonSchema().nullish())
+    website: z.lazy(() => StringFieldComparisonSchema().nullish()),
   })
 }
 
-export function CompanyNoteFilterUserFilterSchema(): z.ZodObject<Properties<CompanyNoteFilterUserFilter>> {
+export function CompanyNoteFilterUserFilterSchema(): z.ZodObject<
+  Properties<CompanyNoteFilterUserFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => CompanyNoteFilterUserFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -860,112 +1612,136 @@ export function CompanyNoteFilterUserFilterSchema(): z.ZodObject<Properties<Comp
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function CompanyNoteSortSchema(): z.ZodObject<Properties<CompanyNoteSort>> {
+export function CompanyNoteSortSchema(): z.ZodObject<
+  Properties<CompanyNoteSort>
+> {
   return z.object({
     direction: SortDirectionSchema,
     field: CompanyNoteSortFieldsSchema,
-    nulls: SortNullsSchema.nullish()
+    nulls: SortNullsSchema.nullish(),
   })
 }
 
-export function CompanyNoteSubscriptionFilterSchema(): z.ZodObject<Properties<CompanyNoteSubscriptionFilter>> {
+export function CompanyNoteSubscriptionFilterSchema(): z.ZodObject<
+  Properties<CompanyNoteSubscriptionFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => CompanyNoteSubscriptionFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => CompanyNoteSubscriptionFilterSchema())).nullish(),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function CompanyNoteUpdateFilterSchema(): z.ZodObject<Properties<CompanyNoteUpdateFilter>> {
+export function CompanyNoteUpdateFilterSchema(): z.ZodObject<
+  Properties<CompanyNoteUpdateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => CompanyNoteUpdateFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => CompanyNoteUpdateFilterSchema())).nullish(),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function CompanyNoteUpdateInputSchema(): z.ZodObject<Properties<CompanyNoteUpdateInput>> {
+export function CompanyNoteUpdateInputSchema(): z.ZodObject<
+  Properties<CompanyNoteUpdateInput>
+> {
   return z.object({
-    note: z.string()
+    note: z.string(),
   })
 }
 
-export function CompanyNotesAggregateGroupBySchema(): z.ZodObject<Properties<CompanyNotesAggregateGroupBy>> {
+export function CompanyNotesAggregateGroupBySchema(): z.ZodObject<
+  Properties<CompanyNotesAggregateGroupBy>
+> {
   return z.object({
-    __typename: z.literal('CompanyNotesAggregateGroupBy').optional(),
+    __typename: z.literal("CompanyNotesAggregateGroupBy").optional(),
     createdAt: z.string().datetime().nullish(),
     id: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function CompanyNotesAggregateResponseSchema(): z.ZodObject<Properties<CompanyNotesAggregateResponse>> {
+export function CompanyNotesAggregateResponseSchema(): z.ZodObject<
+  Properties<CompanyNotesAggregateResponse>
+> {
   return z.object({
-    __typename: z.literal('CompanyNotesAggregateResponse').optional(),
+    __typename: z.literal("CompanyNotesAggregateResponse").optional(),
     avg: z.lazy(() => CompanyNotesAvgAggregateSchema().nullish()),
     count: z.lazy(() => CompanyNotesCountAggregateSchema().nullish()),
     groupBy: z.lazy(() => CompanyNotesAggregateGroupBySchema().nullish()),
     max: z.lazy(() => CompanyNotesMaxAggregateSchema().nullish()),
     min: z.lazy(() => CompanyNotesMinAggregateSchema().nullish()),
-    sum: z.lazy(() => CompanyNotesSumAggregateSchema().nullish())
+    sum: z.lazy(() => CompanyNotesSumAggregateSchema().nullish()),
   })
 }
 
-export function CompanyNotesAvgAggregateSchema(): z.ZodObject<Properties<CompanyNotesAvgAggregate>> {
+export function CompanyNotesAvgAggregateSchema(): z.ZodObject<
+  Properties<CompanyNotesAvgAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyNotesAvgAggregate').optional(),
-    id: z.number().nullish()
+    __typename: z.literal("CompanyNotesAvgAggregate").optional(),
+    id: z.number().nullish(),
   })
 }
 
-export function CompanyNotesConnectionSchema(): z.ZodObject<Properties<CompanyNotesConnection>> {
+export function CompanyNotesConnectionSchema(): z.ZodObject<
+  Properties<CompanyNotesConnection>
+> {
   return z.object({
-    __typename: z.literal('CompanyNotesConnection').optional(),
+    __typename: z.literal("CompanyNotesConnection").optional(),
     nodes: z.array(z.lazy(() => CompanyNoteSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function CompanyNotesCountAggregateSchema(): z.ZodObject<Properties<CompanyNotesCountAggregate>> {
+export function CompanyNotesCountAggregateSchema(): z.ZodObject<
+  Properties<CompanyNotesCountAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyNotesCountAggregate').optional(),
+    __typename: z.literal("CompanyNotesCountAggregate").optional(),
     createdAt: z.number().nullish(),
     id: z.number().nullish(),
-    updatedAt: z.number().nullish()
+    updatedAt: z.number().nullish(),
   })
 }
 
-export function CompanyNotesMaxAggregateSchema(): z.ZodObject<Properties<CompanyNotesMaxAggregate>> {
+export function CompanyNotesMaxAggregateSchema(): z.ZodObject<
+  Properties<CompanyNotesMaxAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyNotesMaxAggregate').optional(),
+    __typename: z.literal("CompanyNotesMaxAggregate").optional(),
     createdAt: z.string().datetime().nullish(),
     id: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function CompanyNotesMinAggregateSchema(): z.ZodObject<Properties<CompanyNotesMinAggregate>> {
+export function CompanyNotesMinAggregateSchema(): z.ZodObject<
+  Properties<CompanyNotesMinAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyNotesMinAggregate').optional(),
+    __typename: z.literal("CompanyNotesMinAggregate").optional(),
     createdAt: z.string().datetime().nullish(),
     id: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function CompanyNotesSumAggregateSchema(): z.ZodObject<Properties<CompanyNotesSumAggregate>> {
+export function CompanyNotesSumAggregateSchema(): z.ZodObject<
+  Properties<CompanyNotesSumAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanyNotesSumAggregate').optional(),
-    id: z.number().nullish()
+    __typename: z.literal("CompanyNotesSumAggregate").optional(),
+    id: z.number().nullish(),
   })
 }
 
@@ -973,15 +1749,21 @@ export function CompanySortSchema(): z.ZodObject<Properties<CompanySort>> {
   return z.object({
     direction: SortDirectionSchema,
     field: CompanySortFieldsSchema,
-    nulls: SortNullsSchema.nullish()
+    nulls: SortNullsSchema.nullish(),
   })
 }
 
-export function CompanySubscriptionFilterSchema(): z.ZodObject<Properties<CompanySubscriptionFilter>> {
+export function CompanySubscriptionFilterSchema(): z.ZodObject<
+  Properties<CompanySubscriptionFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => CompanySubscriptionFilterSchema())).nullish(),
-    businessType: z.lazy(() => CompanyBusinessTypeFilterComparisonSchema().nullish()),
-    companySize: z.lazy(() => CompanyCompanySizeFilterComparisonSchema().nullish()),
+    businessType: z.lazy(() =>
+      CompanyBusinessTypeFilterComparisonSchema().nullish()
+    ),
+    companySize: z.lazy(() =>
+      CompanyCompanySizeFilterComparisonSchema().nullish()
+    ),
     country: z.lazy(() => StringFieldComparisonSchema().nullish()),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
@@ -990,23 +1772,31 @@ export function CompanySubscriptionFilterSchema(): z.ZodObject<Properties<Compan
     or: z.array(z.lazy(() => CompanySubscriptionFilterSchema())).nullish(),
     totalRevenue: z.lazy(() => IntFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    website: z.lazy(() => StringFieldComparisonSchema().nullish())
+    website: z.lazy(() => StringFieldComparisonSchema().nullish()),
   })
 }
 
-export function CompanySumAggregateSchema(): z.ZodObject<Properties<CompanySumAggregate>> {
+export function CompanySumAggregateSchema(): z.ZodObject<
+  Properties<CompanySumAggregate>
+> {
   return z.object({
-    __typename: z.literal('CompanySumAggregate').optional(),
+    __typename: z.literal("CompanySumAggregate").optional(),
     id: z.number().nullish(),
-    totalRevenue: z.number().nullish()
+    totalRevenue: z.number().nullish(),
   })
 }
 
-export function CompanyUpdateFilterSchema(): z.ZodObject<Properties<CompanyUpdateFilter>> {
+export function CompanyUpdateFilterSchema(): z.ZodObject<
+  Properties<CompanyUpdateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => CompanyUpdateFilterSchema())).nullish(),
-    businessType: z.lazy(() => CompanyBusinessTypeFilterComparisonSchema().nullish()),
-    companySize: z.lazy(() => CompanyCompanySizeFilterComparisonSchema().nullish()),
+    businessType: z.lazy(() =>
+      CompanyBusinessTypeFilterComparisonSchema().nullish()
+    ),
+    companySize: z.lazy(() =>
+      CompanyCompanySizeFilterComparisonSchema().nullish()
+    ),
     country: z.lazy(() => StringFieldComparisonSchema().nullish()),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
@@ -1015,11 +1805,13 @@ export function CompanyUpdateFilterSchema(): z.ZodObject<Properties<CompanyUpdat
     or: z.array(z.lazy(() => CompanyUpdateFilterSchema())).nullish(),
     totalRevenue: z.lazy(() => IntFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    website: z.lazy(() => StringFieldComparisonSchema().nullish())
+    website: z.lazy(() => StringFieldComparisonSchema().nullish()),
   })
 }
 
-export function CompanyUpdateInputSchema(): z.ZodObject<Properties<CompanyUpdateInput>> {
+export function CompanyUpdateInputSchema(): z.ZodObject<
+  Properties<CompanyUpdateInput>
+> {
   return z.object({
     businessType: BusinessTypeSchema.nullish(),
     companySize: CompanySizeSchema.nullish(),
@@ -1028,13 +1820,13 @@ export function CompanyUpdateInputSchema(): z.ZodObject<Properties<CompanyUpdate
     name: z.string().nullish(),
     salesOwnerId: z.string().nullish(),
     totalRevenue: z.number().nullish(),
-    website: z.string().nullish()
+    website: z.string().nullish(),
   })
 }
 
 export function ContactSchema(): z.ZodObject<Properties<Contact>> {
   return z.object({
-    __typename: z.literal('Contact').optional(),
+    __typename: z.literal("Contact").optional(),
     avatarUrl: z.string().nullish(),
     company: z.lazy(() => CompanySchema()),
     createdAt: z.string().datetime(),
@@ -1052,27 +1844,33 @@ export function ContactSchema(): z.ZodObject<Properties<Contact>> {
     status: ContactStatusSchema,
     timezone: z.string().nullish(),
     updatedAt: z.string().datetime(),
-    updatedBy: z.lazy(() => UserSchema().nullish())
+    updatedBy: z.lazy(() => UserSchema().nullish()),
   })
 }
 
-export function ContactDealsArgsSchema(): z.ZodObject<Properties<ContactDealsArgs>> {
+export function ContactDealsArgsSchema(): z.ZodObject<
+  Properties<ContactDealsArgs>
+> {
   return z.object({
     filter: z.lazy(() => DealFilterSchema()),
     paging: z.lazy(() => OffsetPagingSchema()),
-    sorting: z.array(z.lazy(() => DealSortSchema()))
+    sorting: z.array(z.lazy(() => DealSortSchema())),
   })
 }
 
-export function ContactNotesArgsSchema(): z.ZodObject<Properties<ContactNotesArgs>> {
+export function ContactNotesArgsSchema(): z.ZodObject<
+  Properties<ContactNotesArgs>
+> {
   return z.object({
     filter: z.lazy(() => ContactNoteFilterSchema()),
     paging: z.lazy(() => OffsetPagingSchema()),
-    sorting: z.array(z.lazy(() => ContactNoteSortSchema()))
+    sorting: z.array(z.lazy(() => ContactNoteSortSchema())),
   })
 }
 
-export function ContactAggregateFilterSchema(): z.ZodObject<Properties<ContactAggregateFilter>> {
+export function ContactAggregateFilterSchema(): z.ZodObject<
+  Properties<ContactAggregateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => ContactAggregateFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -1086,20 +1884,24 @@ export function ContactAggregateFilterSchema(): z.ZodObject<Properties<ContactAg
     stage: z.lazy(() => ContactStageFilterComparisonSchema().nullish()),
     status: z.lazy(() => ContactStatusFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function ContactConnectionSchema(): z.ZodObject<Properties<ContactConnection>> {
+export function ContactConnectionSchema(): z.ZodObject<
+  Properties<ContactConnection>
+> {
   return z.object({
-    __typename: z.literal('ContactConnection').optional(),
+    __typename: z.literal("ContactConnection").optional(),
     nodes: z.array(z.lazy(() => ContactSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function ContactCreateInputSchema(): z.ZodObject<Properties<ContactCreateInput>> {
+export function ContactCreateInputSchema(): z.ZodObject<
+  Properties<ContactCreateInput>
+> {
   return z.object({
     companyId: z.string(),
     email: z.string(),
@@ -1110,20 +1912,24 @@ export function ContactCreateInputSchema(): z.ZodObject<Properties<ContactCreate
     score: z.number().nullish(),
     stage: ContactStageSchema.nullish(),
     status: ContactStatusSchema.nullish(),
-    timezone: z.string().nullish()
+    timezone: z.string().nullish(),
   })
 }
 
-export function ContactDealsConnectionSchema(): z.ZodObject<Properties<ContactDealsConnection>> {
+export function ContactDealsConnectionSchema(): z.ZodObject<
+  Properties<ContactDealsConnection>
+> {
   return z.object({
-    __typename: z.literal('ContactDealsConnection').optional(),
+    __typename: z.literal("ContactDealsConnection").optional(),
     nodes: z.array(z.lazy(() => DealSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function ContactDeleteFilterSchema(): z.ZodObject<Properties<ContactDeleteFilter>> {
+export function ContactDeleteFilterSchema(): z.ZodObject<
+  Properties<ContactDeleteFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => ContactDeleteFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -1137,13 +1943,15 @@ export function ContactDeleteFilterSchema(): z.ZodObject<Properties<ContactDelet
     stage: z.lazy(() => ContactStageFilterComparisonSchema().nullish()),
     status: z.lazy(() => ContactStatusFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function ContactDeleteResponseSchema(): z.ZodObject<Properties<ContactDeleteResponse>> {
+export function ContactDeleteResponseSchema(): z.ZodObject<
+  Properties<ContactDeleteResponse>
+> {
   return z.object({
-    __typename: z.literal('ContactDeleteResponse').optional(),
+    __typename: z.literal("ContactDeleteResponse").optional(),
     avatarUrl: z.string().nullish(),
     createdAt: z.string().datetime().nullish(),
     email: z.string().nullish(),
@@ -1155,7 +1963,7 @@ export function ContactDeleteResponseSchema(): z.ZodObject<Properties<ContactDel
     stage: ContactStageSchema.nullish(),
     status: ContactStatusSchema.nullish(),
     timezone: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
@@ -1179,15 +1987,21 @@ export function ContactFilterSchema(): z.ZodObject<Properties<ContactFilter>> {
     status: z.lazy(() => ContactStatusFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    updatedBy: z.lazy(() => ContactFilterUserFilterSchema().nullish())
+    updatedBy: z.lazy(() => ContactFilterUserFilterSchema().nullish()),
   })
 }
 
-export function ContactFilterCompanyFilterSchema(): z.ZodObject<Properties<ContactFilterCompanyFilter>> {
+export function ContactFilterCompanyFilterSchema(): z.ZodObject<
+  Properties<ContactFilterCompanyFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => ContactFilterCompanyFilterSchema())).nullish(),
-    businessType: z.lazy(() => CompanyBusinessTypeFilterComparisonSchema().nullish()),
-    companySize: z.lazy(() => CompanyCompanySizeFilterComparisonSchema().nullish()),
+    businessType: z.lazy(() =>
+      CompanyBusinessTypeFilterComparisonSchema().nullish()
+    ),
+    companySize: z.lazy(() =>
+      CompanyCompanySizeFilterComparisonSchema().nullish()
+    ),
     country: z.lazy(() => StringFieldComparisonSchema().nullish()),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
@@ -1196,21 +2010,27 @@ export function ContactFilterCompanyFilterSchema(): z.ZodObject<Properties<Conta
     or: z.array(z.lazy(() => ContactFilterCompanyFilterSchema())).nullish(),
     totalRevenue: z.lazy(() => IntFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    website: z.lazy(() => StringFieldComparisonSchema().nullish())
+    website: z.lazy(() => StringFieldComparisonSchema().nullish()),
   })
 }
 
-export function ContactFilterContactNoteFilterSchema(): z.ZodObject<Properties<ContactFilterContactNoteFilter>> {
+export function ContactFilterContactNoteFilterSchema(): z.ZodObject<
+  Properties<ContactFilterContactNoteFilter>
+> {
   return z.object({
-    and: z.array(z.lazy(() => ContactFilterContactNoteFilterSchema())).nullish(),
+    and: z
+      .array(z.lazy(() => ContactFilterContactNoteFilterSchema()))
+      .nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => ContactFilterContactNoteFilterSchema())).nullish(),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function ContactFilterDealFilterSchema(): z.ZodObject<Properties<ContactFilterDealFilter>> {
+export function ContactFilterDealFilterSchema(): z.ZodObject<
+  Properties<ContactFilterDealFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => ContactFilterDealFilterSchema())).nullish(),
     closeDateDay: z.lazy(() => IntFieldComparisonSchema().nullish()),
@@ -1224,11 +2044,13 @@ export function ContactFilterDealFilterSchema(): z.ZodObject<Properties<ContactF
     stageId: z.lazy(() => IdFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    value: z.lazy(() => FloatFieldComparisonSchema().nullish())
+    value: z.lazy(() => FloatFieldComparisonSchema().nullish()),
   })
 }
 
-export function ContactFilterUserFilterSchema(): z.ZodObject<Properties<ContactFilterUserFilter>> {
+export function ContactFilterUserFilterSchema(): z.ZodObject<
+  Properties<ContactFilterUserFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => ContactFilterUserFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -1240,60 +2062,70 @@ export function ContactFilterUserFilterSchema(): z.ZodObject<Properties<ContactF
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
 export function ContactNoteSchema(): z.ZodObject<Properties<ContactNote>> {
   return z.object({
-    __typename: z.literal('ContactNote').optional(),
+    __typename: z.literal("ContactNote").optional(),
     contact: z.lazy(() => ContactSchema()),
     createdAt: z.string().datetime(),
     createdBy: z.lazy(() => UserSchema()),
     id: z.string(),
     note: z.string(),
     updatedAt: z.string().datetime(),
-    updatedBy: z.lazy(() => UserSchema().nullish())
+    updatedBy: z.lazy(() => UserSchema().nullish()),
   })
 }
 
-export function ContactNoteConnectionSchema(): z.ZodObject<Properties<ContactNoteConnection>> {
+export function ContactNoteConnectionSchema(): z.ZodObject<
+  Properties<ContactNoteConnection>
+> {
   return z.object({
-    __typename: z.literal('ContactNoteConnection').optional(),
+    __typename: z.literal("ContactNoteConnection").optional(),
     nodes: z.array(z.lazy(() => ContactNoteSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function ContactNoteCreateInputSchema(): z.ZodObject<Properties<ContactNoteCreateInput>> {
+export function ContactNoteCreateInputSchema(): z.ZodObject<
+  Properties<ContactNoteCreateInput>
+> {
   return z.object({
     contactId: z.string(),
-    note: z.string()
+    note: z.string(),
   })
 }
 
-export function ContactNoteDeleteFilterSchema(): z.ZodObject<Properties<ContactNoteDeleteFilter>> {
+export function ContactNoteDeleteFilterSchema(): z.ZodObject<
+  Properties<ContactNoteDeleteFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => ContactNoteDeleteFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => ContactNoteDeleteFilterSchema())).nullish(),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function ContactNoteDeleteResponseSchema(): z.ZodObject<Properties<ContactNoteDeleteResponse>> {
+export function ContactNoteDeleteResponseSchema(): z.ZodObject<
+  Properties<ContactNoteDeleteResponse>
+> {
   return z.object({
-    __typename: z.literal('ContactNoteDeleteResponse').optional(),
+    __typename: z.literal("ContactNoteDeleteResponse").optional(),
     createdAt: z.string().datetime().nullish(),
     id: z.string().nullish(),
     note: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function ContactNoteFilterSchema(): z.ZodObject<Properties<ContactNoteFilter>> {
+export function ContactNoteFilterSchema(): z.ZodObject<
+  Properties<ContactNoteFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => ContactNoteFilterSchema())).nullish(),
     contact: z.lazy(() => ContactNoteFilterContactFilterSchema().nullish()),
@@ -1302,13 +2134,17 @@ export function ContactNoteFilterSchema(): z.ZodObject<Properties<ContactNoteFil
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => ContactNoteFilterSchema())).nullish(),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    updatedBy: z.lazy(() => ContactNoteFilterUserFilterSchema().nullish())
+    updatedBy: z.lazy(() => ContactNoteFilterUserFilterSchema().nullish()),
   })
 }
 
-export function ContactNoteFilterContactFilterSchema(): z.ZodObject<Properties<ContactNoteFilterContactFilter>> {
+export function ContactNoteFilterContactFilterSchema(): z.ZodObject<
+  Properties<ContactNoteFilterContactFilter>
+> {
   return z.object({
-    and: z.array(z.lazy(() => ContactNoteFilterContactFilterSchema())).nullish(),
+    and: z
+      .array(z.lazy(() => ContactNoteFilterContactFilterSchema()))
+      .nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     email: z.lazy(() => StringFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
@@ -1320,11 +2156,13 @@ export function ContactNoteFilterContactFilterSchema(): z.ZodObject<Properties<C
     stage: z.lazy(() => ContactStageFilterComparisonSchema().nullish()),
     status: z.lazy(() => ContactStatusFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function ContactNoteFilterUserFilterSchema(): z.ZodObject<Properties<ContactNoteFilterUserFilter>> {
+export function ContactNoteFilterUserFilterSchema(): z.ZodObject<
+  Properties<ContactNoteFilterUserFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => ContactNoteFilterUserFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -1336,50 +2174,60 @@ export function ContactNoteFilterUserFilterSchema(): z.ZodObject<Properties<Cont
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function ContactNoteSortSchema(): z.ZodObject<Properties<ContactNoteSort>> {
+export function ContactNoteSortSchema(): z.ZodObject<
+  Properties<ContactNoteSort>
+> {
   return z.object({
     direction: SortDirectionSchema,
     field: ContactNoteSortFieldsSchema,
-    nulls: SortNullsSchema.nullish()
+    nulls: SortNullsSchema.nullish(),
   })
 }
 
-export function ContactNoteSubscriptionFilterSchema(): z.ZodObject<Properties<ContactNoteSubscriptionFilter>> {
+export function ContactNoteSubscriptionFilterSchema(): z.ZodObject<
+  Properties<ContactNoteSubscriptionFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => ContactNoteSubscriptionFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => ContactNoteSubscriptionFilterSchema())).nullish(),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function ContactNoteUpdateFilterSchema(): z.ZodObject<Properties<ContactNoteUpdateFilter>> {
+export function ContactNoteUpdateFilterSchema(): z.ZodObject<
+  Properties<ContactNoteUpdateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => ContactNoteUpdateFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => ContactNoteUpdateFilterSchema())).nullish(),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function ContactNoteUpdateInputSchema(): z.ZodObject<Properties<ContactNoteUpdateInput>> {
+export function ContactNoteUpdateInputSchema(): z.ZodObject<
+  Properties<ContactNoteUpdateInput>
+> {
   return z.object({
-    note: z.string()
+    note: z.string(),
   })
 }
 
-export function ContactNotesConnectionSchema(): z.ZodObject<Properties<ContactNotesConnection>> {
+export function ContactNotesConnectionSchema(): z.ZodObject<
+  Properties<ContactNotesConnection>
+> {
   return z.object({
-    __typename: z.literal('ContactNotesConnection').optional(),
+    __typename: z.literal("ContactNotesConnection").optional(),
     nodes: z.array(z.lazy(() => ContactNoteSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
@@ -1387,11 +2235,13 @@ export function ContactSortSchema(): z.ZodObject<Properties<ContactSort>> {
   return z.object({
     direction: SortDirectionSchema,
     field: ContactSortFieldsSchema,
-    nulls: SortNullsSchema.nullish()
+    nulls: SortNullsSchema.nullish(),
   })
 }
 
-export function ContactStageFilterComparisonSchema(): z.ZodObject<Properties<ContactStageFilterComparison>> {
+export function ContactStageFilterComparisonSchema(): z.ZodObject<
+  Properties<ContactStageFilterComparison>
+> {
   return z.object({
     eq: ContactStageSchema.nullish(),
     gt: ContactStageSchema.nullish(),
@@ -1406,11 +2256,13 @@ export function ContactStageFilterComparisonSchema(): z.ZodObject<Properties<Con
     neq: ContactStageSchema.nullish(),
     notILike: ContactStageSchema.nullish(),
     notIn: z.array(ContactStageSchema).nullish(),
-    notLike: ContactStageSchema.nullish()
+    notLike: ContactStageSchema.nullish(),
   })
 }
 
-export function ContactStatusFilterComparisonSchema(): z.ZodObject<Properties<ContactStatusFilterComparison>> {
+export function ContactStatusFilterComparisonSchema(): z.ZodObject<
+  Properties<ContactStatusFilterComparison>
+> {
   return z.object({
     eq: ContactStatusSchema.nullish(),
     gt: ContactStatusSchema.nullish(),
@@ -1425,11 +2277,13 @@ export function ContactStatusFilterComparisonSchema(): z.ZodObject<Properties<Co
     neq: ContactStatusSchema.nullish(),
     notILike: ContactStatusSchema.nullish(),
     notIn: z.array(ContactStatusSchema).nullish(),
-    notLike: ContactStatusSchema.nullish()
+    notLike: ContactStatusSchema.nullish(),
   })
 }
 
-export function ContactSubscriptionFilterSchema(): z.ZodObject<Properties<ContactSubscriptionFilter>> {
+export function ContactSubscriptionFilterSchema(): z.ZodObject<
+  Properties<ContactSubscriptionFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => ContactSubscriptionFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -1443,11 +2297,13 @@ export function ContactSubscriptionFilterSchema(): z.ZodObject<Properties<Contac
     stage: z.lazy(() => ContactStageFilterComparisonSchema().nullish()),
     status: z.lazy(() => ContactStatusFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function ContactUpdateFilterSchema(): z.ZodObject<Properties<ContactUpdateFilter>> {
+export function ContactUpdateFilterSchema(): z.ZodObject<
+  Properties<ContactUpdateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => ContactUpdateFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -1461,11 +2317,13 @@ export function ContactUpdateFilterSchema(): z.ZodObject<Properties<ContactUpdat
     stage: z.lazy(() => ContactStageFilterComparisonSchema().nullish()),
     status: z.lazy(() => ContactStatusFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function ContactUpdateInputSchema(): z.ZodObject<Properties<ContactUpdateInput>> {
+export function ContactUpdateInputSchema(): z.ZodObject<
+  Properties<ContactUpdateInput>
+> {
   return z.object({
     companyId: z.string().nullish(),
     email: z.string().nullish(),
@@ -1476,251 +2334,333 @@ export function ContactUpdateInputSchema(): z.ZodObject<Properties<ContactUpdate
     score: z.number().nullish(),
     stage: ContactStageSchema.nullish(),
     status: ContactStatusSchema.nullish(),
-    timezone: z.string().nullish()
+    timezone: z.string().nullish(),
   })
 }
 
-export function CreateAuditSubscriptionFilterInputSchema(): z.ZodObject<Properties<CreateAuditSubscriptionFilterInput>> {
+export function CreateAuditSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<CreateAuditSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => AuditSubscriptionFilterSchema())
+    filter: z.lazy(() => AuditSubscriptionFilterSchema()),
   })
 }
 
-export function CreateCompanyNoteSubscriptionFilterInputSchema(): z.ZodObject<Properties<CreateCompanyNoteSubscriptionFilterInput>> {
+export function CreateCompanyNoteSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<CreateCompanyNoteSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => CompanyNoteSubscriptionFilterSchema())
+    filter: z.lazy(() => CompanyNoteSubscriptionFilterSchema()),
   })
 }
 
-export function CreateCompanySubscriptionFilterInputSchema(): z.ZodObject<Properties<CreateCompanySubscriptionFilterInput>> {
+export function CreateCompanySubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<CreateCompanySubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => CompanySubscriptionFilterSchema())
+    filter: z.lazy(() => CompanySubscriptionFilterSchema()),
   })
 }
 
-export function CreateContactNoteSubscriptionFilterInputSchema(): z.ZodObject<Properties<CreateContactNoteSubscriptionFilterInput>> {
+export function CreateContactNoteSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<CreateContactNoteSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => ContactNoteSubscriptionFilterSchema())
+    filter: z.lazy(() => ContactNoteSubscriptionFilterSchema()),
   })
 }
 
-export function CreateContactSubscriptionFilterInputSchema(): z.ZodObject<Properties<CreateContactSubscriptionFilterInput>> {
+export function CreateContactSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<CreateContactSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => ContactSubscriptionFilterSchema())
+    filter: z.lazy(() => ContactSubscriptionFilterSchema()),
   })
 }
 
-export function CreateDealStageSubscriptionFilterInputSchema(): z.ZodObject<Properties<CreateDealStageSubscriptionFilterInput>> {
+export function CreateDealStageSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<CreateDealStageSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => DealStageSubscriptionFilterSchema())
+    filter: z.lazy(() => DealStageSubscriptionFilterSchema()),
   })
 }
 
-export function CreateDealSubscriptionFilterInputSchema(): z.ZodObject<Properties<CreateDealSubscriptionFilterInput>> {
+export function CreateDealSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<CreateDealSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => DealSubscriptionFilterSchema())
+    filter: z.lazy(() => DealSubscriptionFilterSchema()),
   })
 }
 
-export function CreateEventCategorySubscriptionFilterInputSchema(): z.ZodObject<Properties<CreateEventCategorySubscriptionFilterInput>> {
+export function CreateEventCategorySubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<CreateEventCategorySubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => EventCategorySubscriptionFilterSchema())
+    filter: z.lazy(() => EventCategorySubscriptionFilterSchema()),
   })
 }
 
-export function CreateEventSubscriptionFilterInputSchema(): z.ZodObject<Properties<CreateEventSubscriptionFilterInput>> {
+export function CreateEventSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<CreateEventSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => EventSubscriptionFilterSchema())
+    filter: z.lazy(() => EventSubscriptionFilterSchema()),
   })
 }
 
-export function CreateManyCompaniesInputSchema(): z.ZodObject<Properties<CreateManyCompaniesInput>> {
+export function CreateManyCompaniesInputSchema(): z.ZodObject<
+  Properties<CreateManyCompaniesInput>
+> {
   return z.object({
-    companies: z.array(z.lazy(() => CompanyCreateInputSchema()))
+    companies: z.array(z.lazy(() => CompanyCreateInputSchema())),
   })
 }
 
-export function CreateManyCompanyNotesInputSchema(): z.ZodObject<Properties<CreateManyCompanyNotesInput>> {
+export function CreateManyCompanyNotesInputSchema(): z.ZodObject<
+  Properties<CreateManyCompanyNotesInput>
+> {
   return z.object({
-    companyNotes: z.array(z.lazy(() => CompanyNoteCreateInputSchema()))
+    companyNotes: z.array(z.lazy(() => CompanyNoteCreateInputSchema())),
   })
 }
 
-export function CreateManyContactNotesInputSchema(): z.ZodObject<Properties<CreateManyContactNotesInput>> {
+export function CreateManyContactNotesInputSchema(): z.ZodObject<
+  Properties<CreateManyContactNotesInput>
+> {
   return z.object({
-    contactNotes: z.array(z.lazy(() => ContactNoteCreateInputSchema()))
+    contactNotes: z.array(z.lazy(() => ContactNoteCreateInputSchema())),
   })
 }
 
-export function CreateManyContactsInputSchema(): z.ZodObject<Properties<CreateManyContactsInput>> {
+export function CreateManyContactsInputSchema(): z.ZodObject<
+  Properties<CreateManyContactsInput>
+> {
   return z.object({
-    contacts: z.array(z.lazy(() => ContactCreateInputSchema()))
+    contacts: z.array(z.lazy(() => ContactCreateInputSchema())),
   })
 }
 
-export function CreateManyDealStagesInputSchema(): z.ZodObject<Properties<CreateManyDealStagesInput>> {
+export function CreateManyDealStagesInputSchema(): z.ZodObject<
+  Properties<CreateManyDealStagesInput>
+> {
   return z.object({
-    dealStages: z.array(z.lazy(() => DealStageCreateInputSchema()))
+    dealStages: z.array(z.lazy(() => DealStageCreateInputSchema())),
   })
 }
 
-export function CreateManyDealsInputSchema(): z.ZodObject<Properties<CreateManyDealsInput>> {
+export function CreateManyDealsInputSchema(): z.ZodObject<
+  Properties<CreateManyDealsInput>
+> {
   return z.object({
-    deals: z.array(z.lazy(() => DealCreateInputSchema()))
+    deals: z.array(z.lazy(() => DealCreateInputSchema())),
   })
 }
 
-export function CreateManyEventCategoriesInputSchema(): z.ZodObject<Properties<CreateManyEventCategoriesInput>> {
+export function CreateManyEventCategoriesInputSchema(): z.ZodObject<
+  Properties<CreateManyEventCategoriesInput>
+> {
   return z.object({
-    eventCategories: z.array(z.lazy(() => EventCategoryCreateInputSchema()))
+    eventCategories: z.array(z.lazy(() => EventCategoryCreateInputSchema())),
   })
 }
 
-export function CreateManyEventsInputSchema(): z.ZodObject<Properties<CreateManyEventsInput>> {
+export function CreateManyEventsInputSchema(): z.ZodObject<
+  Properties<CreateManyEventsInput>
+> {
   return z.object({
-    events: z.array(z.lazy(() => EventCreateInputSchema()))
+    events: z.array(z.lazy(() => EventCreateInputSchema())),
   })
 }
 
-export function CreateManyQuotesInputSchema(): z.ZodObject<Properties<CreateManyQuotesInput>> {
+export function CreateManyQuotesInputSchema(): z.ZodObject<
+  Properties<CreateManyQuotesInput>
+> {
   return z.object({
-    quotes: z.array(z.lazy(() => QuoteCreateInputSchema()))
+    quotes: z.array(z.lazy(() => QuoteCreateInputSchema())),
   })
 }
 
-export function CreateManyTaskCommentsInputSchema(): z.ZodObject<Properties<CreateManyTaskCommentsInput>> {
+export function CreateManyTaskCommentsInputSchema(): z.ZodObject<
+  Properties<CreateManyTaskCommentsInput>
+> {
   return z.object({
-    taskComments: z.array(z.lazy(() => TaskCommentCreateInputSchema()))
+    taskComments: z.array(z.lazy(() => TaskCommentCreateInputSchema())),
   })
 }
 
-export function CreateManyTaskStagesInputSchema(): z.ZodObject<Properties<CreateManyTaskStagesInput>> {
+export function CreateManyTaskStagesInputSchema(): z.ZodObject<
+  Properties<CreateManyTaskStagesInput>
+> {
   return z.object({
-    taskStages: z.array(z.lazy(() => TaskStageCreateInputSchema()))
+    taskStages: z.array(z.lazy(() => TaskStageCreateInputSchema())),
   })
 }
 
-export function CreateManyTasksInputSchema(): z.ZodObject<Properties<CreateManyTasksInput>> {
+export function CreateManyTasksInputSchema(): z.ZodObject<
+  Properties<CreateManyTasksInput>
+> {
   return z.object({
-    tasks: z.array(z.lazy(() => TaskCreateInputSchema()))
+    tasks: z.array(z.lazy(() => TaskCreateInputSchema())),
   })
 }
 
-export function CreateManyUsersInputSchema(): z.ZodObject<Properties<CreateManyUsersInput>> {
+export function CreateManyUsersInputSchema(): z.ZodObject<
+  Properties<CreateManyUsersInput>
+> {
   return z.object({
-    users: z.array(z.lazy(() => UserCreateInputSchema()))
+    users: z.array(z.lazy(() => UserCreateInputSchema())),
   })
 }
 
-export function CreateOneCompanyInputSchema(): z.ZodObject<Properties<CreateOneCompanyInput>> {
+export function CreateOneCompanyInputSchema(): z.ZodObject<
+  Properties<CreateOneCompanyInput>
+> {
   return z.object({
-    company: z.lazy(() => CompanyCreateInputSchema())
+    company: z.lazy(() => CompanyCreateInputSchema()),
   })
 }
 
-export function CreateOneCompanyNoteInputSchema(): z.ZodObject<Properties<CreateOneCompanyNoteInput>> {
+export function CreateOneCompanyNoteInputSchema(): z.ZodObject<
+  Properties<CreateOneCompanyNoteInput>
+> {
   return z.object({
-    companyNote: z.lazy(() => CompanyNoteCreateInputSchema())
+    companyNote: z.lazy(() => CompanyNoteCreateInputSchema()),
   })
 }
 
-export function CreateOneContactInputSchema(): z.ZodObject<Properties<CreateOneContactInput>> {
+export function CreateOneContactInputSchema(): z.ZodObject<
+  Properties<CreateOneContactInput>
+> {
   return z.object({
-    contact: z.lazy(() => ContactCreateInputSchema())
+    contact: z.lazy(() => ContactCreateInputSchema()),
   })
 }
 
-export function CreateOneContactNoteInputSchema(): z.ZodObject<Properties<CreateOneContactNoteInput>> {
+export function CreateOneContactNoteInputSchema(): z.ZodObject<
+  Properties<CreateOneContactNoteInput>
+> {
   return z.object({
-    contactNote: z.lazy(() => ContactNoteCreateInputSchema())
+    contactNote: z.lazy(() => ContactNoteCreateInputSchema()),
   })
 }
 
-export function CreateOneDealInputSchema(): z.ZodObject<Properties<CreateOneDealInput>> {
+export function CreateOneDealInputSchema(): z.ZodObject<
+  Properties<CreateOneDealInput>
+> {
   return z.object({
-    deal: z.lazy(() => DealCreateInputSchema())
+    deal: z.lazy(() => DealCreateInputSchema()),
   })
 }
 
-export function CreateOneDealStageInputSchema(): z.ZodObject<Properties<CreateOneDealStageInput>> {
+export function CreateOneDealStageInputSchema(): z.ZodObject<
+  Properties<CreateOneDealStageInput>
+> {
   return z.object({
-    dealStage: z.lazy(() => DealStageCreateInputSchema())
+    dealStage: z.lazy(() => DealStageCreateInputSchema()),
   })
 }
 
-export function CreateOneEventCategoryInputSchema(): z.ZodObject<Properties<CreateOneEventCategoryInput>> {
+export function CreateOneEventCategoryInputSchema(): z.ZodObject<
+  Properties<CreateOneEventCategoryInput>
+> {
   return z.object({
-    eventCategory: z.lazy(() => EventCategoryCreateInputSchema())
+    eventCategory: z.lazy(() => EventCategoryCreateInputSchema()),
   })
 }
 
-export function CreateOneEventInputSchema(): z.ZodObject<Properties<CreateOneEventInput>> {
+export function CreateOneEventInputSchema(): z.ZodObject<
+  Properties<CreateOneEventInput>
+> {
   return z.object({
-    event: z.lazy(() => EventCreateInputSchema())
+    event: z.lazy(() => EventCreateInputSchema()),
   })
 }
 
-export function CreateOneQuoteInputSchema(): z.ZodObject<Properties<CreateOneQuoteInput>> {
+export function CreateOneQuoteInputSchema(): z.ZodObject<
+  Properties<CreateOneQuoteInput>
+> {
   return z.object({
-    quote: z.lazy(() => QuoteCreateInputSchema())
+    quote: z.lazy(() => QuoteCreateInputSchema()),
   })
 }
 
-export function CreateOneTaskCommentInputSchema(): z.ZodObject<Properties<CreateOneTaskCommentInput>> {
+export function CreateOneTaskCommentInputSchema(): z.ZodObject<
+  Properties<CreateOneTaskCommentInput>
+> {
   return z.object({
-    taskComment: z.lazy(() => TaskCommentCreateInputSchema())
+    taskComment: z.lazy(() => TaskCommentCreateInputSchema()),
   })
 }
 
-export function CreateOneTaskInputSchema(): z.ZodObject<Properties<CreateOneTaskInput>> {
+export function CreateOneTaskInputSchema(): z.ZodObject<
+  Properties<CreateOneTaskInput>
+> {
   return z.object({
-    task: z.lazy(() => TaskCreateInputSchema())
+    task: z.lazy(() => TaskCreateInputSchema()),
   })
 }
 
-export function CreateOneTaskStageInputSchema(): z.ZodObject<Properties<CreateOneTaskStageInput>> {
+export function CreateOneTaskStageInputSchema(): z.ZodObject<
+  Properties<CreateOneTaskStageInput>
+> {
   return z.object({
-    taskStage: z.lazy(() => TaskStageCreateInputSchema())
+    taskStage: z.lazy(() => TaskStageCreateInputSchema()),
   })
 }
 
-export function CreateOneUserInputSchema(): z.ZodObject<Properties<CreateOneUserInput>> {
+export function CreateOneUserInputSchema(): z.ZodObject<
+  Properties<CreateOneUserInput>
+> {
   return z.object({
-    user: z.lazy(() => UserCreateInputSchema())
+    user: z.lazy(() => UserCreateInputSchema()),
   })
 }
 
-export function CreateQuoteSubscriptionFilterInputSchema(): z.ZodObject<Properties<CreateQuoteSubscriptionFilterInput>> {
+export function CreateQuoteSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<CreateQuoteSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => QuoteSubscriptionFilterSchema())
+    filter: z.lazy(() => QuoteSubscriptionFilterSchema()),
   })
 }
 
-export function CreateTaskCommentSubscriptionFilterInputSchema(): z.ZodObject<Properties<CreateTaskCommentSubscriptionFilterInput>> {
+export function CreateTaskCommentSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<CreateTaskCommentSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => TaskCommentSubscriptionFilterSchema())
+    filter: z.lazy(() => TaskCommentSubscriptionFilterSchema()),
   })
 }
 
-export function CreateTaskStageSubscriptionFilterInputSchema(): z.ZodObject<Properties<CreateTaskStageSubscriptionFilterInput>> {
+export function CreateTaskStageSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<CreateTaskStageSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => TaskStageSubscriptionFilterSchema())
+    filter: z.lazy(() => TaskStageSubscriptionFilterSchema()),
   })
 }
 
-export function CreateTaskSubscriptionFilterInputSchema(): z.ZodObject<Properties<CreateTaskSubscriptionFilterInput>> {
+export function CreateTaskSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<CreateTaskSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => TaskSubscriptionFilterSchema())
+    filter: z.lazy(() => TaskSubscriptionFilterSchema()),
   })
 }
 
-export function CreateUserSubscriptionFilterInputSchema(): z.ZodObject<Properties<CreateUserSubscriptionFilterInput>> {
+export function CreateUserSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<CreateUserSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => UserSubscriptionFilterSchema())
+    filter: z.lazy(() => UserSubscriptionFilterSchema()),
   })
 }
 
-export function DateFieldComparisonSchema(): z.ZodObject<Properties<DateFieldComparison>> {
+export function DateFieldComparisonSchema(): z.ZodObject<
+  Properties<DateFieldComparison>
+> {
   return z.object({
     between: z.lazy(() => DateFieldComparisonBetweenSchema().nullish()),
     eq: z.string().datetime().nullish(),
@@ -1733,20 +2673,22 @@ export function DateFieldComparisonSchema(): z.ZodObject<Properties<DateFieldCom
     lte: z.string().datetime().nullish(),
     neq: z.string().datetime().nullish(),
     notBetween: z.lazy(() => DateFieldComparisonBetweenSchema().nullish()),
-    notIn: z.array(z.string().datetime()).nullish()
+    notIn: z.array(z.string().datetime()).nullish(),
   })
 }
 
-export function DateFieldComparisonBetweenSchema(): z.ZodObject<Properties<DateFieldComparisonBetween>> {
+export function DateFieldComparisonBetweenSchema(): z.ZodObject<
+  Properties<DateFieldComparisonBetween>
+> {
   return z.object({
     lower: z.string().datetime(),
-    upper: z.string().datetime()
+    upper: z.string().datetime(),
   })
 }
 
 export function DealSchema(): z.ZodObject<Properties<Deal>> {
   return z.object({
-    __typename: z.literal('Deal').optional(),
+    __typename: z.literal("Deal").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -1764,11 +2706,13 @@ export function DealSchema(): z.ZodObject<Properties<Deal>> {
     title: z.string(),
     updatedAt: z.string().datetime(),
     updatedBy: z.lazy(() => UserSchema().nullish()),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function DealAggregateFilterSchema(): z.ZodObject<Properties<DealAggregateFilter>> {
+export function DealAggregateFilterSchema(): z.ZodObject<
+  Properties<DealAggregateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => DealAggregateFilterSchema())).nullish(),
     closeDateDay: z.lazy(() => IntFieldComparisonSchema().nullish()),
@@ -1782,13 +2726,15 @@ export function DealAggregateFilterSchema(): z.ZodObject<Properties<DealAggregat
     stageId: z.lazy(() => IdFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    value: z.lazy(() => FloatFieldComparisonSchema().nullish())
+    value: z.lazy(() => FloatFieldComparisonSchema().nullish()),
   })
 }
 
-export function DealAggregateGroupBySchema(): z.ZodObject<Properties<DealAggregateGroupBy>> {
+export function DealAggregateGroupBySchema(): z.ZodObject<
+  Properties<DealAggregateGroupBy>
+> {
   return z.object({
-    __typename: z.literal('DealAggregateGroupBy').optional(),
+    __typename: z.literal("DealAggregateGroupBy").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -1799,37 +2745,45 @@ export function DealAggregateGroupBySchema(): z.ZodObject<Properties<DealAggrega
     stageId: z.string().nullish(),
     title: z.string().nullish(),
     updatedAt: z.string().datetime().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function DealAggregateGroupByCreatedAtArgsSchema(): z.ZodObject<Properties<DealAggregateGroupByCreatedAtArgs>> {
+export function DealAggregateGroupByCreatedAtArgsSchema(): z.ZodObject<
+  Properties<DealAggregateGroupByCreatedAtArgs>
+> {
   return z.object({
-    by: GroupBySchema.default("DAY")
+    by: GroupBySchema.default("DAY"),
   })
 }
 
-export function DealAggregateGroupByUpdatedAtArgsSchema(): z.ZodObject<Properties<DealAggregateGroupByUpdatedAtArgs>> {
+export function DealAggregateGroupByUpdatedAtArgsSchema(): z.ZodObject<
+  Properties<DealAggregateGroupByUpdatedAtArgs>
+> {
   return z.object({
-    by: GroupBySchema.default("DAY")
+    by: GroupBySchema.default("DAY"),
   })
 }
 
-export function DealAggregateResponseSchema(): z.ZodObject<Properties<DealAggregateResponse>> {
+export function DealAggregateResponseSchema(): z.ZodObject<
+  Properties<DealAggregateResponse>
+> {
   return z.object({
-    __typename: z.literal('DealAggregateResponse').optional(),
+    __typename: z.literal("DealAggregateResponse").optional(),
     avg: z.lazy(() => DealAvgAggregateSchema().nullish()),
     count: z.lazy(() => DealCountAggregateSchema().nullish()),
     groupBy: z.lazy(() => DealAggregateGroupBySchema().nullish()),
     max: z.lazy(() => DealMaxAggregateSchema().nullish()),
     min: z.lazy(() => DealMinAggregateSchema().nullish()),
-    sum: z.lazy(() => DealSumAggregateSchema().nullish())
+    sum: z.lazy(() => DealSumAggregateSchema().nullish()),
   })
 }
 
-export function DealAvgAggregateSchema(): z.ZodObject<Properties<DealAvgAggregate>> {
+export function DealAvgAggregateSchema(): z.ZodObject<
+  Properties<DealAvgAggregate>
+> {
   return z.object({
-    __typename: z.literal('DealAvgAggregate').optional(),
+    __typename: z.literal("DealAvgAggregate").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -1837,22 +2791,26 @@ export function DealAvgAggregateSchema(): z.ZodObject<Properties<DealAvgAggregat
     dealOwnerId: z.number().nullish(),
     id: z.number().nullish(),
     stageId: z.number().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function DealConnectionSchema(): z.ZodObject<Properties<DealConnection>> {
+export function DealConnectionSchema(): z.ZodObject<
+  Properties<DealConnection>
+> {
   return z.object({
-    __typename: z.literal('DealConnection').optional(),
+    __typename: z.literal("DealConnection").optional(),
     nodes: z.array(z.lazy(() => DealSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function DealCountAggregateSchema(): z.ZodObject<Properties<DealCountAggregate>> {
+export function DealCountAggregateSchema(): z.ZodObject<
+  Properties<DealCountAggregate>
+> {
   return z.object({
-    __typename: z.literal('DealCountAggregate').optional(),
+    __typename: z.literal("DealCountAggregate").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -1863,22 +2821,26 @@ export function DealCountAggregateSchema(): z.ZodObject<Properties<DealCountAggr
     stageId: z.number().nullish(),
     title: z.number().nullish(),
     updatedAt: z.number().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function DealCreateInputSchema(): z.ZodObject<Properties<DealCreateInput>> {
+export function DealCreateInputSchema(): z.ZodObject<
+  Properties<DealCreateInput>
+> {
   return z.object({
     companyId: z.string(),
     dealContactId: z.string().nullish(),
     dealOwnerId: z.string(),
     stageId: z.string().nullish(),
     title: z.string(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function DealDeleteFilterSchema(): z.ZodObject<Properties<DealDeleteFilter>> {
+export function DealDeleteFilterSchema(): z.ZodObject<
+  Properties<DealDeleteFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => DealDeleteFilterSchema())).nullish(),
     closeDateDay: z.lazy(() => IntFieldComparisonSchema().nullish()),
@@ -1892,13 +2854,15 @@ export function DealDeleteFilterSchema(): z.ZodObject<Properties<DealDeleteFilte
     stageId: z.lazy(() => IdFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    value: z.lazy(() => FloatFieldComparisonSchema().nullish())
+    value: z.lazy(() => FloatFieldComparisonSchema().nullish()),
   })
 }
 
-export function DealDeleteResponseSchema(): z.ZodObject<Properties<DealDeleteResponse>> {
+export function DealDeleteResponseSchema(): z.ZodObject<
+  Properties<DealDeleteResponse>
+> {
   return z.object({
-    __typename: z.literal('DealDeleteResponse').optional(),
+    __typename: z.literal("DealDeleteResponse").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -1910,7 +2874,7 @@ export function DealDeleteResponseSchema(): z.ZodObject<Properties<DealDeleteRes
     stageId: z.string().nullish(),
     title: z.string().nullish(),
     updatedAt: z.string().datetime().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
@@ -1934,15 +2898,21 @@ export function DealFilterSchema(): z.ZodObject<Properties<DealFilter>> {
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     updatedBy: z.lazy(() => DealFilterUserFilterSchema().nullish()),
-    value: z.lazy(() => FloatFieldComparisonSchema().nullish())
+    value: z.lazy(() => FloatFieldComparisonSchema().nullish()),
   })
 }
 
-export function DealFilterCompanyFilterSchema(): z.ZodObject<Properties<DealFilterCompanyFilter>> {
+export function DealFilterCompanyFilterSchema(): z.ZodObject<
+  Properties<DealFilterCompanyFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => DealFilterCompanyFilterSchema())).nullish(),
-    businessType: z.lazy(() => CompanyBusinessTypeFilterComparisonSchema().nullish()),
-    companySize: z.lazy(() => CompanyCompanySizeFilterComparisonSchema().nullish()),
+    businessType: z.lazy(() =>
+      CompanyBusinessTypeFilterComparisonSchema().nullish()
+    ),
+    companySize: z.lazy(() =>
+      CompanyCompanySizeFilterComparisonSchema().nullish()
+    ),
     country: z.lazy(() => StringFieldComparisonSchema().nullish()),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
@@ -1951,11 +2921,13 @@ export function DealFilterCompanyFilterSchema(): z.ZodObject<Properties<DealFilt
     or: z.array(z.lazy(() => DealFilterCompanyFilterSchema())).nullish(),
     totalRevenue: z.lazy(() => IntFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    website: z.lazy(() => StringFieldComparisonSchema().nullish())
+    website: z.lazy(() => StringFieldComparisonSchema().nullish()),
   })
 }
 
-export function DealFilterContactFilterSchema(): z.ZodObject<Properties<DealFilterContactFilter>> {
+export function DealFilterContactFilterSchema(): z.ZodObject<
+  Properties<DealFilterContactFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => DealFilterContactFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -1969,22 +2941,26 @@ export function DealFilterContactFilterSchema(): z.ZodObject<Properties<DealFilt
     stage: z.lazy(() => ContactStageFilterComparisonSchema().nullish()),
     status: z.lazy(() => ContactStatusFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function DealFilterDealStageFilterSchema(): z.ZodObject<Properties<DealFilterDealStageFilter>> {
+export function DealFilterDealStageFilterSchema(): z.ZodObject<
+  Properties<DealFilterDealStageFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => DealFilterDealStageFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => DealFilterDealStageFilterSchema())).nullish(),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function DealFilterUserFilterSchema(): z.ZodObject<Properties<DealFilterUserFilter>> {
+export function DealFilterUserFilterSchema(): z.ZodObject<
+  Properties<DealFilterUserFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => DealFilterUserFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -1996,13 +2972,15 @@ export function DealFilterUserFilterSchema(): z.ZodObject<Properties<DealFilterU
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function DealMaxAggregateSchema(): z.ZodObject<Properties<DealMaxAggregate>> {
+export function DealMaxAggregateSchema(): z.ZodObject<
+  Properties<DealMaxAggregate>
+> {
   return z.object({
-    __typename: z.literal('DealMaxAggregate').optional(),
+    __typename: z.literal("DealMaxAggregate").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -2013,13 +2991,15 @@ export function DealMaxAggregateSchema(): z.ZodObject<Properties<DealMaxAggregat
     stageId: z.string().nullish(),
     title: z.string().nullish(),
     updatedAt: z.string().datetime().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function DealMinAggregateSchema(): z.ZodObject<Properties<DealMinAggregate>> {
+export function DealMinAggregateSchema(): z.ZodObject<
+  Properties<DealMinAggregate>
+> {
   return z.object({
-    __typename: z.literal('DealMinAggregate').optional(),
+    __typename: z.literal("DealMinAggregate").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -2030,7 +3010,7 @@ export function DealMinAggregateSchema(): z.ZodObject<Properties<DealMinAggregat
     stageId: z.string().nullish(),
     title: z.string().nullish(),
     updatedAt: z.string().datetime().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
@@ -2038,55 +3018,67 @@ export function DealSortSchema(): z.ZodObject<Properties<DealSort>> {
   return z.object({
     direction: SortDirectionSchema,
     field: DealSortFieldsSchema,
-    nulls: SortNullsSchema.nullish()
+    nulls: SortNullsSchema.nullish(),
   })
 }
 
 export function DealStageSchema(): z.ZodObject<Properties<DealStage>> {
   return z.object({
-    __typename: z.literal('DealStage').optional(),
+    __typename: z.literal("DealStage").optional(),
     createdAt: z.string().datetime(),
     createdBy: z.lazy(() => UserSchema()),
     deals: z.array(z.lazy(() => DealSchema())),
-    dealsAggregate: z.array(z.lazy(() => DealStageDealsAggregateResponseSchema())),
+    dealsAggregate: z.array(
+      z.lazy(() => DealStageDealsAggregateResponseSchema())
+    ),
     id: z.string(),
     title: z.string(),
     updatedAt: z.string().datetime(),
-    updatedBy: z.lazy(() => UserSchema().nullish())
+    updatedBy: z.lazy(() => UserSchema().nullish()),
   })
 }
 
-export function DealStageDealsArgsSchema(): z.ZodObject<Properties<DealStageDealsArgs>> {
+export function DealStageDealsArgsSchema(): z.ZodObject<
+  Properties<DealStageDealsArgs>
+> {
   return z.object({
     filter: z.lazy(() => DealFilterSchema()),
-    sorting: z.array(z.lazy(() => DealSortSchema()))
+    sorting: z.array(z.lazy(() => DealSortSchema())),
   })
 }
 
-export function DealStageDealsAggregateArgsSchema(): z.ZodObject<Properties<DealStageDealsAggregateArgs>> {
+export function DealStageDealsAggregateArgsSchema(): z.ZodObject<
+  Properties<DealStageDealsAggregateArgs>
+> {
   return z.object({
-    filter: z.lazy(() => DealAggregateFilterSchema().nullish())
+    filter: z.lazy(() => DealAggregateFilterSchema().nullish()),
   })
 }
 
-export function DealStageConnectionSchema(): z.ZodObject<Properties<DealStageConnection>> {
+export function DealStageConnectionSchema(): z.ZodObject<
+  Properties<DealStageConnection>
+> {
   return z.object({
-    __typename: z.literal('DealStageConnection').optional(),
+    __typename: z.literal("DealStageConnection").optional(),
     nodes: z.array(z.lazy(() => DealStageSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function DealStageCreateInputSchema(): z.ZodObject<Properties<DealStageCreateInput>> {
+export function DealStageCreateInputSchema(): z.ZodObject<
+  Properties<DealStageCreateInput>
+> {
   return z.object({
-    title: z.string()
+    title: z.string(),
   })
 }
 
-export function DealStageDealsAggregateGroupBySchema(): z.ZodObject<Properties<DealStageDealsAggregateGroupBy>> {
+export function DealStageDealsAggregateGroupBySchema(): z.ZodObject<
+  Properties<DealStageDealsAggregateGroupBy>
+> {
   return z.object({
-    __typename: z.literal('DealStageDealsAggregateGroupBy').optional(),
+    __typename: z.literal("DealStageDealsAggregateGroupBy").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -2097,25 +3089,29 @@ export function DealStageDealsAggregateGroupBySchema(): z.ZodObject<Properties<D
     stageId: z.string().nullish(),
     title: z.string().nullish(),
     updatedAt: z.string().datetime().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function DealStageDealsAggregateResponseSchema(): z.ZodObject<Properties<DealStageDealsAggregateResponse>> {
+export function DealStageDealsAggregateResponseSchema(): z.ZodObject<
+  Properties<DealStageDealsAggregateResponse>
+> {
   return z.object({
-    __typename: z.literal('DealStageDealsAggregateResponse').optional(),
+    __typename: z.literal("DealStageDealsAggregateResponse").optional(),
     avg: z.lazy(() => DealStageDealsAvgAggregateSchema().nullish()),
     count: z.lazy(() => DealStageDealsCountAggregateSchema().nullish()),
     groupBy: z.lazy(() => DealStageDealsAggregateGroupBySchema().nullish()),
     max: z.lazy(() => DealStageDealsMaxAggregateSchema().nullish()),
     min: z.lazy(() => DealStageDealsMinAggregateSchema().nullish()),
-    sum: z.lazy(() => DealStageDealsSumAggregateSchema().nullish())
+    sum: z.lazy(() => DealStageDealsSumAggregateSchema().nullish()),
   })
 }
 
-export function DealStageDealsAvgAggregateSchema(): z.ZodObject<Properties<DealStageDealsAvgAggregate>> {
+export function DealStageDealsAvgAggregateSchema(): z.ZodObject<
+  Properties<DealStageDealsAvgAggregate>
+> {
   return z.object({
-    __typename: z.literal('DealStageDealsAvgAggregate').optional(),
+    __typename: z.literal("DealStageDealsAvgAggregate").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -2123,13 +3119,15 @@ export function DealStageDealsAvgAggregateSchema(): z.ZodObject<Properties<DealS
     dealOwnerId: z.number().nullish(),
     id: z.number().nullish(),
     stageId: z.number().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function DealStageDealsCountAggregateSchema(): z.ZodObject<Properties<DealStageDealsCountAggregate>> {
+export function DealStageDealsCountAggregateSchema(): z.ZodObject<
+  Properties<DealStageDealsCountAggregate>
+> {
   return z.object({
-    __typename: z.literal('DealStageDealsCountAggregate').optional(),
+    __typename: z.literal("DealStageDealsCountAggregate").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -2140,13 +3138,15 @@ export function DealStageDealsCountAggregateSchema(): z.ZodObject<Properties<Dea
     stageId: z.number().nullish(),
     title: z.number().nullish(),
     updatedAt: z.number().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function DealStageDealsMaxAggregateSchema(): z.ZodObject<Properties<DealStageDealsMaxAggregate>> {
+export function DealStageDealsMaxAggregateSchema(): z.ZodObject<
+  Properties<DealStageDealsMaxAggregate>
+> {
   return z.object({
-    __typename: z.literal('DealStageDealsMaxAggregate').optional(),
+    __typename: z.literal("DealStageDealsMaxAggregate").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -2157,13 +3157,15 @@ export function DealStageDealsMaxAggregateSchema(): z.ZodObject<Properties<DealS
     stageId: z.string().nullish(),
     title: z.string().nullish(),
     updatedAt: z.string().datetime().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function DealStageDealsMinAggregateSchema(): z.ZodObject<Properties<DealStageDealsMinAggregate>> {
+export function DealStageDealsMinAggregateSchema(): z.ZodObject<
+  Properties<DealStageDealsMinAggregate>
+> {
   return z.object({
-    __typename: z.literal('DealStageDealsMinAggregate').optional(),
+    __typename: z.literal("DealStageDealsMinAggregate").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -2174,13 +3176,15 @@ export function DealStageDealsMinAggregateSchema(): z.ZodObject<Properties<DealS
     stageId: z.string().nullish(),
     title: z.string().nullish(),
     updatedAt: z.string().datetime().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function DealStageDealsSumAggregateSchema(): z.ZodObject<Properties<DealStageDealsSumAggregate>> {
+export function DealStageDealsSumAggregateSchema(): z.ZodObject<
+  Properties<DealStageDealsSumAggregate>
+> {
   return z.object({
-    __typename: z.literal('DealStageDealsSumAggregate').optional(),
+    __typename: z.literal("DealStageDealsSumAggregate").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -2188,32 +3192,38 @@ export function DealStageDealsSumAggregateSchema(): z.ZodObject<Properties<DealS
     dealOwnerId: z.number().nullish(),
     id: z.number().nullish(),
     stageId: z.number().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function DealStageDeleteFilterSchema(): z.ZodObject<Properties<DealStageDeleteFilter>> {
+export function DealStageDeleteFilterSchema(): z.ZodObject<
+  Properties<DealStageDeleteFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => DealStageDeleteFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => DealStageDeleteFilterSchema())).nullish(),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function DealStageDeleteResponseSchema(): z.ZodObject<Properties<DealStageDeleteResponse>> {
+export function DealStageDeleteResponseSchema(): z.ZodObject<
+  Properties<DealStageDeleteResponse>
+> {
   return z.object({
-    __typename: z.literal('DealStageDeleteResponse').optional(),
+    __typename: z.literal("DealStageDeleteResponse").optional(),
     createdAt: z.string().datetime().nullish(),
     id: z.string().nullish(),
     title: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function DealStageFilterSchema(): z.ZodObject<Properties<DealStageFilter>> {
+export function DealStageFilterSchema(): z.ZodObject<
+  Properties<DealStageFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => DealStageFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -2223,11 +3233,13 @@ export function DealStageFilterSchema(): z.ZodObject<Properties<DealStageFilter>
     or: z.array(z.lazy(() => DealStageFilterSchema())).nullish(),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    updatedBy: z.lazy(() => DealStageFilterUserFilterSchema().nullish())
+    updatedBy: z.lazy(() => DealStageFilterUserFilterSchema().nullish()),
   })
 }
 
-export function DealStageFilterDealFilterSchema(): z.ZodObject<Properties<DealStageFilterDealFilter>> {
+export function DealStageFilterDealFilterSchema(): z.ZodObject<
+  Properties<DealStageFilterDealFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => DealStageFilterDealFilterSchema())).nullish(),
     closeDateDay: z.lazy(() => IntFieldComparisonSchema().nullish()),
@@ -2241,11 +3253,13 @@ export function DealStageFilterDealFilterSchema(): z.ZodObject<Properties<DealSt
     stageId: z.lazy(() => IdFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    value: z.lazy(() => FloatFieldComparisonSchema().nullish())
+    value: z.lazy(() => FloatFieldComparisonSchema().nullish()),
   })
 }
 
-export function DealStageFilterUserFilterSchema(): z.ZodObject<Properties<DealStageFilterUserFilter>> {
+export function DealStageFilterUserFilterSchema(): z.ZodObject<
+  Properties<DealStageFilterUserFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => DealStageFilterUserFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -2257,7 +3271,7 @@ export function DealStageFilterUserFilterSchema(): z.ZodObject<Properties<DealSt
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
@@ -2265,40 +3279,48 @@ export function DealStageSortSchema(): z.ZodObject<Properties<DealStageSort>> {
   return z.object({
     direction: SortDirectionSchema,
     field: DealStageSortFieldsSchema,
-    nulls: SortNullsSchema.nullish()
+    nulls: SortNullsSchema.nullish(),
   })
 }
 
-export function DealStageSubscriptionFilterSchema(): z.ZodObject<Properties<DealStageSubscriptionFilter>> {
+export function DealStageSubscriptionFilterSchema(): z.ZodObject<
+  Properties<DealStageSubscriptionFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => DealStageSubscriptionFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => DealStageSubscriptionFilterSchema())).nullish(),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function DealStageUpdateFilterSchema(): z.ZodObject<Properties<DealStageUpdateFilter>> {
+export function DealStageUpdateFilterSchema(): z.ZodObject<
+  Properties<DealStageUpdateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => DealStageUpdateFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => DealStageUpdateFilterSchema())).nullish(),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function DealStageUpdateInputSchema(): z.ZodObject<Properties<DealStageUpdateInput>> {
+export function DealStageUpdateInputSchema(): z.ZodObject<
+  Properties<DealStageUpdateInput>
+> {
   return z.object({
     stageId: z.string().nullish(),
-    title: z.string().nullish()
+    title: z.string().nullish(),
   })
 }
 
-export function DealSubscriptionFilterSchema(): z.ZodObject<Properties<DealSubscriptionFilter>> {
+export function DealSubscriptionFilterSchema(): z.ZodObject<
+  Properties<DealSubscriptionFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => DealSubscriptionFilterSchema())).nullish(),
     closeDateDay: z.lazy(() => IntFieldComparisonSchema().nullish()),
@@ -2312,13 +3334,15 @@ export function DealSubscriptionFilterSchema(): z.ZodObject<Properties<DealSubsc
     stageId: z.lazy(() => IdFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    value: z.lazy(() => FloatFieldComparisonSchema().nullish())
+    value: z.lazy(() => FloatFieldComparisonSchema().nullish()),
   })
 }
 
-export function DealSumAggregateSchema(): z.ZodObject<Properties<DealSumAggregate>> {
+export function DealSumAggregateSchema(): z.ZodObject<
+  Properties<DealSumAggregate>
+> {
   return z.object({
-    __typename: z.literal('DealSumAggregate').optional(),
+    __typename: z.literal("DealSumAggregate").optional(),
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
     closeDateYear: z.number().nullish(),
@@ -2326,11 +3350,13 @@ export function DealSumAggregateSchema(): z.ZodObject<Properties<DealSumAggregat
     dealOwnerId: z.number().nullish(),
     id: z.number().nullish(),
     stageId: z.number().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function DealUpdateFilterSchema(): z.ZodObject<Properties<DealUpdateFilter>> {
+export function DealUpdateFilterSchema(): z.ZodObject<
+  Properties<DealUpdateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => DealUpdateFilterSchema())).nullish(),
     closeDateDay: z.lazy(() => IntFieldComparisonSchema().nullish()),
@@ -2344,11 +3370,13 @@ export function DealUpdateFilterSchema(): z.ZodObject<Properties<DealUpdateFilte
     stageId: z.lazy(() => IdFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    value: z.lazy(() => FloatFieldComparisonSchema().nullish())
+    value: z.lazy(() => FloatFieldComparisonSchema().nullish()),
   })
 }
 
-export function DealUpdateInputSchema(): z.ZodObject<Properties<DealUpdateInput>> {
+export function DealUpdateInputSchema(): z.ZodObject<
+  Properties<DealUpdateInput>
+> {
   return z.object({
     closeDateDay: z.number().nullish(),
     closeDateMonth: z.number().nullish(),
@@ -2359,260 +3387,342 @@ export function DealUpdateInputSchema(): z.ZodObject<Properties<DealUpdateInput>
     notes: z.string().nullish(),
     stageId: z.string().nullish(),
     title: z.string().nullish(),
-    value: z.number().nullish()
+    value: z.number().nullish(),
   })
 }
 
-export function DeleteManyCompaniesInputSchema(): z.ZodObject<Properties<DeleteManyCompaniesInput>> {
+export function DeleteManyCompaniesInputSchema(): z.ZodObject<
+  Properties<DeleteManyCompaniesInput>
+> {
   return z.object({
-    filter: z.lazy(() => CompanyDeleteFilterSchema())
+    filter: z.lazy(() => CompanyDeleteFilterSchema()),
   })
 }
 
-export function DeleteManyCompanyNotesInputSchema(): z.ZodObject<Properties<DeleteManyCompanyNotesInput>> {
+export function DeleteManyCompanyNotesInputSchema(): z.ZodObject<
+  Properties<DeleteManyCompanyNotesInput>
+> {
   return z.object({
-    filter: z.lazy(() => CompanyNoteDeleteFilterSchema())
+    filter: z.lazy(() => CompanyNoteDeleteFilterSchema()),
   })
 }
 
-export function DeleteManyContactNotesInputSchema(): z.ZodObject<Properties<DeleteManyContactNotesInput>> {
+export function DeleteManyContactNotesInputSchema(): z.ZodObject<
+  Properties<DeleteManyContactNotesInput>
+> {
   return z.object({
-    filter: z.lazy(() => ContactNoteDeleteFilterSchema())
+    filter: z.lazy(() => ContactNoteDeleteFilterSchema()),
   })
 }
 
-export function DeleteManyContactsInputSchema(): z.ZodObject<Properties<DeleteManyContactsInput>> {
+export function DeleteManyContactsInputSchema(): z.ZodObject<
+  Properties<DeleteManyContactsInput>
+> {
   return z.object({
-    filter: z.lazy(() => ContactDeleteFilterSchema())
+    filter: z.lazy(() => ContactDeleteFilterSchema()),
   })
 }
 
-export function DeleteManyDealStagesInputSchema(): z.ZodObject<Properties<DeleteManyDealStagesInput>> {
+export function DeleteManyDealStagesInputSchema(): z.ZodObject<
+  Properties<DeleteManyDealStagesInput>
+> {
   return z.object({
-    filter: z.lazy(() => DealStageDeleteFilterSchema())
+    filter: z.lazy(() => DealStageDeleteFilterSchema()),
   })
 }
 
-export function DeleteManyDealsInputSchema(): z.ZodObject<Properties<DeleteManyDealsInput>> {
+export function DeleteManyDealsInputSchema(): z.ZodObject<
+  Properties<DeleteManyDealsInput>
+> {
   return z.object({
-    filter: z.lazy(() => DealDeleteFilterSchema())
+    filter: z.lazy(() => DealDeleteFilterSchema()),
   })
 }
 
-export function DeleteManyEventCategoriesInputSchema(): z.ZodObject<Properties<DeleteManyEventCategoriesInput>> {
+export function DeleteManyEventCategoriesInputSchema(): z.ZodObject<
+  Properties<DeleteManyEventCategoriesInput>
+> {
   return z.object({
-    filter: z.lazy(() => EventCategoryDeleteFilterSchema())
+    filter: z.lazy(() => EventCategoryDeleteFilterSchema()),
   })
 }
 
-export function DeleteManyEventsInputSchema(): z.ZodObject<Properties<DeleteManyEventsInput>> {
+export function DeleteManyEventsInputSchema(): z.ZodObject<
+  Properties<DeleteManyEventsInput>
+> {
   return z.object({
-    filter: z.lazy(() => EventDeleteFilterSchema())
+    filter: z.lazy(() => EventDeleteFilterSchema()),
   })
 }
 
-export function DeleteManyQuotesInputSchema(): z.ZodObject<Properties<DeleteManyQuotesInput>> {
+export function DeleteManyQuotesInputSchema(): z.ZodObject<
+  Properties<DeleteManyQuotesInput>
+> {
   return z.object({
-    filter: z.lazy(() => QuoteDeleteFilterSchema())
+    filter: z.lazy(() => QuoteDeleteFilterSchema()),
   })
 }
 
-export function DeleteManyResponseSchema(): z.ZodObject<Properties<DeleteManyResponse>> {
+export function DeleteManyResponseSchema(): z.ZodObject<
+  Properties<DeleteManyResponse>
+> {
   return z.object({
-    __typename: z.literal('DeleteManyResponse').optional(),
-    deletedCount: z.number()
+    __typename: z.literal("DeleteManyResponse").optional(),
+    deletedCount: z.number(),
   })
 }
 
-export function DeleteManyTaskCommentsInputSchema(): z.ZodObject<Properties<DeleteManyTaskCommentsInput>> {
+export function DeleteManyTaskCommentsInputSchema(): z.ZodObject<
+  Properties<DeleteManyTaskCommentsInput>
+> {
   return z.object({
-    filter: z.lazy(() => TaskCommentDeleteFilterSchema())
+    filter: z.lazy(() => TaskCommentDeleteFilterSchema()),
   })
 }
 
-export function DeleteManyTaskStagesInputSchema(): z.ZodObject<Properties<DeleteManyTaskStagesInput>> {
+export function DeleteManyTaskStagesInputSchema(): z.ZodObject<
+  Properties<DeleteManyTaskStagesInput>
+> {
   return z.object({
-    filter: z.lazy(() => TaskStageDeleteFilterSchema())
+    filter: z.lazy(() => TaskStageDeleteFilterSchema()),
   })
 }
 
-export function DeleteManyTasksInputSchema(): z.ZodObject<Properties<DeleteManyTasksInput>> {
+export function DeleteManyTasksInputSchema(): z.ZodObject<
+  Properties<DeleteManyTasksInput>
+> {
   return z.object({
-    filter: z.lazy(() => TaskDeleteFilterSchema())
+    filter: z.lazy(() => TaskDeleteFilterSchema()),
   })
 }
 
-export function DeleteManyUsersInputSchema(): z.ZodObject<Properties<DeleteManyUsersInput>> {
+export function DeleteManyUsersInputSchema(): z.ZodObject<
+  Properties<DeleteManyUsersInput>
+> {
   return z.object({
-    filter: z.lazy(() => UserDeleteFilterSchema())
+    filter: z.lazy(() => UserDeleteFilterSchema()),
   })
 }
 
-export function DeleteOneAuditSubscriptionFilterInputSchema(): z.ZodObject<Properties<DeleteOneAuditSubscriptionFilterInput>> {
+export function DeleteOneAuditSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<DeleteOneAuditSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => AuditSubscriptionFilterSchema())
+    filter: z.lazy(() => AuditSubscriptionFilterSchema()),
   })
 }
 
-export function DeleteOneCompanyInputSchema(): z.ZodObject<Properties<DeleteOneCompanyInput>> {
+export function DeleteOneCompanyInputSchema(): z.ZodObject<
+  Properties<DeleteOneCompanyInput>
+> {
   return z.object({
-    id: z.string()
+    id: z.string(),
   })
 }
 
-export function DeleteOneCompanyNoteInputSchema(): z.ZodObject<Properties<DeleteOneCompanyNoteInput>> {
+export function DeleteOneCompanyNoteInputSchema(): z.ZodObject<
+  Properties<DeleteOneCompanyNoteInput>
+> {
   return z.object({
-    id: z.string()
+    id: z.string(),
   })
 }
 
-export function DeleteOneCompanyNoteSubscriptionFilterInputSchema(): z.ZodObject<Properties<DeleteOneCompanyNoteSubscriptionFilterInput>> {
+export function DeleteOneCompanyNoteSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<DeleteOneCompanyNoteSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => CompanyNoteSubscriptionFilterSchema())
+    filter: z.lazy(() => CompanyNoteSubscriptionFilterSchema()),
   })
 }
 
-export function DeleteOneCompanySubscriptionFilterInputSchema(): z.ZodObject<Properties<DeleteOneCompanySubscriptionFilterInput>> {
+export function DeleteOneCompanySubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<DeleteOneCompanySubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => CompanySubscriptionFilterSchema())
+    filter: z.lazy(() => CompanySubscriptionFilterSchema()),
   })
 }
 
-export function DeleteOneContactInputSchema(): z.ZodObject<Properties<DeleteOneContactInput>> {
+export function DeleteOneContactInputSchema(): z.ZodObject<
+  Properties<DeleteOneContactInput>
+> {
   return z.object({
-    id: z.string()
+    id: z.string(),
   })
 }
 
-export function DeleteOneContactNoteInputSchema(): z.ZodObject<Properties<DeleteOneContactNoteInput>> {
+export function DeleteOneContactNoteInputSchema(): z.ZodObject<
+  Properties<DeleteOneContactNoteInput>
+> {
   return z.object({
-    id: z.string()
+    id: z.string(),
   })
 }
 
-export function DeleteOneContactNoteSubscriptionFilterInputSchema(): z.ZodObject<Properties<DeleteOneContactNoteSubscriptionFilterInput>> {
+export function DeleteOneContactNoteSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<DeleteOneContactNoteSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => ContactNoteSubscriptionFilterSchema())
+    filter: z.lazy(() => ContactNoteSubscriptionFilterSchema()),
   })
 }
 
-export function DeleteOneContactSubscriptionFilterInputSchema(): z.ZodObject<Properties<DeleteOneContactSubscriptionFilterInput>> {
+export function DeleteOneContactSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<DeleteOneContactSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => ContactSubscriptionFilterSchema())
+    filter: z.lazy(() => ContactSubscriptionFilterSchema()),
   })
 }
 
-export function DeleteOneDealInputSchema(): z.ZodObject<Properties<DeleteOneDealInput>> {
+export function DeleteOneDealInputSchema(): z.ZodObject<
+  Properties<DeleteOneDealInput>
+> {
   return z.object({
-    id: z.string()
+    id: z.string(),
   })
 }
 
-export function DeleteOneDealStageInputSchema(): z.ZodObject<Properties<DeleteOneDealStageInput>> {
+export function DeleteOneDealStageInputSchema(): z.ZodObject<
+  Properties<DeleteOneDealStageInput>
+> {
   return z.object({
-    id: z.string()
+    id: z.string(),
   })
 }
 
-export function DeleteOneDealStageSubscriptionFilterInputSchema(): z.ZodObject<Properties<DeleteOneDealStageSubscriptionFilterInput>> {
+export function DeleteOneDealStageSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<DeleteOneDealStageSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => DealStageSubscriptionFilterSchema())
+    filter: z.lazy(() => DealStageSubscriptionFilterSchema()),
   })
 }
 
-export function DeleteOneDealSubscriptionFilterInputSchema(): z.ZodObject<Properties<DeleteOneDealSubscriptionFilterInput>> {
+export function DeleteOneDealSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<DeleteOneDealSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => DealSubscriptionFilterSchema())
+    filter: z.lazy(() => DealSubscriptionFilterSchema()),
   })
 }
 
-export function DeleteOneEventCategoryInputSchema(): z.ZodObject<Properties<DeleteOneEventCategoryInput>> {
+export function DeleteOneEventCategoryInputSchema(): z.ZodObject<
+  Properties<DeleteOneEventCategoryInput>
+> {
   return z.object({
-    id: z.string()
+    id: z.string(),
   })
 }
 
-export function DeleteOneEventCategorySubscriptionFilterInputSchema(): z.ZodObject<Properties<DeleteOneEventCategorySubscriptionFilterInput>> {
+export function DeleteOneEventCategorySubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<DeleteOneEventCategorySubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => EventCategorySubscriptionFilterSchema())
+    filter: z.lazy(() => EventCategorySubscriptionFilterSchema()),
   })
 }
 
-export function DeleteOneEventInputSchema(): z.ZodObject<Properties<DeleteOneEventInput>> {
+export function DeleteOneEventInputSchema(): z.ZodObject<
+  Properties<DeleteOneEventInput>
+> {
   return z.object({
-    id: z.string()
+    id: z.string(),
   })
 }
 
-export function DeleteOneEventSubscriptionFilterInputSchema(): z.ZodObject<Properties<DeleteOneEventSubscriptionFilterInput>> {
+export function DeleteOneEventSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<DeleteOneEventSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => EventSubscriptionFilterSchema())
+    filter: z.lazy(() => EventSubscriptionFilterSchema()),
   })
 }
 
-export function DeleteOneQuoteInputSchema(): z.ZodObject<Properties<DeleteOneQuoteInput>> {
+export function DeleteOneQuoteInputSchema(): z.ZodObject<
+  Properties<DeleteOneQuoteInput>
+> {
   return z.object({
-    id: z.string()
+    id: z.string(),
   })
 }
 
-export function DeleteOneQuoteSubscriptionFilterInputSchema(): z.ZodObject<Properties<DeleteOneQuoteSubscriptionFilterInput>> {
+export function DeleteOneQuoteSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<DeleteOneQuoteSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => QuoteSubscriptionFilterSchema())
+    filter: z.lazy(() => QuoteSubscriptionFilterSchema()),
   })
 }
 
-export function DeleteOneTaskCommentInputSchema(): z.ZodObject<Properties<DeleteOneTaskCommentInput>> {
+export function DeleteOneTaskCommentInputSchema(): z.ZodObject<
+  Properties<DeleteOneTaskCommentInput>
+> {
   return z.object({
-    id: z.string()
+    id: z.string(),
   })
 }
 
-export function DeleteOneTaskCommentSubscriptionFilterInputSchema(): z.ZodObject<Properties<DeleteOneTaskCommentSubscriptionFilterInput>> {
+export function DeleteOneTaskCommentSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<DeleteOneTaskCommentSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => TaskCommentSubscriptionFilterSchema())
+    filter: z.lazy(() => TaskCommentSubscriptionFilterSchema()),
   })
 }
 
-export function DeleteOneTaskInputSchema(): z.ZodObject<Properties<DeleteOneTaskInput>> {
+export function DeleteOneTaskInputSchema(): z.ZodObject<
+  Properties<DeleteOneTaskInput>
+> {
   return z.object({
-    id: z.string()
+    id: z.string(),
   })
 }
 
-export function DeleteOneTaskStageInputSchema(): z.ZodObject<Properties<DeleteOneTaskStageInput>> {
+export function DeleteOneTaskStageInputSchema(): z.ZodObject<
+  Properties<DeleteOneTaskStageInput>
+> {
   return z.object({
-    id: z.string()
+    id: z.string(),
   })
 }
 
-export function DeleteOneTaskStageSubscriptionFilterInputSchema(): z.ZodObject<Properties<DeleteOneTaskStageSubscriptionFilterInput>> {
+export function DeleteOneTaskStageSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<DeleteOneTaskStageSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => TaskStageSubscriptionFilterSchema())
+    filter: z.lazy(() => TaskStageSubscriptionFilterSchema()),
   })
 }
 
-export function DeleteOneTaskSubscriptionFilterInputSchema(): z.ZodObject<Properties<DeleteOneTaskSubscriptionFilterInput>> {
+export function DeleteOneTaskSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<DeleteOneTaskSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => TaskSubscriptionFilterSchema())
+    filter: z.lazy(() => TaskSubscriptionFilterSchema()),
   })
 }
 
-export function DeleteOneUserInputSchema(): z.ZodObject<Properties<DeleteOneUserInput>> {
+export function DeleteOneUserInputSchema(): z.ZodObject<
+  Properties<DeleteOneUserInput>
+> {
   return z.object({
-    id: z.string()
+    id: z.string(),
   })
 }
 
-export function DeleteOneUserSubscriptionFilterInputSchema(): z.ZodObject<Properties<DeleteOneUserSubscriptionFilterInput>> {
+export function DeleteOneUserSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<DeleteOneUserSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => UserSubscriptionFilterSchema())
+    filter: z.lazy(() => UserSubscriptionFilterSchema()),
   })
 }
 
 export function EventSchema(): z.ZodObject<Properties<Event>> {
   return z.object({
-    __typename: z.literal('Event').optional(),
+    __typename: z.literal("Event").optional(),
     category: z.lazy(() => EventCategorySchema()),
     color: z.string(),
     createdAt: z.string().datetime(),
@@ -2624,74 +3734,88 @@ export function EventSchema(): z.ZodObject<Properties<Event>> {
     startDate: z.string().datetime(),
     title: z.string(),
     updatedAt: z.string().datetime(),
-    updatedBy: z.lazy(() => UserSchema().nullish())
+    updatedBy: z.lazy(() => UserSchema().nullish()),
   })
 }
 
-export function EventParticipantsArgsSchema(): z.ZodObject<Properties<EventParticipantsArgs>> {
+export function EventParticipantsArgsSchema(): z.ZodObject<
+  Properties<EventParticipantsArgs>
+> {
   return z.object({
     filter: z.lazy(() => UserFilterSchema()),
-    sorting: z.array(z.lazy(() => UserSortSchema()))
+    sorting: z.array(z.lazy(() => UserSortSchema())),
   })
 }
 
 export function EventCategorySchema(): z.ZodObject<Properties<EventCategory>> {
   return z.object({
-    __typename: z.literal('EventCategory').optional(),
+    __typename: z.literal("EventCategory").optional(),
     createdAt: z.string().datetime(),
     createdBy: z.lazy(() => UserSchema()),
     events: z.array(z.lazy(() => EventCategorySchema())),
     id: z.string(),
     title: z.string(),
     updatedAt: z.string().datetime(),
-    updatedBy: z.lazy(() => UserSchema().nullish())
+    updatedBy: z.lazy(() => UserSchema().nullish()),
   })
 }
 
-export function EventCategoryEventsArgsSchema(): z.ZodObject<Properties<EventCategoryEventsArgs>> {
+export function EventCategoryEventsArgsSchema(): z.ZodObject<
+  Properties<EventCategoryEventsArgs>
+> {
   return z.object({
     filter: z.lazy(() => EventCategoryFilterSchema()),
-    sorting: z.array(z.lazy(() => EventCategorySortSchema()))
+    sorting: z.array(z.lazy(() => EventCategorySortSchema())),
   })
 }
 
-export function EventCategoryConnectionSchema(): z.ZodObject<Properties<EventCategoryConnection>> {
+export function EventCategoryConnectionSchema(): z.ZodObject<
+  Properties<EventCategoryConnection>
+> {
   return z.object({
-    __typename: z.literal('EventCategoryConnection').optional(),
+    __typename: z.literal("EventCategoryConnection").optional(),
     nodes: z.array(z.lazy(() => EventCategorySchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function EventCategoryCreateInputSchema(): z.ZodObject<Properties<EventCategoryCreateInput>> {
+export function EventCategoryCreateInputSchema(): z.ZodObject<
+  Properties<EventCategoryCreateInput>
+> {
   return z.object({
-    title: z.string()
+    title: z.string(),
   })
 }
 
-export function EventCategoryDeleteFilterSchema(): z.ZodObject<Properties<EventCategoryDeleteFilter>> {
+export function EventCategoryDeleteFilterSchema(): z.ZodObject<
+  Properties<EventCategoryDeleteFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => EventCategoryDeleteFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => EventCategoryDeleteFilterSchema())).nullish(),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function EventCategoryDeleteResponseSchema(): z.ZodObject<Properties<EventCategoryDeleteResponse>> {
+export function EventCategoryDeleteResponseSchema(): z.ZodObject<
+  Properties<EventCategoryDeleteResponse>
+> {
   return z.object({
-    __typename: z.literal('EventCategoryDeleteResponse').optional(),
+    __typename: z.literal("EventCategoryDeleteResponse").optional(),
     createdAt: z.string().datetime().nullish(),
     id: z.string().nullish(),
     title: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function EventCategoryFilterSchema(): z.ZodObject<Properties<EventCategoryFilter>> {
+export function EventCategoryFilterSchema(): z.ZodObject<
+  Properties<EventCategoryFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => EventCategoryFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -2700,11 +3824,13 @@ export function EventCategoryFilterSchema(): z.ZodObject<Properties<EventCategor
     or: z.array(z.lazy(() => EventCategoryFilterSchema())).nullish(),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    updatedBy: z.lazy(() => EventCategoryFilterUserFilterSchema().nullish())
+    updatedBy: z.lazy(() => EventCategoryFilterUserFilterSchema().nullish()),
   })
 }
 
-export function EventCategoryFilterUserFilterSchema(): z.ZodObject<Properties<EventCategoryFilterUserFilter>> {
+export function EventCategoryFilterUserFilterSchema(): z.ZodObject<
+  Properties<EventCategoryFilterUserFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => EventCategoryFilterUserFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -2716,56 +3842,72 @@ export function EventCategoryFilterUserFilterSchema(): z.ZodObject<Properties<Ev
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function EventCategorySortSchema(): z.ZodObject<Properties<EventCategorySort>> {
+export function EventCategorySortSchema(): z.ZodObject<
+  Properties<EventCategorySort>
+> {
   return z.object({
     direction: SortDirectionSchema,
     field: EventCategorySortFieldsSchema,
-    nulls: SortNullsSchema.nullish()
+    nulls: SortNullsSchema.nullish(),
   })
 }
 
-export function EventCategorySubscriptionFilterSchema(): z.ZodObject<Properties<EventCategorySubscriptionFilter>> {
+export function EventCategorySubscriptionFilterSchema(): z.ZodObject<
+  Properties<EventCategorySubscriptionFilter>
+> {
   return z.object({
-    and: z.array(z.lazy(() => EventCategorySubscriptionFilterSchema())).nullish(),
+    and: z
+      .array(z.lazy(() => EventCategorySubscriptionFilterSchema()))
+      .nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
-    or: z.array(z.lazy(() => EventCategorySubscriptionFilterSchema())).nullish(),
+    or: z
+      .array(z.lazy(() => EventCategorySubscriptionFilterSchema()))
+      .nullish(),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function EventCategoryUpdateFilterSchema(): z.ZodObject<Properties<EventCategoryUpdateFilter>> {
+export function EventCategoryUpdateFilterSchema(): z.ZodObject<
+  Properties<EventCategoryUpdateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => EventCategoryUpdateFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => EventCategoryUpdateFilterSchema())).nullish(),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function EventCategoryUpdateInputSchema(): z.ZodObject<Properties<EventCategoryUpdateInput>> {
+export function EventCategoryUpdateInputSchema(): z.ZodObject<
+  Properties<EventCategoryUpdateInput>
+> {
   return z.object({
-    title: z.string()
+    title: z.string(),
   })
 }
 
-export function EventConnectionSchema(): z.ZodObject<Properties<EventConnection>> {
+export function EventConnectionSchema(): z.ZodObject<
+  Properties<EventConnection>
+> {
   return z.object({
-    __typename: z.literal('EventConnection').optional(),
+    __typename: z.literal("EventConnection").optional(),
     nodes: z.array(z.lazy(() => EventSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function EventCreateInputSchema(): z.ZodObject<Properties<EventCreateInput>> {
+export function EventCreateInputSchema(): z.ZodObject<
+  Properties<EventCreateInput>
+> {
   return z.object({
     categoryId: z.string(),
     color: z.string(),
@@ -2773,11 +3915,13 @@ export function EventCreateInputSchema(): z.ZodObject<Properties<EventCreateInpu
     endDate: z.string().datetime(),
     participantIds: z.array(z.string()),
     startDate: z.string().datetime(),
-    title: z.string()
+    title: z.string(),
   })
 }
 
-export function EventDeleteFilterSchema(): z.ZodObject<Properties<EventDeleteFilter>> {
+export function EventDeleteFilterSchema(): z.ZodObject<
+  Properties<EventDeleteFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => EventDeleteFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -2787,13 +3931,15 @@ export function EventDeleteFilterSchema(): z.ZodObject<Properties<EventDeleteFil
     or: z.array(z.lazy(() => EventDeleteFilterSchema())).nullish(),
     startDate: z.lazy(() => DateFieldComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function EventDeleteResponseSchema(): z.ZodObject<Properties<EventDeleteResponse>> {
+export function EventDeleteResponseSchema(): z.ZodObject<
+  Properties<EventDeleteResponse>
+> {
   return z.object({
-    __typename: z.literal('EventDeleteResponse').optional(),
+    __typename: z.literal("EventDeleteResponse").optional(),
     color: z.string().nullish(),
     createdAt: z.string().datetime().nullish(),
     description: z.string().nullish(),
@@ -2801,7 +3947,7 @@ export function EventDeleteResponseSchema(): z.ZodObject<Properties<EventDeleteR
     id: z.string().nullish(),
     startDate: z.string().datetime().nullish(),
     title: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
@@ -2818,22 +3964,28 @@ export function EventFilterSchema(): z.ZodObject<Properties<EventFilter>> {
     startDate: z.lazy(() => DateFieldComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    updatedBy: z.lazy(() => EventFilterUserFilterSchema().nullish())
+    updatedBy: z.lazy(() => EventFilterUserFilterSchema().nullish()),
   })
 }
 
-export function EventFilterEventCategoryFilterSchema(): z.ZodObject<Properties<EventFilterEventCategoryFilter>> {
+export function EventFilterEventCategoryFilterSchema(): z.ZodObject<
+  Properties<EventFilterEventCategoryFilter>
+> {
   return z.object({
-    and: z.array(z.lazy(() => EventFilterEventCategoryFilterSchema())).nullish(),
+    and: z
+      .array(z.lazy(() => EventFilterEventCategoryFilterSchema()))
+      .nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => EventFilterEventCategoryFilterSchema())).nullish(),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function EventFilterUserFilterSchema(): z.ZodObject<Properties<EventFilterUserFilter>> {
+export function EventFilterUserFilterSchema(): z.ZodObject<
+  Properties<EventFilterUserFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => EventFilterUserFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -2845,7 +3997,7 @@ export function EventFilterUserFilterSchema(): z.ZodObject<Properties<EventFilte
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
@@ -2853,11 +4005,13 @@ export function EventSortSchema(): z.ZodObject<Properties<EventSort>> {
   return z.object({
     direction: SortDirectionSchema,
     field: EventSortFieldsSchema,
-    nulls: SortNullsSchema.nullish()
+    nulls: SortNullsSchema.nullish(),
   })
 }
 
-export function EventSubscriptionFilterSchema(): z.ZodObject<Properties<EventSubscriptionFilter>> {
+export function EventSubscriptionFilterSchema(): z.ZodObject<
+  Properties<EventSubscriptionFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => EventSubscriptionFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -2867,11 +4021,13 @@ export function EventSubscriptionFilterSchema(): z.ZodObject<Properties<EventSub
     or: z.array(z.lazy(() => EventSubscriptionFilterSchema())).nullish(),
     startDate: z.lazy(() => DateFieldComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function EventUpdateFilterSchema(): z.ZodObject<Properties<EventUpdateFilter>> {
+export function EventUpdateFilterSchema(): z.ZodObject<
+  Properties<EventUpdateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => EventUpdateFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -2881,11 +4037,13 @@ export function EventUpdateFilterSchema(): z.ZodObject<Properties<EventUpdateFil
     or: z.array(z.lazy(() => EventUpdateFilterSchema())).nullish(),
     startDate: z.lazy(() => DateFieldComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function EventUpdateInputSchema(): z.ZodObject<Properties<EventUpdateInput>> {
+export function EventUpdateInputSchema(): z.ZodObject<
+  Properties<EventUpdateInput>
+> {
   return z.object({
     categoryId: z.string().nullish(),
     color: z.string().nullish(),
@@ -2893,11 +4051,13 @@ export function EventUpdateInputSchema(): z.ZodObject<Properties<EventUpdateInpu
     endDate: z.string().datetime().nullish(),
     participantIds: z.array(z.string()).nullish(),
     startDate: z.string().datetime().nullish(),
-    title: z.string().nullish()
+    title: z.string().nullish(),
   })
 }
 
-export function FloatFieldComparisonSchema(): z.ZodObject<Properties<FloatFieldComparison>> {
+export function FloatFieldComparisonSchema(): z.ZodObject<
+  Properties<FloatFieldComparison>
+> {
   return z.object({
     between: z.lazy(() => FloatFieldComparisonBetweenSchema().nullish()),
     eq: z.number().nullish(),
@@ -2910,18 +4070,22 @@ export function FloatFieldComparisonSchema(): z.ZodObject<Properties<FloatFieldC
     lte: z.number().nullish(),
     neq: z.number().nullish(),
     notBetween: z.lazy(() => FloatFieldComparisonBetweenSchema().nullish()),
-    notIn: z.array(z.number()).nullish()
+    notIn: z.array(z.number()).nullish(),
   })
 }
 
-export function FloatFieldComparisonBetweenSchema(): z.ZodObject<Properties<FloatFieldComparisonBetween>> {
+export function FloatFieldComparisonBetweenSchema(): z.ZodObject<
+  Properties<FloatFieldComparisonBetween>
+> {
   return z.object({
     lower: z.number(),
-    upper: z.number()
+    upper: z.number(),
   })
 }
 
-export function IdFilterComparisonSchema(): z.ZodObject<Properties<IdFilterComparison>> {
+export function IdFilterComparisonSchema(): z.ZodObject<
+  Properties<IdFilterComparison>
+> {
   return z.object({
     eq: z.string().nullish(),
     gt: z.string().nullish(),
@@ -2936,11 +4100,13 @@ export function IdFilterComparisonSchema(): z.ZodObject<Properties<IdFilterCompa
     neq: z.string().nullish(),
     notILike: z.string().nullish(),
     notIn: z.array(z.string()).nullish(),
-    notLike: z.string().nullish()
+    notLike: z.string().nullish(),
   })
 }
 
-export function IntFieldComparisonSchema(): z.ZodObject<Properties<IntFieldComparison>> {
+export function IntFieldComparisonSchema(): z.ZodObject<
+  Properties<IntFieldComparison>
+> {
   return z.object({
     between: z.lazy(() => IntFieldComparisonBetweenSchema().nullish()),
     eq: z.number().nullish(),
@@ -2953,24 +4119,28 @@ export function IntFieldComparisonSchema(): z.ZodObject<Properties<IntFieldCompa
     lte: z.number().nullish(),
     neq: z.number().nullish(),
     notBetween: z.lazy(() => IntFieldComparisonBetweenSchema().nullish()),
-    notIn: z.array(z.number()).nullish()
+    notIn: z.array(z.number()).nullish(),
   })
 }
 
-export function IntFieldComparisonBetweenSchema(): z.ZodObject<Properties<IntFieldComparisonBetween>> {
+export function IntFieldComparisonBetweenSchema(): z.ZodObject<
+  Properties<IntFieldComparisonBetween>
+> {
   return z.object({
     lower: z.number(),
-    upper: z.number()
+    upper: z.number(),
   })
 }
 
 export function LoginInputSchema(): z.ZodObject<Properties<LoginInput>> {
   return z.object({
-    email: z.string()
+    email: z.string(),
   })
 }
 
-export function NumberFieldComparisonSchema(): z.ZodObject<Properties<NumberFieldComparison>> {
+export function NumberFieldComparisonSchema(): z.ZodObject<
+  Properties<NumberFieldComparison>
+> {
   return z.object({
     between: z.lazy(() => NumberFieldComparisonBetweenSchema().nullish()),
     eq: z.number().nullish(),
@@ -2983,35 +4153,39 @@ export function NumberFieldComparisonSchema(): z.ZodObject<Properties<NumberFiel
     lte: z.number().nullish(),
     neq: z.number().nullish(),
     notBetween: z.lazy(() => NumberFieldComparisonBetweenSchema().nullish()),
-    notIn: z.array(z.number()).nullish()
+    notIn: z.array(z.number()).nullish(),
   })
 }
 
-export function NumberFieldComparisonBetweenSchema(): z.ZodObject<Properties<NumberFieldComparisonBetween>> {
+export function NumberFieldComparisonBetweenSchema(): z.ZodObject<
+  Properties<NumberFieldComparisonBetween>
+> {
   return z.object({
     lower: z.number(),
-    upper: z.number()
+    upper: z.number(),
   })
 }
 
-export function OffsetPageInfoSchema(): z.ZodObject<Properties<OffsetPageInfo>> {
+export function OffsetPageInfoSchema(): z.ZodObject<
+  Properties<OffsetPageInfo>
+> {
   return z.object({
-    __typename: z.literal('OffsetPageInfo').optional(),
+    __typename: z.literal("OffsetPageInfo").optional(),
     hasNextPage: z.boolean().nullish(),
-    hasPreviousPage: z.boolean().nullish()
+    hasPreviousPage: z.boolean().nullish(),
   })
 }
 
 export function OffsetPagingSchema(): z.ZodObject<Properties<OffsetPaging>> {
   return z.object({
     limit: z.number().nullish(),
-    offset: z.number().nullish()
+    offset: z.number().nullish(),
   })
 }
 
 export function QuoteSchema(): z.ZodObject<Properties<Quote>> {
   return z.object({
-    __typename: z.literal('Quote').optional(),
+    __typename: z.literal("Quote").optional(),
     company: z.lazy(() => CompanySchema()),
     contact: z.lazy(() => ContactSchema()),
     createdAt: z.string().datetime(),
@@ -3026,29 +4200,35 @@ export function QuoteSchema(): z.ZodObject<Properties<Quote>> {
     title: z.string(),
     total: z.number(),
     updatedAt: z.string().datetime(),
-    updatedBy: z.lazy(() => UserSchema().nullish())
+    updatedBy: z.lazy(() => UserSchema().nullish()),
   })
 }
 
-export function QuoteConnectionSchema(): z.ZodObject<Properties<QuoteConnection>> {
+export function QuoteConnectionSchema(): z.ZodObject<
+  Properties<QuoteConnection>
+> {
   return z.object({
-    __typename: z.literal('QuoteConnection').optional(),
+    __typename: z.literal("QuoteConnection").optional(),
     nodes: z.array(z.lazy(() => QuoteSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function QuoteCreateInputSchema(): z.ZodObject<Properties<QuoteCreateInput>> {
+export function QuoteCreateInputSchema(): z.ZodObject<
+  Properties<QuoteCreateInput>
+> {
   return z.object({
     companyId: z.string(),
     contactId: z.string(),
     salesOwnerId: z.string(),
-    title: z.string()
+    title: z.string(),
   })
 }
 
-export function QuoteDeleteFilterSchema(): z.ZodObject<Properties<QuoteDeleteFilter>> {
+export function QuoteDeleteFilterSchema(): z.ZodObject<
+  Properties<QuoteDeleteFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => QuoteDeleteFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -3057,13 +4237,15 @@ export function QuoteDeleteFilterSchema(): z.ZodObject<Properties<QuoteDeleteFil
     status: z.lazy(() => QuoteStatusFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     total: z.lazy(() => FloatFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function QuoteDeleteResponseSchema(): z.ZodObject<Properties<QuoteDeleteResponse>> {
+export function QuoteDeleteResponseSchema(): z.ZodObject<
+  Properties<QuoteDeleteResponse>
+> {
   return z.object({
-    __typename: z.literal('QuoteDeleteResponse').optional(),
+    __typename: z.literal("QuoteDeleteResponse").optional(),
     createdAt: z.string().datetime().nullish(),
     description: z.string().nullish(),
     id: z.string().nullish(),
@@ -3073,7 +4255,7 @@ export function QuoteDeleteResponseSchema(): z.ZodObject<Properties<QuoteDeleteR
     tax: z.number().nullish(),
     title: z.string().nullish(),
     total: z.number().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
@@ -3091,15 +4273,21 @@ export function QuoteFilterSchema(): z.ZodObject<Properties<QuoteFilter>> {
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     total: z.lazy(() => FloatFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    updatedBy: z.lazy(() => QuoteFilterUserFilterSchema().nullish())
+    updatedBy: z.lazy(() => QuoteFilterUserFilterSchema().nullish()),
   })
 }
 
-export function QuoteFilterCompanyFilterSchema(): z.ZodObject<Properties<QuoteFilterCompanyFilter>> {
+export function QuoteFilterCompanyFilterSchema(): z.ZodObject<
+  Properties<QuoteFilterCompanyFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => QuoteFilterCompanyFilterSchema())).nullish(),
-    businessType: z.lazy(() => CompanyBusinessTypeFilterComparisonSchema().nullish()),
-    companySize: z.lazy(() => CompanyCompanySizeFilterComparisonSchema().nullish()),
+    businessType: z.lazy(() =>
+      CompanyBusinessTypeFilterComparisonSchema().nullish()
+    ),
+    companySize: z.lazy(() =>
+      CompanyCompanySizeFilterComparisonSchema().nullish()
+    ),
     country: z.lazy(() => StringFieldComparisonSchema().nullish()),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
@@ -3108,11 +4296,13 @@ export function QuoteFilterCompanyFilterSchema(): z.ZodObject<Properties<QuoteFi
     or: z.array(z.lazy(() => QuoteFilterCompanyFilterSchema())).nullish(),
     totalRevenue: z.lazy(() => IntFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    website: z.lazy(() => StringFieldComparisonSchema().nullish())
+    website: z.lazy(() => StringFieldComparisonSchema().nullish()),
   })
 }
 
-export function QuoteFilterContactFilterSchema(): z.ZodObject<Properties<QuoteFilterContactFilter>> {
+export function QuoteFilterContactFilterSchema(): z.ZodObject<
+  Properties<QuoteFilterContactFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => QuoteFilterContactFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -3126,11 +4316,13 @@ export function QuoteFilterContactFilterSchema(): z.ZodObject<Properties<QuoteFi
     stage: z.lazy(() => ContactStageFilterComparisonSchema().nullish()),
     status: z.lazy(() => ContactStatusFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function QuoteFilterUserFilterSchema(): z.ZodObject<Properties<QuoteFilterUserFilter>> {
+export function QuoteFilterUserFilterSchema(): z.ZodObject<
+  Properties<QuoteFilterUserFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => QuoteFilterUserFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -3142,27 +4334,29 @@ export function QuoteFilterUserFilterSchema(): z.ZodObject<Properties<QuoteFilte
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
 export function QuoteItemSchema(): z.ZodObject<Properties<QuoteItem>> {
   return z.object({
-    __typename: z.literal('QuoteItem').optional(),
+    __typename: z.literal("QuoteItem").optional(),
     discount: z.number(),
     quantity: z.number(),
     title: z.string(),
     totalPrice: z.number(),
-    unitPrice: z.number()
+    unitPrice: z.number(),
   })
 }
 
-export function QuoteItemInputSchema(): z.ZodObject<Properties<QuoteItemInput>> {
+export function QuoteItemInputSchema(): z.ZodObject<
+  Properties<QuoteItemInput>
+> {
   return z.object({
     discount: z.number(),
     quantity: z.number(),
     title: z.string(),
-    unitPrice: z.number()
+    unitPrice: z.number(),
   })
 }
 
@@ -3170,11 +4364,13 @@ export function QuoteSortSchema(): z.ZodObject<Properties<QuoteSort>> {
   return z.object({
     direction: SortDirectionSchema,
     field: QuoteSortFieldsSchema,
-    nulls: SortNullsSchema.nullish()
+    nulls: SortNullsSchema.nullish(),
   })
 }
 
-export function QuoteStatusFilterComparisonSchema(): z.ZodObject<Properties<QuoteStatusFilterComparison>> {
+export function QuoteStatusFilterComparisonSchema(): z.ZodObject<
+  Properties<QuoteStatusFilterComparison>
+> {
   return z.object({
     eq: QuoteStatusSchema.nullish(),
     gt: QuoteStatusSchema.nullish(),
@@ -3189,11 +4385,13 @@ export function QuoteStatusFilterComparisonSchema(): z.ZodObject<Properties<Quot
     neq: QuoteStatusSchema.nullish(),
     notILike: QuoteStatusSchema.nullish(),
     notIn: z.array(QuoteStatusSchema).nullish(),
-    notLike: QuoteStatusSchema.nullish()
+    notLike: QuoteStatusSchema.nullish(),
   })
 }
 
-export function QuoteSubscriptionFilterSchema(): z.ZodObject<Properties<QuoteSubscriptionFilter>> {
+export function QuoteSubscriptionFilterSchema(): z.ZodObject<
+  Properties<QuoteSubscriptionFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => QuoteSubscriptionFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -3202,11 +4400,13 @@ export function QuoteSubscriptionFilterSchema(): z.ZodObject<Properties<QuoteSub
     status: z.lazy(() => QuoteStatusFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     total: z.lazy(() => FloatFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function QuoteUpdateFilterSchema(): z.ZodObject<Properties<QuoteUpdateFilter>> {
+export function QuoteUpdateFilterSchema(): z.ZodObject<
+  Properties<QuoteUpdateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => QuoteUpdateFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -3215,11 +4415,13 @@ export function QuoteUpdateFilterSchema(): z.ZodObject<Properties<QuoteUpdateFil
     status: z.lazy(() => QuoteStatusFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     total: z.lazy(() => FloatFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function QuoteUpdateInputSchema(): z.ZodObject<Properties<QuoteUpdateInput>> {
+export function QuoteUpdateInputSchema(): z.ZodObject<
+  Properties<QuoteUpdateInput>
+> {
   return z.object({
     companyId: z.string().nullish(),
     contactId: z.string().nullish(),
@@ -3228,18 +4430,20 @@ export function QuoteUpdateInputSchema(): z.ZodObject<Properties<QuoteUpdateInpu
     salesOwnerId: z.string().nullish(),
     status: QuoteStatusSchema.nullish(),
     tax: z.number().nullish(),
-    title: z.string().nullish()
+    title: z.string().nullish(),
   })
 }
 
 export function RegisterInputSchema(): z.ZodObject<Properties<RegisterInput>> {
   return z.object({
     email: z.string(),
-    password: z.string()
+    password: z.string(),
   })
 }
 
-export function StringFieldComparisonSchema(): z.ZodObject<Properties<StringFieldComparison>> {
+export function StringFieldComparisonSchema(): z.ZodObject<
+  Properties<StringFieldComparison>
+> {
   return z.object({
     eq: z.string().nullish(),
     gt: z.string().nullish(),
@@ -3254,16 +4458,18 @@ export function StringFieldComparisonSchema(): z.ZodObject<Properties<StringFiel
     neq: z.string().nullish(),
     notILike: z.string().nullish(),
     notIn: z.array(z.string()).nullish(),
-    notLike: z.string().nullish()
+    notLike: z.string().nullish(),
   })
 }
 
 export function TaskSchema(): z.ZodObject<Properties<Task>> {
   return z.object({
-    __typename: z.literal('Task').optional(),
+    __typename: z.literal("Task").optional(),
     checklist: z.array(z.lazy(() => CheckListItemSchema())),
     comments: z.lazy(() => TaskCommentsConnectionSchema()),
-    commentsAggregate: z.array(z.lazy(() => TaskCommentsAggregateResponseSchema())),
+    commentsAggregate: z.array(
+      z.lazy(() => TaskCommentsAggregateResponseSchema())
+    ),
     completed: z.boolean(),
     createdAt: z.string().datetime(),
     createdBy: z.lazy(() => UserSchema()),
@@ -3276,38 +4482,46 @@ export function TaskSchema(): z.ZodObject<Properties<Task>> {
     updatedAt: z.string().datetime(),
     updatedBy: z.lazy(() => UserSchema().nullish()),
     users: z.array(z.lazy(() => UserSchema())),
-    usersAggregate: z.array(z.lazy(() => TaskUsersAggregateResponseSchema()))
+    usersAggregate: z.array(z.lazy(() => TaskUsersAggregateResponseSchema())),
   })
 }
 
-export function TaskCommentsArgsSchema(): z.ZodObject<Properties<TaskCommentsArgs>> {
+export function TaskCommentsArgsSchema(): z.ZodObject<
+  Properties<TaskCommentsArgs>
+> {
   return z.object({
     filter: z.lazy(() => TaskCommentFilterSchema()),
     paging: z.lazy(() => OffsetPagingSchema()),
-    sorting: z.array(z.lazy(() => TaskCommentSortSchema()))
+    sorting: z.array(z.lazy(() => TaskCommentSortSchema())),
   })
 }
 
-export function TaskCommentsAggregateArgsSchema(): z.ZodObject<Properties<TaskCommentsAggregateArgs>> {
+export function TaskCommentsAggregateArgsSchema(): z.ZodObject<
+  Properties<TaskCommentsAggregateArgs>
+> {
   return z.object({
-    filter: z.lazy(() => TaskCommentAggregateFilterSchema().nullish())
+    filter: z.lazy(() => TaskCommentAggregateFilterSchema().nullish()),
   })
 }
 
 export function TaskUsersArgsSchema(): z.ZodObject<Properties<TaskUsersArgs>> {
   return z.object({
     filter: z.lazy(() => UserFilterSchema()),
-    sorting: z.array(z.lazy(() => UserSortSchema()))
+    sorting: z.array(z.lazy(() => UserSortSchema())),
   })
 }
 
-export function TaskUsersAggregateArgsSchema(): z.ZodObject<Properties<TaskUsersAggregateArgs>> {
+export function TaskUsersAggregateArgsSchema(): z.ZodObject<
+  Properties<TaskUsersAggregateArgs>
+> {
   return z.object({
-    filter: z.lazy(() => UserAggregateFilterSchema().nullish())
+    filter: z.lazy(() => UserAggregateFilterSchema().nullish()),
   })
 }
 
-export function TaskAggregateFilterSchema(): z.ZodObject<Properties<TaskAggregateFilter>> {
+export function TaskAggregateFilterSchema(): z.ZodObject<
+  Properties<TaskAggregateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskAggregateFilterSchema())).nullish(),
     completed: z.lazy(() => BooleanFieldComparisonSchema().nullish()),
@@ -3318,13 +4532,15 @@ export function TaskAggregateFilterSchema(): z.ZodObject<Properties<TaskAggregat
     or: z.array(z.lazy(() => TaskAggregateFilterSchema())).nullish(),
     stageId: z.lazy(() => IdFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskAggregateGroupBySchema(): z.ZodObject<Properties<TaskAggregateGroupBy>> {
+export function TaskAggregateGroupBySchema(): z.ZodObject<
+  Properties<TaskAggregateGroupBy>
+> {
   return z.object({
-    __typename: z.literal('TaskAggregateGroupBy').optional(),
+    __typename: z.literal("TaskAggregateGroupBy").optional(),
     completed: z.boolean().nullish(),
     createdAt: z.string().datetime().nullish(),
     description: z.string().nullish(),
@@ -3332,108 +4548,130 @@ export function TaskAggregateGroupBySchema(): z.ZodObject<Properties<TaskAggrega
     id: z.string().nullish(),
     stageId: z.string().nullish(),
     title: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function TaskAggregateGroupByCreatedAtArgsSchema(): z.ZodObject<Properties<TaskAggregateGroupByCreatedAtArgs>> {
+export function TaskAggregateGroupByCreatedAtArgsSchema(): z.ZodObject<
+  Properties<TaskAggregateGroupByCreatedAtArgs>
+> {
   return z.object({
-    by: GroupBySchema.default("DAY")
+    by: GroupBySchema.default("DAY"),
   })
 }
 
-export function TaskAggregateGroupByDueDateArgsSchema(): z.ZodObject<Properties<TaskAggregateGroupByDueDateArgs>> {
+export function TaskAggregateGroupByDueDateArgsSchema(): z.ZodObject<
+  Properties<TaskAggregateGroupByDueDateArgs>
+> {
   return z.object({
-    by: GroupBySchema.default("DAY")
+    by: GroupBySchema.default("DAY"),
   })
 }
 
-export function TaskAggregateGroupByUpdatedAtArgsSchema(): z.ZodObject<Properties<TaskAggregateGroupByUpdatedAtArgs>> {
+export function TaskAggregateGroupByUpdatedAtArgsSchema(): z.ZodObject<
+  Properties<TaskAggregateGroupByUpdatedAtArgs>
+> {
   return z.object({
-    by: GroupBySchema.default("DAY")
+    by: GroupBySchema.default("DAY"),
   })
 }
 
-export function TaskAggregateResponseSchema(): z.ZodObject<Properties<TaskAggregateResponse>> {
+export function TaskAggregateResponseSchema(): z.ZodObject<
+  Properties<TaskAggregateResponse>
+> {
   return z.object({
-    __typename: z.literal('TaskAggregateResponse').optional(),
+    __typename: z.literal("TaskAggregateResponse").optional(),
     avg: z.lazy(() => TaskAvgAggregateSchema().nullish()),
     count: z.lazy(() => TaskCountAggregateSchema().nullish()),
     groupBy: z.lazy(() => TaskAggregateGroupBySchema().nullish()),
     max: z.lazy(() => TaskMaxAggregateSchema().nullish()),
     min: z.lazy(() => TaskMinAggregateSchema().nullish()),
-    sum: z.lazy(() => TaskSumAggregateSchema().nullish())
+    sum: z.lazy(() => TaskSumAggregateSchema().nullish()),
   })
 }
 
-export function TaskAvgAggregateSchema(): z.ZodObject<Properties<TaskAvgAggregate>> {
+export function TaskAvgAggregateSchema(): z.ZodObject<
+  Properties<TaskAvgAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskAvgAggregate').optional(),
+    __typename: z.literal("TaskAvgAggregate").optional(),
     id: z.number().nullish(),
-    stageId: z.number().nullish()
+    stageId: z.number().nullish(),
   })
 }
 
 export function TaskCommentSchema(): z.ZodObject<Properties<TaskComment>> {
   return z.object({
-    __typename: z.literal('TaskComment').optional(),
+    __typename: z.literal("TaskComment").optional(),
     comment: z.string(),
     createdAt: z.string().datetime(),
     createdBy: z.lazy(() => UserSchema()),
     id: z.string(),
     task: z.lazy(() => TaskSchema()),
     updatedAt: z.string().datetime(),
-    updatedBy: z.lazy(() => UserSchema().nullish())
+    updatedBy: z.lazy(() => UserSchema().nullish()),
   })
 }
 
-export function TaskCommentAggregateFilterSchema(): z.ZodObject<Properties<TaskCommentAggregateFilter>> {
+export function TaskCommentAggregateFilterSchema(): z.ZodObject<
+  Properties<TaskCommentAggregateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskCommentAggregateFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => TaskCommentAggregateFilterSchema())).nullish(),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskCommentConnectionSchema(): z.ZodObject<Properties<TaskCommentConnection>> {
+export function TaskCommentConnectionSchema(): z.ZodObject<
+  Properties<TaskCommentConnection>
+> {
   return z.object({
-    __typename: z.literal('TaskCommentConnection').optional(),
+    __typename: z.literal("TaskCommentConnection").optional(),
     nodes: z.array(z.lazy(() => TaskCommentSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function TaskCommentCreateInputSchema(): z.ZodObject<Properties<TaskCommentCreateInput>> {
+export function TaskCommentCreateInputSchema(): z.ZodObject<
+  Properties<TaskCommentCreateInput>
+> {
   return z.object({
     comment: z.string(),
-    taskId: z.string()
+    taskId: z.string(),
   })
 }
 
-export function TaskCommentDeleteFilterSchema(): z.ZodObject<Properties<TaskCommentDeleteFilter>> {
+export function TaskCommentDeleteFilterSchema(): z.ZodObject<
+  Properties<TaskCommentDeleteFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskCommentDeleteFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => TaskCommentDeleteFilterSchema())).nullish(),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskCommentDeleteResponseSchema(): z.ZodObject<Properties<TaskCommentDeleteResponse>> {
+export function TaskCommentDeleteResponseSchema(): z.ZodObject<
+  Properties<TaskCommentDeleteResponse>
+> {
   return z.object({
-    __typename: z.literal('TaskCommentDeleteResponse').optional(),
+    __typename: z.literal("TaskCommentDeleteResponse").optional(),
     comment: z.string().nullish(),
     createdAt: z.string().datetime().nullish(),
     id: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function TaskCommentFilterSchema(): z.ZodObject<Properties<TaskCommentFilter>> {
+export function TaskCommentFilterSchema(): z.ZodObject<
+  Properties<TaskCommentFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskCommentFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -3442,11 +4680,13 @@ export function TaskCommentFilterSchema(): z.ZodObject<Properties<TaskCommentFil
     or: z.array(z.lazy(() => TaskCommentFilterSchema())).nullish(),
     task: z.lazy(() => TaskCommentFilterTaskFilterSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    updatedBy: z.lazy(() => TaskCommentFilterUserFilterSchema().nullish())
+    updatedBy: z.lazy(() => TaskCommentFilterUserFilterSchema().nullish()),
   })
 }
 
-export function TaskCommentFilterTaskFilterSchema(): z.ZodObject<Properties<TaskCommentFilterTaskFilter>> {
+export function TaskCommentFilterTaskFilterSchema(): z.ZodObject<
+  Properties<TaskCommentFilterTaskFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskCommentFilterTaskFilterSchema())).nullish(),
     completed: z.lazy(() => BooleanFieldComparisonSchema().nullish()),
@@ -3457,11 +4697,13 @@ export function TaskCommentFilterTaskFilterSchema(): z.ZodObject<Properties<Task
     or: z.array(z.lazy(() => TaskCommentFilterTaskFilterSchema())).nullish(),
     stageId: z.lazy(() => IdFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskCommentFilterUserFilterSchema(): z.ZodObject<Properties<TaskCommentFilterUserFilter>> {
+export function TaskCommentFilterUserFilterSchema(): z.ZodObject<
+  Properties<TaskCommentFilterUserFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskCommentFilterUserFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -3473,127 +4715,155 @@ export function TaskCommentFilterUserFilterSchema(): z.ZodObject<Properties<Task
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskCommentSortSchema(): z.ZodObject<Properties<TaskCommentSort>> {
+export function TaskCommentSortSchema(): z.ZodObject<
+  Properties<TaskCommentSort>
+> {
   return z.object({
     direction: SortDirectionSchema,
     field: TaskCommentSortFieldsSchema,
-    nulls: SortNullsSchema.nullish()
+    nulls: SortNullsSchema.nullish(),
   })
 }
 
-export function TaskCommentSubscriptionFilterSchema(): z.ZodObject<Properties<TaskCommentSubscriptionFilter>> {
+export function TaskCommentSubscriptionFilterSchema(): z.ZodObject<
+  Properties<TaskCommentSubscriptionFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskCommentSubscriptionFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => TaskCommentSubscriptionFilterSchema())).nullish(),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskCommentUpdateFilterSchema(): z.ZodObject<Properties<TaskCommentUpdateFilter>> {
+export function TaskCommentUpdateFilterSchema(): z.ZodObject<
+  Properties<TaskCommentUpdateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskCommentUpdateFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => TaskCommentUpdateFilterSchema())).nullish(),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskCommentUpdateInputSchema(): z.ZodObject<Properties<TaskCommentUpdateInput>> {
+export function TaskCommentUpdateInputSchema(): z.ZodObject<
+  Properties<TaskCommentUpdateInput>
+> {
   return z.object({
-    comment: z.string()
+    comment: z.string(),
   })
 }
 
-export function TaskCommentsAggregateGroupBySchema(): z.ZodObject<Properties<TaskCommentsAggregateGroupBy>> {
+export function TaskCommentsAggregateGroupBySchema(): z.ZodObject<
+  Properties<TaskCommentsAggregateGroupBy>
+> {
   return z.object({
-    __typename: z.literal('TaskCommentsAggregateGroupBy').optional(),
+    __typename: z.literal("TaskCommentsAggregateGroupBy").optional(),
     createdAt: z.string().datetime().nullish(),
     id: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function TaskCommentsAggregateResponseSchema(): z.ZodObject<Properties<TaskCommentsAggregateResponse>> {
+export function TaskCommentsAggregateResponseSchema(): z.ZodObject<
+  Properties<TaskCommentsAggregateResponse>
+> {
   return z.object({
-    __typename: z.literal('TaskCommentsAggregateResponse').optional(),
+    __typename: z.literal("TaskCommentsAggregateResponse").optional(),
     avg: z.lazy(() => TaskCommentsAvgAggregateSchema().nullish()),
     count: z.lazy(() => TaskCommentsCountAggregateSchema().nullish()),
     groupBy: z.lazy(() => TaskCommentsAggregateGroupBySchema().nullish()),
     max: z.lazy(() => TaskCommentsMaxAggregateSchema().nullish()),
     min: z.lazy(() => TaskCommentsMinAggregateSchema().nullish()),
-    sum: z.lazy(() => TaskCommentsSumAggregateSchema().nullish())
+    sum: z.lazy(() => TaskCommentsSumAggregateSchema().nullish()),
   })
 }
 
-export function TaskCommentsAvgAggregateSchema(): z.ZodObject<Properties<TaskCommentsAvgAggregate>> {
+export function TaskCommentsAvgAggregateSchema(): z.ZodObject<
+  Properties<TaskCommentsAvgAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskCommentsAvgAggregate').optional(),
-    id: z.number().nullish()
+    __typename: z.literal("TaskCommentsAvgAggregate").optional(),
+    id: z.number().nullish(),
   })
 }
 
-export function TaskCommentsConnectionSchema(): z.ZodObject<Properties<TaskCommentsConnection>> {
+export function TaskCommentsConnectionSchema(): z.ZodObject<
+  Properties<TaskCommentsConnection>
+> {
   return z.object({
-    __typename: z.literal('TaskCommentsConnection').optional(),
+    __typename: z.literal("TaskCommentsConnection").optional(),
     nodes: z.array(z.lazy(() => TaskCommentSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function TaskCommentsCountAggregateSchema(): z.ZodObject<Properties<TaskCommentsCountAggregate>> {
+export function TaskCommentsCountAggregateSchema(): z.ZodObject<
+  Properties<TaskCommentsCountAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskCommentsCountAggregate').optional(),
+    __typename: z.literal("TaskCommentsCountAggregate").optional(),
     createdAt: z.number().nullish(),
     id: z.number().nullish(),
-    updatedAt: z.number().nullish()
+    updatedAt: z.number().nullish(),
   })
 }
 
-export function TaskCommentsMaxAggregateSchema(): z.ZodObject<Properties<TaskCommentsMaxAggregate>> {
+export function TaskCommentsMaxAggregateSchema(): z.ZodObject<
+  Properties<TaskCommentsMaxAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskCommentsMaxAggregate').optional(),
+    __typename: z.literal("TaskCommentsMaxAggregate").optional(),
     createdAt: z.string().datetime().nullish(),
     id: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function TaskCommentsMinAggregateSchema(): z.ZodObject<Properties<TaskCommentsMinAggregate>> {
+export function TaskCommentsMinAggregateSchema(): z.ZodObject<
+  Properties<TaskCommentsMinAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskCommentsMinAggregate').optional(),
+    __typename: z.literal("TaskCommentsMinAggregate").optional(),
     createdAt: z.string().datetime().nullish(),
     id: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function TaskCommentsSumAggregateSchema(): z.ZodObject<Properties<TaskCommentsSumAggregate>> {
+export function TaskCommentsSumAggregateSchema(): z.ZodObject<
+  Properties<TaskCommentsSumAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskCommentsSumAggregate').optional(),
-    id: z.number().nullish()
+    __typename: z.literal("TaskCommentsSumAggregate").optional(),
+    id: z.number().nullish(),
   })
 }
 
-export function TaskConnectionSchema(): z.ZodObject<Properties<TaskConnection>> {
+export function TaskConnectionSchema(): z.ZodObject<
+  Properties<TaskConnection>
+> {
   return z.object({
-    __typename: z.literal('TaskConnection').optional(),
+    __typename: z.literal("TaskConnection").optional(),
     nodes: z.array(z.lazy(() => TaskSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function TaskCountAggregateSchema(): z.ZodObject<Properties<TaskCountAggregate>> {
+export function TaskCountAggregateSchema(): z.ZodObject<
+  Properties<TaskCountAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskCountAggregate').optional(),
+    __typename: z.literal("TaskCountAggregate").optional(),
     completed: z.number().nullish(),
     createdAt: z.number().nullish(),
     description: z.number().nullish(),
@@ -3601,22 +4871,26 @@ export function TaskCountAggregateSchema(): z.ZodObject<Properties<TaskCountAggr
     id: z.number().nullish(),
     stageId: z.number().nullish(),
     title: z.number().nullish(),
-    updatedAt: z.number().nullish()
+    updatedAt: z.number().nullish(),
   })
 }
 
-export function TaskCreateInputSchema(): z.ZodObject<Properties<TaskCreateInput>> {
+export function TaskCreateInputSchema(): z.ZodObject<
+  Properties<TaskCreateInput>
+> {
   return z.object({
     checklist: z.array(z.lazy(() => ChecklistItemInputSchema())).nullish(),
     description: z.string().nullish(),
     dueDate: z.string().datetime().nullish(),
     stageId: z.number().nullish(),
     title: z.string(),
-    userIds: z.array(z.string()).nullish()
+    userIds: z.array(z.string()).nullish(),
   })
 }
 
-export function TaskDeleteFilterSchema(): z.ZodObject<Properties<TaskDeleteFilter>> {
+export function TaskDeleteFilterSchema(): z.ZodObject<
+  Properties<TaskDeleteFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskDeleteFilterSchema())).nullish(),
     completed: z.lazy(() => BooleanFieldComparisonSchema().nullish()),
@@ -3627,13 +4901,15 @@ export function TaskDeleteFilterSchema(): z.ZodObject<Properties<TaskDeleteFilte
     or: z.array(z.lazy(() => TaskDeleteFilterSchema())).nullish(),
     stageId: z.lazy(() => IdFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskDeleteResponseSchema(): z.ZodObject<Properties<TaskDeleteResponse>> {
+export function TaskDeleteResponseSchema(): z.ZodObject<
+  Properties<TaskDeleteResponse>
+> {
   return z.object({
-    __typename: z.literal('TaskDeleteResponse').optional(),
+    __typename: z.literal("TaskDeleteResponse").optional(),
     checklist: z.array(z.lazy(() => CheckListItemSchema())).nullish(),
     completed: z.boolean().nullish(),
     createdAt: z.string().datetime().nullish(),
@@ -3642,7 +4918,7 @@ export function TaskDeleteResponseSchema(): z.ZodObject<Properties<TaskDeleteRes
     id: z.string().nullish(),
     stageId: z.string().nullish(),
     title: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
@@ -3661,32 +4937,38 @@ export function TaskFilterSchema(): z.ZodObject<Properties<TaskFilter>> {
     stageId: z.lazy(() => IdFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    updatedBy: z.lazy(() => TaskFilterUserFilterSchema().nullish())
+    updatedBy: z.lazy(() => TaskFilterUserFilterSchema().nullish()),
   })
 }
 
-export function TaskFilterTaskCommentFilterSchema(): z.ZodObject<Properties<TaskFilterTaskCommentFilter>> {
+export function TaskFilterTaskCommentFilterSchema(): z.ZodObject<
+  Properties<TaskFilterTaskCommentFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskFilterTaskCommentFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => TaskFilterTaskCommentFilterSchema())).nullish(),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskFilterTaskStageFilterSchema(): z.ZodObject<Properties<TaskFilterTaskStageFilter>> {
+export function TaskFilterTaskStageFilterSchema(): z.ZodObject<
+  Properties<TaskFilterTaskStageFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskFilterTaskStageFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => TaskFilterTaskStageFilterSchema())).nullish(),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskFilterUserFilterSchema(): z.ZodObject<Properties<TaskFilterUserFilter>> {
+export function TaskFilterUserFilterSchema(): z.ZodObject<
+  Properties<TaskFilterUserFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskFilterUserFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -3698,33 +4980,37 @@ export function TaskFilterUserFilterSchema(): z.ZodObject<Properties<TaskFilterU
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskMaxAggregateSchema(): z.ZodObject<Properties<TaskMaxAggregate>> {
+export function TaskMaxAggregateSchema(): z.ZodObject<
+  Properties<TaskMaxAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskMaxAggregate').optional(),
+    __typename: z.literal("TaskMaxAggregate").optional(),
     createdAt: z.string().datetime().nullish(),
     description: z.string().nullish(),
     dueDate: z.string().datetime().nullish(),
     id: z.string().nullish(),
     stageId: z.string().nullish(),
     title: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function TaskMinAggregateSchema(): z.ZodObject<Properties<TaskMinAggregate>> {
+export function TaskMinAggregateSchema(): z.ZodObject<
+  Properties<TaskMinAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskMinAggregate').optional(),
+    __typename: z.literal("TaskMinAggregate").optional(),
     createdAt: z.string().datetime().nullish(),
     description: z.string().nullish(),
     dueDate: z.string().datetime().nullish(),
     id: z.string().nullish(),
     stageId: z.string().nullish(),
     title: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
@@ -3732,136 +5018,166 @@ export function TaskSortSchema(): z.ZodObject<Properties<TaskSort>> {
   return z.object({
     direction: SortDirectionSchema,
     field: TaskSortFieldsSchema,
-    nulls: SortNullsSchema.nullish()
+    nulls: SortNullsSchema.nullish(),
   })
 }
 
 export function TaskStageSchema(): z.ZodObject<Properties<TaskStage>> {
   return z.object({
-    __typename: z.literal('TaskStage').optional(),
+    __typename: z.literal("TaskStage").optional(),
     createdAt: z.string().datetime(),
     createdBy: z.lazy(() => UserSchema()),
     id: z.string(),
     tasks: z.array(z.lazy(() => TaskSchema())),
-    tasksAggregate: z.array(z.lazy(() => TaskStageTasksAggregateResponseSchema())),
+    tasksAggregate: z.array(
+      z.lazy(() => TaskStageTasksAggregateResponseSchema())
+    ),
     title: z.string(),
     updatedAt: z.string().datetime(),
-    updatedBy: z.lazy(() => UserSchema().nullish())
+    updatedBy: z.lazy(() => UserSchema().nullish()),
   })
 }
 
-export function TaskStageTasksArgsSchema(): z.ZodObject<Properties<TaskStageTasksArgs>> {
+export function TaskStageTasksArgsSchema(): z.ZodObject<
+  Properties<TaskStageTasksArgs>
+> {
   return z.object({
     filter: z.lazy(() => TaskFilterSchema()),
-    sorting: z.array(z.lazy(() => TaskSortSchema()))
+    sorting: z.array(z.lazy(() => TaskSortSchema())),
   })
 }
 
-export function TaskStageTasksAggregateArgsSchema(): z.ZodObject<Properties<TaskStageTasksAggregateArgs>> {
+export function TaskStageTasksAggregateArgsSchema(): z.ZodObject<
+  Properties<TaskStageTasksAggregateArgs>
+> {
   return z.object({
-    filter: z.lazy(() => TaskAggregateFilterSchema().nullish())
+    filter: z.lazy(() => TaskAggregateFilterSchema().nullish()),
   })
 }
 
-export function TaskStageAggregateFilterSchema(): z.ZodObject<Properties<TaskStageAggregateFilter>> {
+export function TaskStageAggregateFilterSchema(): z.ZodObject<
+  Properties<TaskStageAggregateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskStageAggregateFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => TaskStageAggregateFilterSchema())).nullish(),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskStageAggregateGroupBySchema(): z.ZodObject<Properties<TaskStageAggregateGroupBy>> {
+export function TaskStageAggregateGroupBySchema(): z.ZodObject<
+  Properties<TaskStageAggregateGroupBy>
+> {
   return z.object({
-    __typename: z.literal('TaskStageAggregateGroupBy').optional(),
+    __typename: z.literal("TaskStageAggregateGroupBy").optional(),
     createdAt: z.string().datetime().nullish(),
     id: z.string().nullish(),
     title: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function TaskStageAggregateGroupByCreatedAtArgsSchema(): z.ZodObject<Properties<TaskStageAggregateGroupByCreatedAtArgs>> {
+export function TaskStageAggregateGroupByCreatedAtArgsSchema(): z.ZodObject<
+  Properties<TaskStageAggregateGroupByCreatedAtArgs>
+> {
   return z.object({
-    by: GroupBySchema.default("DAY")
+    by: GroupBySchema.default("DAY"),
   })
 }
 
-export function TaskStageAggregateGroupByUpdatedAtArgsSchema(): z.ZodObject<Properties<TaskStageAggregateGroupByUpdatedAtArgs>> {
+export function TaskStageAggregateGroupByUpdatedAtArgsSchema(): z.ZodObject<
+  Properties<TaskStageAggregateGroupByUpdatedAtArgs>
+> {
   return z.object({
-    by: GroupBySchema.default("DAY")
+    by: GroupBySchema.default("DAY"),
   })
 }
 
-export function TaskStageAggregateResponseSchema(): z.ZodObject<Properties<TaskStageAggregateResponse>> {
+export function TaskStageAggregateResponseSchema(): z.ZodObject<
+  Properties<TaskStageAggregateResponse>
+> {
   return z.object({
-    __typename: z.literal('TaskStageAggregateResponse').optional(),
+    __typename: z.literal("TaskStageAggregateResponse").optional(),
     avg: z.lazy(() => TaskStageAvgAggregateSchema().nullish()),
     count: z.lazy(() => TaskStageCountAggregateSchema().nullish()),
     groupBy: z.lazy(() => TaskStageAggregateGroupBySchema().nullish()),
     max: z.lazy(() => TaskStageMaxAggregateSchema().nullish()),
     min: z.lazy(() => TaskStageMinAggregateSchema().nullish()),
-    sum: z.lazy(() => TaskStageSumAggregateSchema().nullish())
+    sum: z.lazy(() => TaskStageSumAggregateSchema().nullish()),
   })
 }
 
-export function TaskStageAvgAggregateSchema(): z.ZodObject<Properties<TaskStageAvgAggregate>> {
+export function TaskStageAvgAggregateSchema(): z.ZodObject<
+  Properties<TaskStageAvgAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskStageAvgAggregate').optional(),
-    id: z.number().nullish()
+    __typename: z.literal("TaskStageAvgAggregate").optional(),
+    id: z.number().nullish(),
   })
 }
 
-export function TaskStageConnectionSchema(): z.ZodObject<Properties<TaskStageConnection>> {
+export function TaskStageConnectionSchema(): z.ZodObject<
+  Properties<TaskStageConnection>
+> {
   return z.object({
-    __typename: z.literal('TaskStageConnection').optional(),
+    __typename: z.literal("TaskStageConnection").optional(),
     nodes: z.array(z.lazy(() => TaskStageSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function TaskStageCountAggregateSchema(): z.ZodObject<Properties<TaskStageCountAggregate>> {
+export function TaskStageCountAggregateSchema(): z.ZodObject<
+  Properties<TaskStageCountAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskStageCountAggregate').optional(),
+    __typename: z.literal("TaskStageCountAggregate").optional(),
     createdAt: z.number().nullish(),
     id: z.number().nullish(),
     title: z.number().nullish(),
-    updatedAt: z.number().nullish()
+    updatedAt: z.number().nullish(),
   })
 }
 
-export function TaskStageCreateInputSchema(): z.ZodObject<Properties<TaskStageCreateInput>> {
+export function TaskStageCreateInputSchema(): z.ZodObject<
+  Properties<TaskStageCreateInput>
+> {
   return z.object({
-    title: z.string()
+    title: z.string(),
   })
 }
 
-export function TaskStageDeleteFilterSchema(): z.ZodObject<Properties<TaskStageDeleteFilter>> {
+export function TaskStageDeleteFilterSchema(): z.ZodObject<
+  Properties<TaskStageDeleteFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskStageDeleteFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => TaskStageDeleteFilterSchema())).nullish(),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskStageDeleteResponseSchema(): z.ZodObject<Properties<TaskStageDeleteResponse>> {
+export function TaskStageDeleteResponseSchema(): z.ZodObject<
+  Properties<TaskStageDeleteResponse>
+> {
   return z.object({
-    __typename: z.literal('TaskStageDeleteResponse').optional(),
+    __typename: z.literal("TaskStageDeleteResponse").optional(),
     createdAt: z.string().datetime().nullish(),
     id: z.string().nullish(),
     title: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function TaskStageFilterSchema(): z.ZodObject<Properties<TaskStageFilter>> {
+export function TaskStageFilterSchema(): z.ZodObject<
+  Properties<TaskStageFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskStageFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -3870,11 +5186,13 @@ export function TaskStageFilterSchema(): z.ZodObject<Properties<TaskStageFilter>
     or: z.array(z.lazy(() => TaskStageFilterSchema())).nullish(),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    updatedBy: z.lazy(() => TaskStageFilterUserFilterSchema().nullish())
+    updatedBy: z.lazy(() => TaskStageFilterUserFilterSchema().nullish()),
   })
 }
 
-export function TaskStageFilterUserFilterSchema(): z.ZodObject<Properties<TaskStageFilterUserFilter>> {
+export function TaskStageFilterUserFilterSchema(): z.ZodObject<
+  Properties<TaskStageFilterUserFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskStageFilterUserFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -3886,27 +5204,31 @@ export function TaskStageFilterUserFilterSchema(): z.ZodObject<Properties<TaskSt
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskStageMaxAggregateSchema(): z.ZodObject<Properties<TaskStageMaxAggregate>> {
+export function TaskStageMaxAggregateSchema(): z.ZodObject<
+  Properties<TaskStageMaxAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskStageMaxAggregate').optional(),
+    __typename: z.literal("TaskStageMaxAggregate").optional(),
     createdAt: z.string().datetime().nullish(),
     id: z.string().nullish(),
     title: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function TaskStageMinAggregateSchema(): z.ZodObject<Properties<TaskStageMinAggregate>> {
+export function TaskStageMinAggregateSchema(): z.ZodObject<
+  Properties<TaskStageMinAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskStageMinAggregate').optional(),
+    __typename: z.literal("TaskStageMinAggregate").optional(),
     createdAt: z.string().datetime().nullish(),
     id: z.string().nullish(),
     title: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
@@ -3914,31 +5236,37 @@ export function TaskStageSortSchema(): z.ZodObject<Properties<TaskStageSort>> {
   return z.object({
     direction: SortDirectionSchema,
     field: TaskStageSortFieldsSchema,
-    nulls: SortNullsSchema.nullish()
+    nulls: SortNullsSchema.nullish(),
   })
 }
 
-export function TaskStageSubscriptionFilterSchema(): z.ZodObject<Properties<TaskStageSubscriptionFilter>> {
+export function TaskStageSubscriptionFilterSchema(): z.ZodObject<
+  Properties<TaskStageSubscriptionFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskStageSubscriptionFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => TaskStageSubscriptionFilterSchema())).nullish(),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskStageSumAggregateSchema(): z.ZodObject<Properties<TaskStageSumAggregate>> {
+export function TaskStageSumAggregateSchema(): z.ZodObject<
+  Properties<TaskStageSumAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskStageSumAggregate').optional(),
-    id: z.number().nullish()
+    __typename: z.literal("TaskStageSumAggregate").optional(),
+    id: z.number().nullish(),
   })
 }
 
-export function TaskStageTasksAggregateGroupBySchema(): z.ZodObject<Properties<TaskStageTasksAggregateGroupBy>> {
+export function TaskStageTasksAggregateGroupBySchema(): z.ZodObject<
+  Properties<TaskStageTasksAggregateGroupBy>
+> {
   return z.object({
-    __typename: z.literal('TaskStageTasksAggregateGroupBy').optional(),
+    __typename: z.literal("TaskStageTasksAggregateGroupBy").optional(),
     completed: z.boolean().nullish(),
     createdAt: z.string().datetime().nullish(),
     description: z.string().nullish(),
@@ -3946,33 +5274,39 @@ export function TaskStageTasksAggregateGroupBySchema(): z.ZodObject<Properties<T
     id: z.string().nullish(),
     stageId: z.string().nullish(),
     title: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function TaskStageTasksAggregateResponseSchema(): z.ZodObject<Properties<TaskStageTasksAggregateResponse>> {
+export function TaskStageTasksAggregateResponseSchema(): z.ZodObject<
+  Properties<TaskStageTasksAggregateResponse>
+> {
   return z.object({
-    __typename: z.literal('TaskStageTasksAggregateResponse').optional(),
+    __typename: z.literal("TaskStageTasksAggregateResponse").optional(),
     avg: z.lazy(() => TaskStageTasksAvgAggregateSchema().nullish()),
     count: z.lazy(() => TaskStageTasksCountAggregateSchema().nullish()),
     groupBy: z.lazy(() => TaskStageTasksAggregateGroupBySchema().nullish()),
     max: z.lazy(() => TaskStageTasksMaxAggregateSchema().nullish()),
     min: z.lazy(() => TaskStageTasksMinAggregateSchema().nullish()),
-    sum: z.lazy(() => TaskStageTasksSumAggregateSchema().nullish())
+    sum: z.lazy(() => TaskStageTasksSumAggregateSchema().nullish()),
   })
 }
 
-export function TaskStageTasksAvgAggregateSchema(): z.ZodObject<Properties<TaskStageTasksAvgAggregate>> {
+export function TaskStageTasksAvgAggregateSchema(): z.ZodObject<
+  Properties<TaskStageTasksAvgAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskStageTasksAvgAggregate').optional(),
+    __typename: z.literal("TaskStageTasksAvgAggregate").optional(),
     id: z.number().nullish(),
-    stageId: z.number().nullish()
+    stageId: z.number().nullish(),
   })
 }
 
-export function TaskStageTasksCountAggregateSchema(): z.ZodObject<Properties<TaskStageTasksCountAggregate>> {
+export function TaskStageTasksCountAggregateSchema(): z.ZodObject<
+  Properties<TaskStageTasksCountAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskStageTasksCountAggregate').optional(),
+    __typename: z.literal("TaskStageTasksCountAggregate").optional(),
     completed: z.number().nullish(),
     createdAt: z.number().nullish(),
     description: z.number().nullish(),
@@ -3980,62 +5314,74 @@ export function TaskStageTasksCountAggregateSchema(): z.ZodObject<Properties<Tas
     id: z.number().nullish(),
     stageId: z.number().nullish(),
     title: z.number().nullish(),
-    updatedAt: z.number().nullish()
+    updatedAt: z.number().nullish(),
   })
 }
 
-export function TaskStageTasksMaxAggregateSchema(): z.ZodObject<Properties<TaskStageTasksMaxAggregate>> {
+export function TaskStageTasksMaxAggregateSchema(): z.ZodObject<
+  Properties<TaskStageTasksMaxAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskStageTasksMaxAggregate').optional(),
+    __typename: z.literal("TaskStageTasksMaxAggregate").optional(),
     createdAt: z.string().datetime().nullish(),
     description: z.string().nullish(),
     dueDate: z.string().datetime().nullish(),
     id: z.string().nullish(),
     stageId: z.string().nullish(),
     title: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function TaskStageTasksMinAggregateSchema(): z.ZodObject<Properties<TaskStageTasksMinAggregate>> {
+export function TaskStageTasksMinAggregateSchema(): z.ZodObject<
+  Properties<TaskStageTasksMinAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskStageTasksMinAggregate').optional(),
+    __typename: z.literal("TaskStageTasksMinAggregate").optional(),
     createdAt: z.string().datetime().nullish(),
     description: z.string().nullish(),
     dueDate: z.string().datetime().nullish(),
     id: z.string().nullish(),
     stageId: z.string().nullish(),
     title: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function TaskStageTasksSumAggregateSchema(): z.ZodObject<Properties<TaskStageTasksSumAggregate>> {
+export function TaskStageTasksSumAggregateSchema(): z.ZodObject<
+  Properties<TaskStageTasksSumAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskStageTasksSumAggregate').optional(),
+    __typename: z.literal("TaskStageTasksSumAggregate").optional(),
     id: z.number().nullish(),
-    stageId: z.number().nullish()
+    stageId: z.number().nullish(),
   })
 }
 
-export function TaskStageUpdateFilterSchema(): z.ZodObject<Properties<TaskStageUpdateFilter>> {
+export function TaskStageUpdateFilterSchema(): z.ZodObject<
+  Properties<TaskStageUpdateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskStageUpdateFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
     or: z.array(z.lazy(() => TaskStageUpdateFilterSchema())).nullish(),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskStageUpdateInputSchema(): z.ZodObject<Properties<TaskStageUpdateInput>> {
+export function TaskStageUpdateInputSchema(): z.ZodObject<
+  Properties<TaskStageUpdateInput>
+> {
   return z.object({
-    title: z.string()
+    title: z.string(),
   })
 }
 
-export function TaskSubscriptionFilterSchema(): z.ZodObject<Properties<TaskSubscriptionFilter>> {
+export function TaskSubscriptionFilterSchema(): z.ZodObject<
+  Properties<TaskSubscriptionFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskSubscriptionFilterSchema())).nullish(),
     completed: z.lazy(() => BooleanFieldComparisonSchema().nullish()),
@@ -4046,19 +5392,23 @@ export function TaskSubscriptionFilterSchema(): z.ZodObject<Properties<TaskSubsc
     or: z.array(z.lazy(() => TaskSubscriptionFilterSchema())).nullish(),
     stageId: z.lazy(() => IdFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskSumAggregateSchema(): z.ZodObject<Properties<TaskSumAggregate>> {
+export function TaskSumAggregateSchema(): z.ZodObject<
+  Properties<TaskSumAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskSumAggregate').optional(),
+    __typename: z.literal("TaskSumAggregate").optional(),
     id: z.number().nullish(),
-    stageId: z.number().nullish()
+    stageId: z.number().nullish(),
   })
 }
 
-export function TaskUpdateFilterSchema(): z.ZodObject<Properties<TaskUpdateFilter>> {
+export function TaskUpdateFilterSchema(): z.ZodObject<
+  Properties<TaskUpdateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => TaskUpdateFilterSchema())).nullish(),
     completed: z.lazy(() => BooleanFieldComparisonSchema().nullish()),
@@ -4069,11 +5419,13 @@ export function TaskUpdateFilterSchema(): z.ZodObject<Properties<TaskUpdateFilte
     or: z.array(z.lazy(() => TaskUpdateFilterSchema())).nullish(),
     stageId: z.lazy(() => IdFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function TaskUpdateInputSchema(): z.ZodObject<Properties<TaskUpdateInput>> {
+export function TaskUpdateInputSchema(): z.ZodObject<
+  Properties<TaskUpdateInput>
+> {
   return z.object({
     checklist: z.array(z.lazy(() => ChecklistItemInputSchema())).nullish(),
     completed: z.boolean().nullish(),
@@ -4081,13 +5433,15 @@ export function TaskUpdateInputSchema(): z.ZodObject<Properties<TaskUpdateInput>
     dueDate: z.string().datetime().nullish(),
     stageId: z.string().nullish(),
     title: z.string().nullish(),
-    userIds: z.array(z.string()).nullish()
+    userIds: z.array(z.string()).nullish(),
   })
 }
 
-export function TaskUsersAggregateGroupBySchema(): z.ZodObject<Properties<TaskUsersAggregateGroupBy>> {
+export function TaskUsersAggregateGroupBySchema(): z.ZodObject<
+  Properties<TaskUsersAggregateGroupBy>
+> {
   return z.object({
-    __typename: z.literal('TaskUsersAggregateGroupBy').optional(),
+    __typename: z.literal("TaskUsersAggregateGroupBy").optional(),
     createdAt: z.string().datetime().nullish(),
     email: z.string().nullish(),
     id: z.string().nullish(),
@@ -4096,32 +5450,38 @@ export function TaskUsersAggregateGroupBySchema(): z.ZodObject<Properties<TaskUs
     phone: z.string().nullish(),
     role: RoleSchema.nullish(),
     timezone: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function TaskUsersAggregateResponseSchema(): z.ZodObject<Properties<TaskUsersAggregateResponse>> {
+export function TaskUsersAggregateResponseSchema(): z.ZodObject<
+  Properties<TaskUsersAggregateResponse>
+> {
   return z.object({
-    __typename: z.literal('TaskUsersAggregateResponse').optional(),
+    __typename: z.literal("TaskUsersAggregateResponse").optional(),
     avg: z.lazy(() => TaskUsersAvgAggregateSchema().nullish()),
     count: z.lazy(() => TaskUsersCountAggregateSchema().nullish()),
     groupBy: z.lazy(() => TaskUsersAggregateGroupBySchema().nullish()),
     max: z.lazy(() => TaskUsersMaxAggregateSchema().nullish()),
     min: z.lazy(() => TaskUsersMinAggregateSchema().nullish()),
-    sum: z.lazy(() => TaskUsersSumAggregateSchema().nullish())
+    sum: z.lazy(() => TaskUsersSumAggregateSchema().nullish()),
   })
 }
 
-export function TaskUsersAvgAggregateSchema(): z.ZodObject<Properties<TaskUsersAvgAggregate>> {
+export function TaskUsersAvgAggregateSchema(): z.ZodObject<
+  Properties<TaskUsersAvgAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskUsersAvgAggregate').optional(),
-    id: z.number().nullish()
+    __typename: z.literal("TaskUsersAvgAggregate").optional(),
+    id: z.number().nullish(),
   })
 }
 
-export function TaskUsersCountAggregateSchema(): z.ZodObject<Properties<TaskUsersCountAggregate>> {
+export function TaskUsersCountAggregateSchema(): z.ZodObject<
+  Properties<TaskUsersCountAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskUsersCountAggregate').optional(),
+    __typename: z.literal("TaskUsersCountAggregate").optional(),
     createdAt: z.number().nullish(),
     email: z.number().nullish(),
     id: z.number().nullish(),
@@ -4130,13 +5490,15 @@ export function TaskUsersCountAggregateSchema(): z.ZodObject<Properties<TaskUser
     phone: z.number().nullish(),
     role: z.number().nullish(),
     timezone: z.number().nullish(),
-    updatedAt: z.number().nullish()
+    updatedAt: z.number().nullish(),
   })
 }
 
-export function TaskUsersMaxAggregateSchema(): z.ZodObject<Properties<TaskUsersMaxAggregate>> {
+export function TaskUsersMaxAggregateSchema(): z.ZodObject<
+  Properties<TaskUsersMaxAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskUsersMaxAggregate').optional(),
+    __typename: z.literal("TaskUsersMaxAggregate").optional(),
     createdAt: z.string().datetime().nullish(),
     email: z.string().nullish(),
     id: z.string().nullish(),
@@ -4145,13 +5507,15 @@ export function TaskUsersMaxAggregateSchema(): z.ZodObject<Properties<TaskUsersM
     phone: z.string().nullish(),
     role: RoleSchema.nullish(),
     timezone: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function TaskUsersMinAggregateSchema(): z.ZodObject<Properties<TaskUsersMinAggregate>> {
+export function TaskUsersMinAggregateSchema(): z.ZodObject<
+  Properties<TaskUsersMinAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskUsersMinAggregate').optional(),
+    __typename: z.literal("TaskUsersMinAggregate").optional(),
     createdAt: z.string().datetime().nullish(),
     email: z.string().nullish(),
     id: z.string().nullish(),
@@ -4160,293 +5524,377 @@ export function TaskUsersMinAggregateSchema(): z.ZodObject<Properties<TaskUsersM
     phone: z.string().nullish(),
     role: RoleSchema.nullish(),
     timezone: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function TaskUsersSumAggregateSchema(): z.ZodObject<Properties<TaskUsersSumAggregate>> {
+export function TaskUsersSumAggregateSchema(): z.ZodObject<
+  Properties<TaskUsersSumAggregate>
+> {
   return z.object({
-    __typename: z.literal('TaskUsersSumAggregate').optional(),
-    id: z.number().nullish()
+    __typename: z.literal("TaskUsersSumAggregate").optional(),
+    id: z.number().nullish(),
   })
 }
 
-export function UpdateManyCompaniesInputSchema(): z.ZodObject<Properties<UpdateManyCompaniesInput>> {
+export function UpdateManyCompaniesInputSchema(): z.ZodObject<
+  Properties<UpdateManyCompaniesInput>
+> {
   return z.object({
     filter: z.lazy(() => CompanyUpdateFilterSchema()),
-    update: z.lazy(() => CompanyUpdateInputSchema())
+    update: z.lazy(() => CompanyUpdateInputSchema()),
   })
 }
 
-export function UpdateManyCompanyNotesInputSchema(): z.ZodObject<Properties<UpdateManyCompanyNotesInput>> {
+export function UpdateManyCompanyNotesInputSchema(): z.ZodObject<
+  Properties<UpdateManyCompanyNotesInput>
+> {
   return z.object({
     filter: z.lazy(() => CompanyNoteUpdateFilterSchema()),
-    update: z.lazy(() => CompanyNoteUpdateInputSchema())
+    update: z.lazy(() => CompanyNoteUpdateInputSchema()),
   })
 }
 
-export function UpdateManyContactNotesInputSchema(): z.ZodObject<Properties<UpdateManyContactNotesInput>> {
+export function UpdateManyContactNotesInputSchema(): z.ZodObject<
+  Properties<UpdateManyContactNotesInput>
+> {
   return z.object({
     filter: z.lazy(() => ContactNoteUpdateFilterSchema()),
-    update: z.lazy(() => ContactNoteUpdateInputSchema())
+    update: z.lazy(() => ContactNoteUpdateInputSchema()),
   })
 }
 
-export function UpdateManyContactsInputSchema(): z.ZodObject<Properties<UpdateManyContactsInput>> {
+export function UpdateManyContactsInputSchema(): z.ZodObject<
+  Properties<UpdateManyContactsInput>
+> {
   return z.object({
     filter: z.lazy(() => ContactUpdateFilterSchema()),
-    update: z.lazy(() => ContactUpdateInputSchema())
+    update: z.lazy(() => ContactUpdateInputSchema()),
   })
 }
 
-export function UpdateManyDealStagesInputSchema(): z.ZodObject<Properties<UpdateManyDealStagesInput>> {
+export function UpdateManyDealStagesInputSchema(): z.ZodObject<
+  Properties<UpdateManyDealStagesInput>
+> {
   return z.object({
     filter: z.lazy(() => DealStageUpdateFilterSchema()),
-    update: z.lazy(() => DealStageUpdateInputSchema())
+    update: z.lazy(() => DealStageUpdateInputSchema()),
   })
 }
 
-export function UpdateManyDealsInputSchema(): z.ZodObject<Properties<UpdateManyDealsInput>> {
+export function UpdateManyDealsInputSchema(): z.ZodObject<
+  Properties<UpdateManyDealsInput>
+> {
   return z.object({
     filter: z.lazy(() => DealUpdateFilterSchema()),
-    update: z.lazy(() => DealUpdateInputSchema())
+    update: z.lazy(() => DealUpdateInputSchema()),
   })
 }
 
-export function UpdateManyEventCategoriesInputSchema(): z.ZodObject<Properties<UpdateManyEventCategoriesInput>> {
+export function UpdateManyEventCategoriesInputSchema(): z.ZodObject<
+  Properties<UpdateManyEventCategoriesInput>
+> {
   return z.object({
     filter: z.lazy(() => EventCategoryUpdateFilterSchema()),
-    update: z.lazy(() => EventCategoryUpdateInputSchema())
+    update: z.lazy(() => EventCategoryUpdateInputSchema()),
   })
 }
 
-export function UpdateManyEventsInputSchema(): z.ZodObject<Properties<UpdateManyEventsInput>> {
+export function UpdateManyEventsInputSchema(): z.ZodObject<
+  Properties<UpdateManyEventsInput>
+> {
   return z.object({
     filter: z.lazy(() => EventUpdateFilterSchema()),
-    update: z.lazy(() => EventUpdateInputSchema())
+    update: z.lazy(() => EventUpdateInputSchema()),
   })
 }
 
-export function UpdateManyQuotesInputSchema(): z.ZodObject<Properties<UpdateManyQuotesInput>> {
+export function UpdateManyQuotesInputSchema(): z.ZodObject<
+  Properties<UpdateManyQuotesInput>
+> {
   return z.object({
     filter: z.lazy(() => QuoteUpdateFilterSchema()),
-    update: z.lazy(() => QuoteUpdateInputSchema())
+    update: z.lazy(() => QuoteUpdateInputSchema()),
   })
 }
 
-export function UpdateManyResponseSchema(): z.ZodObject<Properties<UpdateManyResponse>> {
+export function UpdateManyResponseSchema(): z.ZodObject<
+  Properties<UpdateManyResponse>
+> {
   return z.object({
-    __typename: z.literal('UpdateManyResponse').optional(),
-    updatedCount: z.number()
+    __typename: z.literal("UpdateManyResponse").optional(),
+    updatedCount: z.number(),
   })
 }
 
-export function UpdateManyTaskCommentsInputSchema(): z.ZodObject<Properties<UpdateManyTaskCommentsInput>> {
+export function UpdateManyTaskCommentsInputSchema(): z.ZodObject<
+  Properties<UpdateManyTaskCommentsInput>
+> {
   return z.object({
     filter: z.lazy(() => TaskCommentUpdateFilterSchema()),
-    update: z.lazy(() => TaskCommentUpdateInputSchema())
+    update: z.lazy(() => TaskCommentUpdateInputSchema()),
   })
 }
 
-export function UpdateManyTaskStagesInputSchema(): z.ZodObject<Properties<UpdateManyTaskStagesInput>> {
+export function UpdateManyTaskStagesInputSchema(): z.ZodObject<
+  Properties<UpdateManyTaskStagesInput>
+> {
   return z.object({
     filter: z.lazy(() => TaskStageUpdateFilterSchema()),
-    update: z.lazy(() => TaskStageUpdateInputSchema())
+    update: z.lazy(() => TaskStageUpdateInputSchema()),
   })
 }
 
-export function UpdateManyTasksInputSchema(): z.ZodObject<Properties<UpdateManyTasksInput>> {
+export function UpdateManyTasksInputSchema(): z.ZodObject<
+  Properties<UpdateManyTasksInput>
+> {
   return z.object({
     filter: z.lazy(() => TaskUpdateFilterSchema()),
-    update: z.lazy(() => TaskUpdateInputSchema())
+    update: z.lazy(() => TaskUpdateInputSchema()),
   })
 }
 
-export function UpdateManyUsersInputSchema(): z.ZodObject<Properties<UpdateManyUsersInput>> {
+export function UpdateManyUsersInputSchema(): z.ZodObject<
+  Properties<UpdateManyUsersInput>
+> {
   return z.object({
     filter: z.lazy(() => UserUpdateFilterSchema()),
-    update: z.lazy(() => UserUpdateInputSchema())
+    update: z.lazy(() => UserUpdateInputSchema()),
   })
 }
 
-export function UpdateOneAuditSubscriptionFilterInputSchema(): z.ZodObject<Properties<UpdateOneAuditSubscriptionFilterInput>> {
+export function UpdateOneAuditSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<UpdateOneAuditSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => AuditSubscriptionFilterSchema())
+    filter: z.lazy(() => AuditSubscriptionFilterSchema()),
   })
 }
 
-export function UpdateOneCompanyInputSchema(): z.ZodObject<Properties<UpdateOneCompanyInput>> {
-  return z.object({
-    id: z.string(),
-    update: z.lazy(() => CompanyUpdateInputSchema())
-  })
-}
-
-export function UpdateOneCompanyNoteInputSchema(): z.ZodObject<Properties<UpdateOneCompanyNoteInput>> {
+export function UpdateOneCompanyInputSchema(): z.ZodObject<
+  Properties<UpdateOneCompanyInput>
+> {
   return z.object({
     id: z.string(),
-    update: z.lazy(() => CompanyNoteUpdateInputSchema())
+    update: z.lazy(() => CompanyUpdateInputSchema()),
   })
 }
 
-export function UpdateOneCompanyNoteSubscriptionFilterInputSchema(): z.ZodObject<Properties<UpdateOneCompanyNoteSubscriptionFilterInput>> {
-  return z.object({
-    filter: z.lazy(() => CompanyNoteSubscriptionFilterSchema())
-  })
-}
-
-export function UpdateOneCompanySubscriptionFilterInputSchema(): z.ZodObject<Properties<UpdateOneCompanySubscriptionFilterInput>> {
-  return z.object({
-    filter: z.lazy(() => CompanySubscriptionFilterSchema())
-  })
-}
-
-export function UpdateOneContactInputSchema(): z.ZodObject<Properties<UpdateOneContactInput>> {
+export function UpdateOneCompanyNoteInputSchema(): z.ZodObject<
+  Properties<UpdateOneCompanyNoteInput>
+> {
   return z.object({
     id: z.string(),
-    update: z.lazy(() => ContactUpdateInputSchema())
+    update: z.lazy(() => CompanyNoteUpdateInputSchema()),
   })
 }
 
-export function UpdateOneContactNoteInputSchema(): z.ZodObject<Properties<UpdateOneContactNoteInput>> {
+export function UpdateOneCompanyNoteSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<UpdateOneCompanyNoteSubscriptionFilterInput>
+> {
+  return z.object({
+    filter: z.lazy(() => CompanyNoteSubscriptionFilterSchema()),
+  })
+}
+
+export function UpdateOneCompanySubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<UpdateOneCompanySubscriptionFilterInput>
+> {
+  return z.object({
+    filter: z.lazy(() => CompanySubscriptionFilterSchema()),
+  })
+}
+
+export function UpdateOneContactInputSchema(): z.ZodObject<
+  Properties<UpdateOneContactInput>
+> {
   return z.object({
     id: z.string(),
-    update: z.lazy(() => ContactNoteUpdateInputSchema())
+    update: z.lazy(() => ContactUpdateInputSchema()),
   })
 }
 
-export function UpdateOneContactNoteSubscriptionFilterInputSchema(): z.ZodObject<Properties<UpdateOneContactNoteSubscriptionFilterInput>> {
-  return z.object({
-    filter: z.lazy(() => ContactNoteSubscriptionFilterSchema())
-  })
-}
-
-export function UpdateOneContactSubscriptionFilterInputSchema(): z.ZodObject<Properties<UpdateOneContactSubscriptionFilterInput>> {
-  return z.object({
-    filter: z.lazy(() => ContactSubscriptionFilterSchema())
-  })
-}
-
-export function UpdateOneDealInputSchema(): z.ZodObject<Properties<UpdateOneDealInput>> {
+export function UpdateOneContactNoteInputSchema(): z.ZodObject<
+  Properties<UpdateOneContactNoteInput>
+> {
   return z.object({
     id: z.string(),
-    update: z.lazy(() => DealUpdateInputSchema())
+    update: z.lazy(() => ContactNoteUpdateInputSchema()),
   })
 }
 
-export function UpdateOneDealStageInputSchema(): z.ZodObject<Properties<UpdateOneDealStageInput>> {
+export function UpdateOneContactNoteSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<UpdateOneContactNoteSubscriptionFilterInput>
+> {
+  return z.object({
+    filter: z.lazy(() => ContactNoteSubscriptionFilterSchema()),
+  })
+}
+
+export function UpdateOneContactSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<UpdateOneContactSubscriptionFilterInput>
+> {
+  return z.object({
+    filter: z.lazy(() => ContactSubscriptionFilterSchema()),
+  })
+}
+
+export function UpdateOneDealInputSchema(): z.ZodObject<
+  Properties<UpdateOneDealInput>
+> {
   return z.object({
     id: z.string(),
-    update: z.lazy(() => DealStageUpdateInputSchema())
+    update: z.lazy(() => DealUpdateInputSchema()),
   })
 }
 
-export function UpdateOneDealStageSubscriptionFilterInputSchema(): z.ZodObject<Properties<UpdateOneDealStageSubscriptionFilterInput>> {
-  return z.object({
-    filter: z.lazy(() => DealStageSubscriptionFilterSchema())
-  })
-}
-
-export function UpdateOneDealSubscriptionFilterInputSchema(): z.ZodObject<Properties<UpdateOneDealSubscriptionFilterInput>> {
-  return z.object({
-    filter: z.lazy(() => DealSubscriptionFilterSchema())
-  })
-}
-
-export function UpdateOneEventCategoryInputSchema(): z.ZodObject<Properties<UpdateOneEventCategoryInput>> {
+export function UpdateOneDealStageInputSchema(): z.ZodObject<
+  Properties<UpdateOneDealStageInput>
+> {
   return z.object({
     id: z.string(),
-    update: z.lazy(() => EventCategoryUpdateInputSchema())
+    update: z.lazy(() => DealStageUpdateInputSchema()),
   })
 }
 
-export function UpdateOneEventCategorySubscriptionFilterInputSchema(): z.ZodObject<Properties<UpdateOneEventCategorySubscriptionFilterInput>> {
+export function UpdateOneDealStageSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<UpdateOneDealStageSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => EventCategorySubscriptionFilterSchema())
+    filter: z.lazy(() => DealStageSubscriptionFilterSchema()),
   })
 }
 
-export function UpdateOneEventInputSchema(): z.ZodObject<Properties<UpdateOneEventInput>> {
+export function UpdateOneDealSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<UpdateOneDealSubscriptionFilterInput>
+> {
   return z.object({
-    id: z.string(),
-    update: z.lazy(() => EventUpdateInputSchema())
+    filter: z.lazy(() => DealSubscriptionFilterSchema()),
   })
 }
 
-export function UpdateOneEventSubscriptionFilterInputSchema(): z.ZodObject<Properties<UpdateOneEventSubscriptionFilterInput>> {
-  return z.object({
-    filter: z.lazy(() => EventSubscriptionFilterSchema())
-  })
-}
-
-export function UpdateOneQuoteInputSchema(): z.ZodObject<Properties<UpdateOneQuoteInput>> {
-  return z.object({
-    id: z.string(),
-    update: z.lazy(() => QuoteUpdateInputSchema())
-  })
-}
-
-export function UpdateOneQuoteSubscriptionFilterInputSchema(): z.ZodObject<Properties<UpdateOneQuoteSubscriptionFilterInput>> {
-  return z.object({
-    filter: z.lazy(() => QuoteSubscriptionFilterSchema())
-  })
-}
-
-export function UpdateOneTaskCommentInputSchema(): z.ZodObject<Properties<UpdateOneTaskCommentInput>> {
+export function UpdateOneEventCategoryInputSchema(): z.ZodObject<
+  Properties<UpdateOneEventCategoryInput>
+> {
   return z.object({
     id: z.string(),
-    update: z.lazy(() => TaskCommentUpdateInputSchema())
+    update: z.lazy(() => EventCategoryUpdateInputSchema()),
   })
 }
 
-export function UpdateOneTaskCommentSubscriptionFilterInputSchema(): z.ZodObject<Properties<UpdateOneTaskCommentSubscriptionFilterInput>> {
+export function UpdateOneEventCategorySubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<UpdateOneEventCategorySubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => TaskCommentSubscriptionFilterSchema())
+    filter: z.lazy(() => EventCategorySubscriptionFilterSchema()),
   })
 }
 
-export function UpdateOneTaskInputSchema(): z.ZodObject<Properties<UpdateOneTaskInput>> {
-  return z.object({
-    id: z.string(),
-    update: z.lazy(() => TaskUpdateInputSchema())
-  })
-}
-
-export function UpdateOneTaskStageInputSchema(): z.ZodObject<Properties<UpdateOneTaskStageInput>> {
+export function UpdateOneEventInputSchema(): z.ZodObject<
+  Properties<UpdateOneEventInput>
+> {
   return z.object({
     id: z.string(),
-    update: z.lazy(() => TaskStageUpdateInputSchema())
+    update: z.lazy(() => EventUpdateInputSchema()),
   })
 }
 
-export function UpdateOneTaskStageSubscriptionFilterInputSchema(): z.ZodObject<Properties<UpdateOneTaskStageSubscriptionFilterInput>> {
+export function UpdateOneEventSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<UpdateOneEventSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => TaskStageSubscriptionFilterSchema())
+    filter: z.lazy(() => EventSubscriptionFilterSchema()),
   })
 }
 
-export function UpdateOneTaskSubscriptionFilterInputSchema(): z.ZodObject<Properties<UpdateOneTaskSubscriptionFilterInput>> {
-  return z.object({
-    filter: z.lazy(() => TaskSubscriptionFilterSchema())
-  })
-}
-
-export function UpdateOneUserInputSchema(): z.ZodObject<Properties<UpdateOneUserInput>> {
+export function UpdateOneQuoteInputSchema(): z.ZodObject<
+  Properties<UpdateOneQuoteInput>
+> {
   return z.object({
     id: z.string(),
-    update: z.lazy(() => UserUpdateInputSchema())
+    update: z.lazy(() => QuoteUpdateInputSchema()),
   })
 }
 
-export function UpdateOneUserSubscriptionFilterInputSchema(): z.ZodObject<Properties<UpdateOneUserSubscriptionFilterInput>> {
+export function UpdateOneQuoteSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<UpdateOneQuoteSubscriptionFilterInput>
+> {
   return z.object({
-    filter: z.lazy(() => UserSubscriptionFilterSchema())
+    filter: z.lazy(() => QuoteSubscriptionFilterSchema()),
+  })
+}
+
+export function UpdateOneTaskCommentInputSchema(): z.ZodObject<
+  Properties<UpdateOneTaskCommentInput>
+> {
+  return z.object({
+    id: z.string(),
+    update: z.lazy(() => TaskCommentUpdateInputSchema()),
+  })
+}
+
+export function UpdateOneTaskCommentSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<UpdateOneTaskCommentSubscriptionFilterInput>
+> {
+  return z.object({
+    filter: z.lazy(() => TaskCommentSubscriptionFilterSchema()),
+  })
+}
+
+export function UpdateOneTaskInputSchema(): z.ZodObject<
+  Properties<UpdateOneTaskInput>
+> {
+  return z.object({
+    id: z.string(),
+    update: z.lazy(() => TaskUpdateInputSchema()),
+  })
+}
+
+export function UpdateOneTaskStageInputSchema(): z.ZodObject<
+  Properties<UpdateOneTaskStageInput>
+> {
+  return z.object({
+    id: z.string(),
+    update: z.lazy(() => TaskStageUpdateInputSchema()),
+  })
+}
+
+export function UpdateOneTaskStageSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<UpdateOneTaskStageSubscriptionFilterInput>
+> {
+  return z.object({
+    filter: z.lazy(() => TaskStageSubscriptionFilterSchema()),
+  })
+}
+
+export function UpdateOneTaskSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<UpdateOneTaskSubscriptionFilterInput>
+> {
+  return z.object({
+    filter: z.lazy(() => TaskSubscriptionFilterSchema()),
+  })
+}
+
+export function UpdateOneUserInputSchema(): z.ZodObject<
+  Properties<UpdateOneUserInput>
+> {
+  return z.object({
+    id: z.string(),
+    update: z.lazy(() => UserUpdateInputSchema()),
+  })
+}
+
+export function UpdateOneUserSubscriptionFilterInputSchema(): z.ZodObject<
+  Properties<UpdateOneUserSubscriptionFilterInput>
+> {
+  return z.object({
+    filter: z.lazy(() => UserSubscriptionFilterSchema()),
   })
 }
 
 export function UserSchema(): z.ZodObject<Properties<User>> {
   return z.object({
-    __typename: z.literal('User').optional(),
+    __typename: z.literal("User").optional(),
     avatarUrl: z.string().nullish(),
     companies: z.lazy(() => UserCompaniesConnectionSchema()),
     contacts: z.lazy(() => UserContactsConnectionSchema()),
@@ -4463,23 +5911,27 @@ export function UserSchema(): z.ZodObject<Properties<User>> {
     tasks: z.lazy(() => UserTasksConnectionSchema()),
     timezone: z.string().nullish(),
     updatedAt: z.string().datetime(),
-    updatedBy: z.lazy(() => UserSchema().nullish())
+    updatedBy: z.lazy(() => UserSchema().nullish()),
   })
 }
 
-export function UserCompaniesArgsSchema(): z.ZodObject<Properties<UserCompaniesArgs>> {
+export function UserCompaniesArgsSchema(): z.ZodObject<
+  Properties<UserCompaniesArgs>
+> {
   return z.object({
     filter: z.lazy(() => CompanyFilterSchema()),
     paging: z.lazy(() => OffsetPagingSchema()),
-    sorting: z.array(z.lazy(() => CompanySortSchema()))
+    sorting: z.array(z.lazy(() => CompanySortSchema())),
   })
 }
 
-export function UserContactsArgsSchema(): z.ZodObject<Properties<UserContactsArgs>> {
+export function UserContactsArgsSchema(): z.ZodObject<
+  Properties<UserContactsArgs>
+> {
   return z.object({
     filter: z.lazy(() => ContactFilterSchema()),
     paging: z.lazy(() => OffsetPagingSchema()),
-    sorting: z.array(z.lazy(() => ContactSortSchema()))
+    sorting: z.array(z.lazy(() => ContactSortSchema())),
   })
 }
 
@@ -4487,15 +5939,17 @@ export function UserDealsArgsSchema(): z.ZodObject<Properties<UserDealsArgs>> {
   return z.object({
     filter: z.lazy(() => DealFilterSchema()),
     paging: z.lazy(() => OffsetPagingSchema()),
-    sorting: z.array(z.lazy(() => DealSortSchema()))
+    sorting: z.array(z.lazy(() => DealSortSchema())),
   })
 }
 
-export function UserEventsArgsSchema(): z.ZodObject<Properties<UserEventsArgs>> {
+export function UserEventsArgsSchema(): z.ZodObject<
+  Properties<UserEventsArgs>
+> {
   return z.object({
     filter: z.lazy(() => EventFilterSchema()),
     paging: z.lazy(() => OffsetPagingSchema()),
-    sorting: z.array(z.lazy(() => EventSortSchema()))
+    sorting: z.array(z.lazy(() => EventSortSchema())),
   })
 }
 
@@ -4503,11 +5957,13 @@ export function UserTasksArgsSchema(): z.ZodObject<Properties<UserTasksArgs>> {
   return z.object({
     filter: z.lazy(() => TaskFilterSchema()),
     paging: z.lazy(() => OffsetPagingSchema()),
-    sorting: z.array(z.lazy(() => TaskSortSchema()))
+    sorting: z.array(z.lazy(() => TaskSortSchema())),
   })
 }
 
-export function UserAggregateFilterSchema(): z.ZodObject<Properties<UserAggregateFilter>> {
+export function UserAggregateFilterSchema(): z.ZodObject<
+  Properties<UserAggregateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => UserAggregateFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -4519,58 +5975,70 @@ export function UserAggregateFilterSchema(): z.ZodObject<Properties<UserAggregat
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function UserCompaniesConnectionSchema(): z.ZodObject<Properties<UserCompaniesConnection>> {
+export function UserCompaniesConnectionSchema(): z.ZodObject<
+  Properties<UserCompaniesConnection>
+> {
   return z.object({
-    __typename: z.literal('UserCompaniesConnection').optional(),
+    __typename: z.literal("UserCompaniesConnection").optional(),
     nodes: z.array(z.lazy(() => CompanySchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function UserConnectionSchema(): z.ZodObject<Properties<UserConnection>> {
+export function UserConnectionSchema(): z.ZodObject<
+  Properties<UserConnection>
+> {
   return z.object({
-    __typename: z.literal('UserConnection').optional(),
+    __typename: z.literal("UserConnection").optional(),
     nodes: z.array(z.lazy(() => UserSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function UserContactsConnectionSchema(): z.ZodObject<Properties<UserContactsConnection>> {
+export function UserContactsConnectionSchema(): z.ZodObject<
+  Properties<UserContactsConnection>
+> {
   return z.object({
-    __typename: z.literal('UserContactsConnection').optional(),
+    __typename: z.literal("UserContactsConnection").optional(),
     nodes: z.array(z.lazy(() => ContactSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function UserCreateInputSchema(): z.ZodObject<Properties<UserCreateInput>> {
+export function UserCreateInputSchema(): z.ZodObject<
+  Properties<UserCreateInput>
+> {
   return z.object({
     email: z.string(),
     jobTitle: z.string(),
     name: z.string(),
     phone: z.string(),
     role: RoleSchema,
-    timezone: z.string()
+    timezone: z.string(),
   })
 }
 
-export function UserDealsConnectionSchema(): z.ZodObject<Properties<UserDealsConnection>> {
+export function UserDealsConnectionSchema(): z.ZodObject<
+  Properties<UserDealsConnection>
+> {
   return z.object({
-    __typename: z.literal('UserDealsConnection').optional(),
+    __typename: z.literal("UserDealsConnection").optional(),
     nodes: z.array(z.lazy(() => DealSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function UserDeleteFilterSchema(): z.ZodObject<Properties<UserDeleteFilter>> {
+export function UserDeleteFilterSchema(): z.ZodObject<
+  Properties<UserDeleteFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => UserDeleteFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -4582,13 +6050,15 @@ export function UserDeleteFilterSchema(): z.ZodObject<Properties<UserDeleteFilte
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function UserDeleteResponseSchema(): z.ZodObject<Properties<UserDeleteResponse>> {
+export function UserDeleteResponseSchema(): z.ZodObject<
+  Properties<UserDeleteResponse>
+> {
   return z.object({
-    __typename: z.literal('UserDeleteResponse').optional(),
+    __typename: z.literal("UserDeleteResponse").optional(),
     avatarUrl: z.string().nullish(),
     createdAt: z.string().datetime().nullish(),
     email: z.string().nullish(),
@@ -4598,16 +6068,18 @@ export function UserDeleteResponseSchema(): z.ZodObject<Properties<UserDeleteRes
     phone: z.string().nullish(),
     role: RoleSchema.nullish(),
     timezone: z.string().nullish(),
-    updatedAt: z.string().datetime().nullish()
+    updatedAt: z.string().datetime().nullish(),
   })
 }
 
-export function UserEventsConnectionSchema(): z.ZodObject<Properties<UserEventsConnection>> {
+export function UserEventsConnectionSchema(): z.ZodObject<
+  Properties<UserEventsConnection>
+> {
   return z.object({
-    __typename: z.literal('UserEventsConnection').optional(),
+    __typename: z.literal("UserEventsConnection").optional(),
     nodes: z.array(z.lazy(() => EventSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
@@ -4630,15 +6102,21 @@ export function UserFilterSchema(): z.ZodObject<Properties<UserFilter>> {
     tasks: z.lazy(() => UserFilterTaskFilterSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    updatedBy: z.lazy(() => UserFilterUserFilterSchema().nullish())
+    updatedBy: z.lazy(() => UserFilterUserFilterSchema().nullish()),
   })
 }
 
-export function UserFilterCompanyFilterSchema(): z.ZodObject<Properties<UserFilterCompanyFilter>> {
+export function UserFilterCompanyFilterSchema(): z.ZodObject<
+  Properties<UserFilterCompanyFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => UserFilterCompanyFilterSchema())).nullish(),
-    businessType: z.lazy(() => CompanyBusinessTypeFilterComparisonSchema().nullish()),
-    companySize: z.lazy(() => CompanyCompanySizeFilterComparisonSchema().nullish()),
+    businessType: z.lazy(() =>
+      CompanyBusinessTypeFilterComparisonSchema().nullish()
+    ),
+    companySize: z.lazy(() =>
+      CompanyCompanySizeFilterComparisonSchema().nullish()
+    ),
     country: z.lazy(() => StringFieldComparisonSchema().nullish()),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
     id: z.lazy(() => IdFilterComparisonSchema().nullish()),
@@ -4647,11 +6125,13 @@ export function UserFilterCompanyFilterSchema(): z.ZodObject<Properties<UserFilt
     or: z.array(z.lazy(() => UserFilterCompanyFilterSchema())).nullish(),
     totalRevenue: z.lazy(() => IntFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    website: z.lazy(() => StringFieldComparisonSchema().nullish())
+    website: z.lazy(() => StringFieldComparisonSchema().nullish()),
   })
 }
 
-export function UserFilterContactFilterSchema(): z.ZodObject<Properties<UserFilterContactFilter>> {
+export function UserFilterContactFilterSchema(): z.ZodObject<
+  Properties<UserFilterContactFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => UserFilterContactFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -4665,11 +6145,13 @@ export function UserFilterContactFilterSchema(): z.ZodObject<Properties<UserFilt
     stage: z.lazy(() => ContactStageFilterComparisonSchema().nullish()),
     status: z.lazy(() => ContactStatusFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function UserFilterDealFilterSchema(): z.ZodObject<Properties<UserFilterDealFilter>> {
+export function UserFilterDealFilterSchema(): z.ZodObject<
+  Properties<UserFilterDealFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => UserFilterDealFilterSchema())).nullish(),
     closeDateDay: z.lazy(() => IntFieldComparisonSchema().nullish()),
@@ -4683,11 +6165,13 @@ export function UserFilterDealFilterSchema(): z.ZodObject<Properties<UserFilterD
     stageId: z.lazy(() => IdFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
     updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
-    value: z.lazy(() => FloatFieldComparisonSchema().nullish())
+    value: z.lazy(() => FloatFieldComparisonSchema().nullish()),
   })
 }
 
-export function UserFilterEventFilterSchema(): z.ZodObject<Properties<UserFilterEventFilter>> {
+export function UserFilterEventFilterSchema(): z.ZodObject<
+  Properties<UserFilterEventFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => UserFilterEventFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -4697,11 +6181,13 @@ export function UserFilterEventFilterSchema(): z.ZodObject<Properties<UserFilter
     or: z.array(z.lazy(() => UserFilterEventFilterSchema())).nullish(),
     startDate: z.lazy(() => DateFieldComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function UserFilterTaskFilterSchema(): z.ZodObject<Properties<UserFilterTaskFilter>> {
+export function UserFilterTaskFilterSchema(): z.ZodObject<
+  Properties<UserFilterTaskFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => UserFilterTaskFilterSchema())).nullish(),
     completed: z.lazy(() => BooleanFieldComparisonSchema().nullish()),
@@ -4712,11 +6198,13 @@ export function UserFilterTaskFilterSchema(): z.ZodObject<Properties<UserFilterT
     or: z.array(z.lazy(() => UserFilterTaskFilterSchema())).nullish(),
     stageId: z.lazy(() => IdFilterComparisonSchema().nullish()),
     title: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function UserFilterUserFilterSchema(): z.ZodObject<Properties<UserFilterUserFilter>> {
+export function UserFilterUserFilterSchema(): z.ZodObject<
+  Properties<UserFilterUserFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => UserFilterUserFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -4728,16 +6216,18 @@ export function UserFilterUserFilterSchema(): z.ZodObject<Properties<UserFilterU
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function UserRoleFilterComparisonSchema(): z.ZodObject<Properties<UserRoleFilterComparison>> {
+export function UserRoleFilterComparisonSchema(): z.ZodObject<
+  Properties<UserRoleFilterComparison>
+> {
   return z.object({
     eq: RoleSchema.nullish(),
     in: z.array(RoleSchema).nullish(),
     neq: RoleSchema.nullish(),
-    notIn: z.array(RoleSchema).nullish()
+    notIn: z.array(RoleSchema).nullish(),
   })
 }
 
@@ -4745,11 +6235,13 @@ export function UserSortSchema(): z.ZodObject<Properties<UserSort>> {
   return z.object({
     direction: SortDirectionSchema,
     field: UserSortFieldsSchema,
-    nulls: SortNullsSchema.nullish()
+    nulls: SortNullsSchema.nullish(),
   })
 }
 
-export function UserSubscriptionFilterSchema(): z.ZodObject<Properties<UserSubscriptionFilter>> {
+export function UserSubscriptionFilterSchema(): z.ZodObject<
+  Properties<UserSubscriptionFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => UserSubscriptionFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -4761,20 +6253,24 @@ export function UserSubscriptionFilterSchema(): z.ZodObject<Properties<UserSubsc
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function UserTasksConnectionSchema(): z.ZodObject<Properties<UserTasksConnection>> {
+export function UserTasksConnectionSchema(): z.ZodObject<
+  Properties<UserTasksConnection>
+> {
   return z.object({
-    __typename: z.literal('UserTasksConnection').optional(),
+    __typename: z.literal("UserTasksConnection").optional(),
     nodes: z.array(z.lazy(() => TaskSchema())),
     pageInfo: z.lazy(() => OffsetPageInfoSchema()),
-    totalCount: z.number()
+    totalCount: z.number(),
   })
 }
 
-export function UserUpdateFilterSchema(): z.ZodObject<Properties<UserUpdateFilter>> {
+export function UserUpdateFilterSchema(): z.ZodObject<
+  Properties<UserUpdateFilter>
+> {
   return z.object({
     and: z.array(z.lazy(() => UserUpdateFilterSchema())).nullish(),
     createdAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
@@ -4786,17 +6282,19 @@ export function UserUpdateFilterSchema(): z.ZodObject<Properties<UserUpdateFilte
     phone: z.lazy(() => StringFieldComparisonSchema().nullish()),
     role: z.lazy(() => UserRoleFilterComparisonSchema().nullish()),
     timezone: z.lazy(() => StringFieldComparisonSchema().nullish()),
-    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish())
+    updatedAt: z.lazy(() => DateFieldComparisonSchema().nullish()),
   })
 }
 
-export function UserUpdateInputSchema(): z.ZodObject<Properties<UserUpdateInput>> {
+export function UserUpdateInputSchema(): z.ZodObject<
+  Properties<UserUpdateInput>
+> {
   return z.object({
     email: z.string().nullish(),
     jobTitle: z.string().nullish(),
     name: z.string().nullish(),
     phone: z.string().nullish(),
     role: RoleSchema.nullish(),
-    timezone: z.string().nullish()
+    timezone: z.string().nullish(),
   })
 }
