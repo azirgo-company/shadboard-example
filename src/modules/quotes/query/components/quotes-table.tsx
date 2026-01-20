@@ -1,11 +1,11 @@
-'use client'
+"use client"
 
-import { Quote } from '@/graphql/schema.types'
-import { QUOTES_QUERY } from '@/modules/quotes/query'
-import { useTable } from '@refinedev/react-table'
-import { ColumnDef } from '@tanstack/react-table'
-import { Paperclip } from 'lucide-react'
-import { ShadboardTable } from 'shadboard'
+import { Quote } from "@/graphql/schema.types"
+import { QUOTES_QUERY } from "@/modules/quotes/query"
+import { useTable } from "@refinedev/react-table"
+import { ColumnDef } from "@tanstack/react-table"
+import { Paperclip } from "lucide-react"
+import { ShadboardTable } from "shadboard"
 
 interface QuotesPropsTable {
   companyId: string
@@ -14,19 +14,19 @@ interface QuotesPropsTable {
 export const QuotesTable = ({ companyId }: QuotesPropsTable) => {
   const columns: ColumnDef<Quote>[] = [
     {
-      id: 'title',
-      accessorKey: 'title',
-      header: 'Title',
+      id: "title",
+      accessorKey: "title",
+      header: "Title",
     },
     {
-      id: 'status',
-      accessorKey: 'status',
-      header: 'Status',
+      id: "status",
+      accessorKey: "status",
+      header: "Status",
     },
     {
-      id: 'description',
-      accessorKey: 'description',
-      header: 'Description',
+      id: "description",
+      accessorKey: "description",
+      header: "Description",
       cell: ({ row }) => (
         <span className="block max-w-xs truncate">
           {row.original.description}
@@ -34,15 +34,15 @@ export const QuotesTable = ({ companyId }: QuotesPropsTable) => {
       ),
     },
     {
-      id: 'total',
-      accessorKey: 'total',
-      header: 'Total',
+      id: "total",
+      accessorKey: "total",
+      header: "Total",
       cell: ({ row }) => (
         <span>
-          {typeof row.original.total === 'number'
+          {typeof row.original.total === "number"
             ? row.original.total.toLocaleString(undefined, {
-                style: 'currency',
-                currency: 'USD',
+                style: "currency",
+                currency: "USD",
               })
             : row.original.total}
         </span>
@@ -53,15 +53,15 @@ export const QuotesTable = ({ companyId }: QuotesPropsTable) => {
   const refineTable = useTable<Quote>({
     columns,
     refineCoreProps: {
-      resource: 'quotes',
+      resource: "quotes",
       meta: {
         gqlQuery: QUOTES_QUERY,
       },
       filters: {
         permanent: [
           {
-            field: 'company.id',
-            operator: 'eq',
+            field: "company.id",
+            operator: "eq",
             value: companyId,
           },
         ],

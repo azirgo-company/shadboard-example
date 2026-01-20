@@ -92,7 +92,7 @@ export const CompanyContactsTable = ({
         <Users2 className="mr-2 inline-block" size={20} />
         <h3 className="text-lg font-semibold">Contacts</h3>
       </div>
-      <ShadboardTable table={refineTable} />
+      <ShadboardTable table={refineTable} onRowClick resource="contacts" />
     </div>
   )
 }

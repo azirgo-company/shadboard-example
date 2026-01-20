@@ -35,7 +35,8 @@
     "react": "19.2.1",
     "react-dom": "19.2.1",
     "react-hook-form": "^7.68.0",
-    "shadboard": "^0.0.11",
+    "reactflow": "^11.11.4",
+    "shadboard": "^0.0.13",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {

@@ -81,10 +81,7 @@ export default function ListCompaniesPage() {
 
   return (
     <List>
-      <ShadboardTable
-        table={table}
-        onRowClick={(record: Company) => show("companies", record.id)}
-      />
+      <ShadboardTable table={table} onRowClick />
     </List>
   )
 }
